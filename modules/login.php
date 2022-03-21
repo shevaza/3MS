@@ -11,38 +11,58 @@
     ?>
 </head>
 
-<body style="background-image: url('../res/img/bg.jpg') !important">
-    <div class="container" style="margin-top:8%">
+<body>
+    <div class="leftbg"></div>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><span class="text-danger">OnPoint</span> - Industry Management</a>
+    </nav>
+
+    <div class="container" style="margin-top:5%;">
+    
         <div class="row justify-content-center">
-            <div class="col col-lg-9 col-md-12 col-sm-12">
-                <div class="box card p-2">
-                    <div class="card-body">
-                        <div class="container">
-                            <div class="row justify-content-center mb-3">
-                                <div class="col text-center">
-                                    <img src="../res/img/logo.png" alt="" width="100">
-                                </div>
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12 text-dark text-xl-start text-md-start text-sm-center text-center">
+                <img src="../res/img/logo.png" class="img-fluid" alt="" width="200">
+                <h3 class="my-0">Welcome to</h3>
+                <h1 class="my-0" style="font-size:5rem">3MPlast</h1>
+                <h4 class="my-0">"Quality Reimagined"</h4>
+            </div>
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12 mt-2">
+                <div class="row">
+                    <div class="col">
+                        <div class="card card-hover box mb-4">
+                            <img class="card-img-top" src="holder.js/100x180/" alt="">
+                            <div class="card-body">
+                                <a class="text-light" href="">
+                                    <h4 class="card-title">Emails & Extentions</h4>
+                                    <p class="card-text">A list of all emails and phone extentions</p>
+                                </a>
                             </div>
-                            <div class="row">
-                                <div class="col-12 col-lg-6 mb-3 border-end border-danger">
-                                    <img class="img-fluid" src="https://scontent.fbey7-1.fna.fbcdn.net/v/t31.18172-8/1291468_629393823781169_1550207425_o.jpg?_nc_cat=104&ccb=1-5&_nc_sid=19026a&_nc_ohc=UIf5CkCP-fcAX_wwSn6&_nc_ht=scontent.fbey7-1.fna&oh=00_AT8V3tyxT1eJP8wiHMWvISgOlX1bOzOQbqTOSb02QRAjjg&oe=6259A4E6" alt="">
-                                </div>
-                                <div class="col-12 col-lg-6">
-                                    <h4 class="text-center">Login</h4>
-                                    <div class="mb-1">
-                                        <label for="" class="form-label"></label>
-                                        <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
-                                        <small id="helpId" class="text-muted">Username</small>
-                                    </div>
-                                    <div class="mb-1">
-                                        <label for="" class="form-label"></label>
-                                        <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
-                                        <small id="helpId" class="text-muted">Password</small>
-                                    </div>
-                                    <div class="d-grid">
-                                        <a href="dashboard.php">
-                                            <button type="button" class="btn btn-danger btn-block mt-2">Login</button>
-                                        </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="box card p-2 text-light">
+                            <div class="card-body">
+                                <div class="container">
+                                    <div class="row justify-content-center mb-3">
+                                        <div class="col">
+                                            <h2 class="text-center border-bottom pb-3">Login</h2>
+                                            <div class="mb-1 text-start">
+                                                <label for="" class="form-label"></label>
+                                                <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                                <small id="helpId">Username</small>
+                                            </div>
+                                            <div class="mb-1 text-start">
+                                                <label for="" class="form-label"></label>
+                                                <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                                <small id="helpId">Password</small>
+                                            </div>
+                                                <a class="d-grid" href="dashboard.php">
+                                                    <button type="button" class="btn btn-danger btn-block mt-2">Login</button>
+                                                </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -52,6 +72,12 @@
             </div>
         </div>
     </div>
+
+        <nav class="navbar navbar-dark text-light bg-dark fixed-bottom justify-content-center">
+            <small>
+                &copy; 2022 Copyright <a class="text-danger" target="_blank" href="https://onpointleb.000webhostapp.com/">OnPoint</a> - Shafiq Zabet
+            </small>
+        </nav>
 
 </body>
 <?php
