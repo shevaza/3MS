@@ -56,7 +56,7 @@
                                             </div>
                                             <div class="mb-1 text-start">
                                                 <label for="" class="form-label"></label>
-                                                <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                                <input type="password" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
                                                 <small id="helpId">Password</small>
                                             </div>
                                                 <a class="d-grid" href="dashboard.php">

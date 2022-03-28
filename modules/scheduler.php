@@ -60,7 +60,7 @@
         <nav class="navbar navbar-expand-sm navbar-light bg-light">
             <div class="container-fluid">
                 <img class="me-2" src="../res/img/logo.png" alt="" width="60">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="dashboard.php">
                     Scheduler
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarID" aria-controls="navbarID" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,10 +68,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarID">
                     <ul class="navbar-nav ms-auto">
-                        <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+                        <a class="nav-link" aria-current="page" href="dashboard.php">Dashboard</a>
                         <a class="nav-link" aria-current="page" href="#">Users</a>
                         <a class="nav-link" aria-current="page" href="#">Settings</a>
-                        <a class="nav-link" aria-current="page" href="#">Logout</a>
+                        <a class="nav-link" aria-current="page" href="login.php">Logout</a>
                     </ul>
                 </div>
             </div>
