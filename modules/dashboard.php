@@ -43,17 +43,13 @@ session_start();
     <!-- MAIN CONTAINER -->
     <div class="container-fluid">
         <div class="row flex-nowrap">
+            <!-- SIDE NAV -->
             <div class="col-auto col-md-3 col-xl-2 px-0 bg-light">
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-0 w-100 pt-2 text-white min-vh-100">
                     <a href="#" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                         <span class="fs-5 d-none d-sm-inline">Menu</span>
                     </a>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 w-100 align-items-center align-items-sm-start" id="menu">
-                        <li class="side-item">
-                            <a href="#" class="nav-link align-middle px-0">
-                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
-                            </a>
-                        </li>
                         <li class="side-item">
                             <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                                 <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
@@ -96,7 +92,34 @@ session_start();
             </div>
 
 
-            <div class="col py-3">
+
+
+
+
+
+            <!-- DASHBOARD -->
+            <div id="dashboard" class="col py-3 model">
+                <div class="row">
+                    <div class="col col-3">
+                        <div class="card">
+                            <img class="card-img-top" src="holder.js/100x180/" alt="">
+                            <div class="card-body">
+                                <h4 class="card-title">Production</h4>
+                                <canvas id="myChart" width="400" height="400"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+            <!-- PRODUCTION -->
+            <div id="production" class="col py-3 model">
                 <div class="row">
                     <div class="col">
                         <a class="text-dark" href="scheduler.php">
@@ -110,13 +133,15 @@ session_start();
                         </a>
                     </div>
                     <div class="col">
-                        <div class="card db-item">
-                            <img class="card-img-top" src="holder.js/100x180/" alt="">
-                            <div class="card-body">
-                                <h4 class="card-title">Maintenance</h4>
-                                <p class="card-text">Maintenance Reports</p>
+                        <a class="text-dark" href="maintenance.php">
+                            <div class="card db-item">
+                                <img class="card-img-top" src="holder.js/100x180/" alt="">
+                                <div class="card-body">
+                                    <h4 class="card-title">Maintenance</h4>
+                                    <p class="card-text">Maintenance Reports</p>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     <div class="col">
                         <div class="card db-item">
@@ -138,11 +163,71 @@ session_start();
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <canvas id="myChart" width="400" height="400"></canvas>
+
+
+
+
+
+            <!-- MAINTENANCE -->
+            <div id="maintenance" class="col py-3 model">
+                <div class="row">
+                    <div class="col">
+                        <a class="text-dark" href="#">
+                            <div class="card db-item">
+                                <img class="card-img-top" src="holder.js/100x180/" alt="">
+                                <div class="card-body">
+                                    <h4 class="card-title">Preventative Maintenance</h4>
+                                    <p class="card-text">Maintenance planning</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <div class="card db-item">
+                            <img class="card-img-top" src="holder.js/100x180/" alt="">
+                            <div class="card-body">
+                                <h4 class="card-title">Corrective Maintenance</h4>
+                                <p class="card-text">Maintenance on spot</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card db-item">
+                            <img class="card-img-top" src="holder.js/100x180/" alt="">
+                            <div class="card-body">
+                                <h4 class="card-title">Maintenance Logs</h4>
+                                <p class="card-text">All maintenance logs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
     </div>
     <!-- CLOSE MAIN CONTAINER -->

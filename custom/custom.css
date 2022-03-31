@@ -74,3 +74,7 @@ a {
     color: white;
     background-color: #c71d1d !important;
 }
+
+.model {
+    display: none;
+}
