@@ -128,7 +128,7 @@ session_start();
                 </div>
                 <div class="row">
                     <div class="col">
-                        <a class="text-dark" href="scheduler.php">
+                        <a class="text-dark" href="production_scheduler.php">
                             <div class="card db-item">
                                 <img class="card-img-top" src="holder.js/100x180/" alt="">
                                 <div class="card-body">
@@ -137,35 +137,6 @@ session_start();
                                 </div>
                             </div>
                         </a>
-                    </div>
-                    <div class="col">
-                        <a class="text-dark" href="maintenance.php">
-                            <div class="card db-item">
-                                <img class="card-img-top" src="holder.js/100x180/" alt="">
-                                <div class="card-body">
-                                    <h4 class="card-title">Maintenance</h4>
-                                    <p class="card-text">Maintenance Reports</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col">
-                        <div class="card db-item">
-                            <img class="card-img-top" src="holder.js/100x180/" alt="">
-                            <div class="card-body">
-                                <h4 class="card-title">Procurement</h4>
-                                <p class="card-text">Purchasing orders</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card db-item">
-                            <img class="card-img-top" src="holder.js/100x180/" alt="">
-                            <div class="card-body">
-                                <h4 class="card-title">Other</h4>
-                                <p class="card-text">Others tasks assigned</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -195,28 +166,32 @@ session_start();
                         </a>
                     </div>
                     <div class="col">
-                        <div class="card db-item">
-                            <div class="card-body">
-                                <div class="row justify-content-center">
-                                    <div class="col-auto text-end">
-                                        <i class="fas fa-toolbox" style="font-size: 5rem;"></i>
-                                    </div>
-                                    <div class="col">
-                                        <h4 class="card-title">Corrective Maintenance</h4>
-                                        <p class="card-text">Maintenance on spot</p>
+                        <a class="text-dark" href="maintenance_corrective.php">
+                            <div class="card db-item">
+                                <div class="card-body">
+                                    <div class="row justify-content-center">
+                                        <div class="col-auto text-end">
+                                            <i class="fas fa-toolbox" style="font-size: 5rem;"></i>
+                                        </div>
+                                        <div class="col">
+                                            <h4 class="card-title">Corrective Maintenance</h4>
+                                            <p class="card-text">Maintenance on spot</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     <div class="col">
-                        <div class="card db-item">
-                            <img class="card-img-top" src="holder.js/100x180/" alt="">
-                            <div class="card-body">
-                                <h4 class="card-title">Maintenance Logs</h4>
-                                <p class="card-text">All maintenance logs</p>
+                        <a class="text-dark" href="maintenance_log.php">
+                            <div class="card db-item">
+                                <img class="card-img-top" src="holder.js/100x180/" alt="">
+                                <div class="card-body">
+                                    <h4 class="card-title">Maintenance Logs</h4>
+                                    <p class="card-text">All maintenance logs</p>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
