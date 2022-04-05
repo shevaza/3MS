@@ -15,6 +15,12 @@ session_start();
     <?php
     include '../css.php';
     ?>
+    <script>
+        function switchTab(i) {
+            $('.model').hide();
+            $('#' + i).fadeIn();
+        }
+    </script>
 </head>
 
 <body>
@@ -50,19 +56,19 @@ session_start();
                         <span class="fs-5 d-none d-sm-inline ">Menu</span>
                     </a> -->
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 mt-3 w-100 align-items-center align-items-sm-start" id="menu">
-                        <li class="side-item">
+                        <li class="side-item" onclick="switchTab('dashboard')">
                             <a href="#" class="nav-link px-0 align-middle py-4">
                                 <i class="fs-4 fas fa-gauge"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
                         </li>
-                        <li class="side-item">
+                        <li class="side-item" onclick="switchTab('production')">
                             <a href="#" class="nav-link px-0 align-middle py-4">
                                 <i class="fs-4 fas fa-industry"></i> <span class="ms-1 d-none d-sm-inline">Production</span></a>
                         </li>
-                        <li class="side-item">
+                        <li class="side-item" onclick="switchTab('maintenance')">
                             <a href="#" class="nav-link px-0 align-middle py-4">
                                 <i class="fs-4 fas fa-tools"></i> <span class="ms-1 d-none d-sm-inline">Maintenance</span> </a>
                         </li>
-                        <li class="side-item">
+                        <li class="side-item" onclick="switchTab()">
                             <a href="#" class="nav-link px-0 align-middle py-4">
                                 <i class="fs-4 fas fa-user"></i> <span class="ms-1 d-none d-sm-inline">Customers</span> </a>
                         </li>
@@ -80,12 +86,12 @@ session_start();
             <!-- DASHBOARD -->
             <div id="dashboard" class="col py-3 model">
                 <div class="row">
-                    <div class="col col-3">
+                    <div class="col">
                         <div class="card">
                             <img class="card-img-top" src="holder.js/100x180/" alt="">
                             <div class="card-body">
-                                <h4 class="card-title">Production</h4>
-                                <canvas id="myChart" width="400" height="400"></canvas>
+                                <h4 class="card-title">Industry</h4>
+                                <canvas id="Chart" width="100" height="40"></canvas>
                             </div>
                         </div>
                     </div>
@@ -100,6 +106,26 @@ session_start();
 
             <!-- PRODUCTION -->
             <div id="production" class="col py-3 model">
+                <div class="row mb-2">
+                    <div class="col col-4">
+                        <div class="card">
+                            <img class="card-img-top" src="holder.js/100x180/" alt="">
+                            <div class="card-body">
+                                <h4 class="card-title">Year Production</h4>
+                                <canvas id="PieChart" width="100" height="100"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-8">
+                        <div class="card">
+                            <img class="card-img-top" src="holder.js/100x180/" alt="">
+                            <div class="card-body">
+                                <h4 class="card-title">Month Production</h4>
+                                <canvas id="LineChart" width="100" height="50"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col">
                         <a class="text-dark" href="scheduler.php">
@@ -154,20 +180,32 @@ session_start();
                     <div class="col">
                         <a class="text-dark" href="#">
                             <div class="card db-item">
-                                <img class="card-img-top" src="holder.js/100x180/" alt="">
                                 <div class="card-body">
-                                    <h4 class="card-title">Preventative Maintenance</h4>
-                                    <p class="card-text">Maintenance planning</p>
+                                    <div class="row justify-content-center">
+                                        <div class="col-auto text-end">
+                                            <i class="fas fa-wrench" style="font-size: 5rem;"></i>
+                                        </div>
+                                        <div class="col">
+                                            <h4 class="card-title">Preventative Maintenance</h4>
+                                            <p class="card-text">Maintenance planning</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </a>
                     </div>
                     <div class="col">
                         <div class="card db-item">
-                            <img class="card-img-top" src="holder.js/100x180/" alt="">
                             <div class="card-body">
-                                <h4 class="card-title">Corrective Maintenance</h4>
-                                <p class="card-text">Maintenance on spot</p>
+                                <div class="row justify-content-center">
+                                    <div class="col-auto text-end">
+                                        <i class="fas fa-toolbox" style="font-size: 5rem;"></i>
+                                    </div>
+                                    <div class="col">
+                                        <h4 class="card-title">Corrective Maintenance</h4>
+                                        <p class="card-text">Maintenance on spot</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
