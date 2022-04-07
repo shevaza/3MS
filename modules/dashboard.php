@@ -36,6 +36,7 @@ session_start();
                 </button>
                 <div class="collapse navbar-collapse" id="navbarID">
                     <ul class="navbar-nav ms-auto">
+                        <a class="nav-link diabled me-2 border-end border-dark border-2" aria-current="page" href="#">Welcome Shafiq</a>
                         <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
                         <a class="nav-link" aria-current="page" href="#">Users</a>
                         <a class="nav-link" aria-current="page" href="#">Settings</a>
@@ -90,7 +91,7 @@ session_start();
                         <div class="card">
                             <img class="card-img-top" src="holder.js/100x180/" alt="">
                             <div class="card-body">
-                                <h4 class="card-title">Industry</h4>
+                                <h4 class="card-title">Industry Production</h4>
                                 <canvas id="Chart" width="100" height="40"></canvas>
                             </div>
                         </div>

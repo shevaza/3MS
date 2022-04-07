@@ -68,6 +68,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarID">
                     <ul class="navbar-nav ms-auto">
+                        <a class="nav-link diabled me-2 border-end border-dark border-2" aria-current="page" href="#">Welcome Shafiq</a>
                         <a class="nav-link" aria-current="page" href="dashboard.php">Dashboard</a>
                         <a class="nav-link" aria-current="page" href="#">Users</a>
                         <a class="nav-link" aria-current="page" href="#">Settings</a>
