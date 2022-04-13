@@ -150,7 +150,7 @@ session_start();
             <div id="maintenance" class="col py-3 model">
                 <div class="row">
                     <div class="col">
-                        <a class="text-dark" href="#">
+                        <a class="text-dark" href="maintenance_preventative.php">
                             <div class="card db-item">
                                 <div class="card-body">
                                     <div class="row justify-content-center">
