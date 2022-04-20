@@ -6,19 +6,12 @@ $databasePassword = '';
 $databaseName = '3ms';
 
 
-// if (isset($_SESSION['db'])) {
-//     $databaseName = $_SESSION['db'];
-// }else {
-//     echo 'NO DATABASE SELECTED';
-// }
-
 $mysqli = mysqli_connect($databaseHost, $databaseUsername, $databasePassword, $databaseName);
 
 date_default_timezone_set("Asia/Beirut");
 
 
 session_start();
-// include 'log.php';
 if (isset($_POST['username'])) {
   $username = stripslashes($_REQUEST['username']);
   $username = mysqli_real_escape_string($mysqli, $username);
@@ -32,11 +25,8 @@ if (isset($_POST['username'])) {
     $_SESSION['user_id'] = $res['id'];
     $_SESSION['username'] = $username;
     $_SESSION['user_type'] = $res['user_type'];
-    // logsql('login', 0, $username, $res['user_type']);
-    // header("Location: index.php");
     echo '<script> location.replace("index.php"); </script>';
   } else {
     echo '<script> location.replace("login.php?err=1"); </script>';
-
   }
 }
