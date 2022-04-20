@@ -1,3 +1,10 @@
+<?php
+require('../config.php');
+if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
+    header('location:dashboard.php');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +26,7 @@
     </nav>
 
     <div class="container" style="margin-top:5%;">
-    
+
         <div class="row justify-content-center">
             <div class="col-12 col-lg-6 col-md-6 col-sm-12 text-dark text-xl-start text-md-start text-sm-center text-center">
                 <img src="../res/img/logo.png" class="img-fluid" alt="" width="200">
@@ -59,9 +66,9 @@
                                                 <input type="password" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
                                                 <small id="helpId">Password</small>
                                             </div>
-                                                <a class="d-grid" href="dashboard.php">
-                                                    <button type="button" class="btn btn-danger btn-block mt-2">Login</button>
-                                                </a>
+                                            <a class="d-grid" href="dashboard.php">
+                                                <button type="button" class="btn btn-danger btn-block mt-2">Login</button>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -73,11 +80,11 @@
         </div>
     </div>
 
-        <nav class="navbar navbar-dark text-light bg-dark fixed-bottom justify-content-center">
-            <small>
-                &copy; 2022 Copyright <a class="text-danger" target="_blank" href="https://onpointleb.000webhostapp.com/">OnPoint</a> - Shafiq Zabet
-            </small>
-        </nav>
+    <nav class="navbar navbar-dark text-light bg-dark fixed-bottom justify-content-center">
+        <small>
+            &copy; 2022 Copyright <a class="text-danger" target="_blank" href="https://onpointleb.000webhostapp.com/">OnPoint</a> - Shafiq Zabet
+        </small>
+    </nav>
 
 </body>
 <?php
