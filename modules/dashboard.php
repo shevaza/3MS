@@ -1,8 +1,8 @@
 <?php
 session_start();
-// if (empty($_SESSION['user_id'])) {
-//     header('location:login.php');
-// }
+if (empty($_SESSION['user_id'])) {
+    header('location:login.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,12 +15,6 @@ session_start();
     <?php
     include '../css.php';
     ?>
-    <script>
-        function switchTab(i) {
-            $('.model').hide();
-            $('#' + i).fadeIn();
-        }
-    </script>
 </head>
 
 <body>
@@ -36,11 +30,11 @@ session_start();
                 </button>
                 <div class="collapse navbar-collapse" id="navbarID">
                     <ul class="navbar-nav ms-auto">
-                        <a class="nav-link diabled me-2 border-end border-dark border-2" aria-current="page" href="#">Welcome Shafiq</a>
+                        <a class="nav-link diabled me-2 border-end border-dark border-2" aria-current="page" href="#">Welcome <?php echo ucfirst($_SESSION['username']) ?></a>
                         <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
                         <a class="nav-link" aria-current="page" href="#">Users</a>
                         <a class="nav-link" aria-current="page" href="#">Settings</a>
-                        <a class="nav-link" aria-current="page" href="login.php">Logout</a>
+                        <a class="nav-link" aria-current="page" href="../php_queries/logout.php">Logout</a>
                     </ul>
                 </div>
             </div>
@@ -61,17 +55,21 @@ session_start();
                             <a href="#" class="nav-link px-0 align-middle py-4">
                                 <i class="fs-4 fas fa-gauge"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
                         </li>
-                        <li class="side-item" onclick="switchTab('production')">
+                        <!-- <li class="side-item" onclick="switchTab('production')">
                             <a href="#" class="nav-link px-0 align-middle py-4">
                                 <i class="fs-4 fas fa-industry"></i> <span class="ms-1 d-none d-sm-inline">Production</span></a>
-                        </li>
+                        </li> -->
                         <li class="side-item" onclick="switchTab('maintenance')">
                             <a href="#" class="nav-link px-0 align-middle py-4">
                                 <i class="fs-4 fas fa-tools"></i> <span class="ms-1 d-none d-sm-inline">Maintenance</span> </a>
                         </li>
+                        <li class="side-item" onclick="switchTab('setup')">
+                            <a href="#" class="nav-link px-0 align-middle py-4">
+                                <i class="fs-4 fas fa-gear"></i> <span class="ms-1 d-none d-sm-inline">Setup</span> </a>
+                        </li>
                         <li class="side-item" onclick="switchTab()">
                             <a href="#" class="nav-link px-0 align-middle py-4">
-                                <i class="fs-4 fas fa-user"></i> <span class="ms-1 d-none d-sm-inline">Customers</span> </a>
+                                <i class="fs-4 fas fa-user"></i> <span class="ms-1 d-none d-sm-inline">Users</span> </a>
                         </li>
                     </ul>
                     <hr>
@@ -198,7 +196,62 @@ session_start();
             </div>
 
 
-
+            <!-- SETUP -->
+            <div id="setup" class="col py-3 model">
+                <div class="row">
+                    <div class="col">
+                        <a class="text-dark" href="#">
+                            <div class="card db-item">
+                                <div class="card-body">
+                                    <div class="row justify-content-center">
+                                        <div class="col-auto text-end">
+                                            <i class="fas fa-wrench" style="font-size: 5rem;"></i>
+                                        </div>
+                                        <div class="col">
+                                            <h4 class="card-title">Machines</h4>
+                                            <p class="card-text">Setup factory machines</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a class="text-dark" href="#">
+                            <div class="card db-item">
+                                <div class="card-body">
+                                    <div class="row justify-content-center">
+                                        <div class="col-auto text-end">
+                                            <i class="fas fa-toolbox" style="font-size: 5rem;"></i>
+                                        </div>
+                                        <div class="col">
+                                            <h4 class="card-title">Molds</h4>
+                                            <p class="card-text">Setup Machine Molds</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a class="text-dark" href="#">
+                            <div class="card db-item">
+                                <div class="card-body">
+                                    <div class="row justify-content-center">
+                                        <div class="col-auto text-end">
+                                            <i class="fas fa-toolbox" style="font-size: 5rem;"></i>
+                                        </div>
+                                        <div class="col">
+                                            <h4 class="card-title">Items</h4>
+                                            <p class="card-text">Setup Production Items</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
 
 
 

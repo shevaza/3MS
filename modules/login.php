@@ -3,6 +3,17 @@ require('../config.php');
 if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
     header('location:dashboard.php');
 }
+if (isset($_GET['err']) && $_GET['err'] == 1) {
+    $error = ' <div class="alert alert-light text-danger d-flex align-items-center mb-0" role="alert">
+                                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                                    <div class="ms-2">
+                                                        Username or password incorrect. 
+                                                    </div>
+                                                </div>';
+} else {
+    $error = '';
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -55,20 +66,21 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                                 <div class="container">
                                     <div class="row justify-content-center mb-3">
                                         <div class="col">
-                                            <h2 class="text-center border-bottom pb-3">Login</h2>
-                                            <div class="mb-1 text-start">
-                                                <label for="" class="form-label"></label>
-                                                <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
-                                                <small id="helpId">Username</small>
-                                            </div>
-                                            <div class="mb-1 text-start">
-                                                <label for="" class="form-label"></label>
-                                                <input type="password" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
-                                                <small id="helpId">Password</small>
-                                            </div>
-                                            <a class="d-grid" href="dashboard.php">
-                                                <button type="button" class="btn btn-danger btn-block mt-2">Login</button>
-                                            </a>
+                                            <form action="../config.php" method="post">
+                                                <h2 class="text-center border-bottom pb-3">Login</h2>
+                                                <?php echo $error; ?>
+                                                <div class="mb-1 text-start">
+                                                    <label for="" class="form-label"></label>
+                                                    <input type="text" name="username" id="" class="form-control" placeholder="" aria-describedby="helpId" required>
+                                                    <small id="helpId">Username</small>
+                                                </div>
+                                                <div class="mb-1 text-start">
+                                                    <label for="" class="form-label"></label>
+                                                    <input type="password" name="password" id="" class="form-control" placeholder="" aria-describedby="helpId" required>
+                                                    <small id="helpId">Password</small>
+                                                </div>
+                                                <button type="submit" name="submit" class="btn btn-danger btn-block mt-2 d-grid w-100">Login</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

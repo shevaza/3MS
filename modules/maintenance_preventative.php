@@ -53,30 +53,43 @@ session_start();
             <div class="col-sm-12 col-md-9 col-lg-9 mb-3">
                 <div class="card">
                     <div class="card-header">
-                        <h4><i class="fas fa-wrench"></i> Preventative Maintenance</h4>
+                        <div class="row">
+                        <div class="col">
+                            <h4><i class="fas fa-wrench"></i> Preventative Maintenance</h4>
+                            </div>
+                            <div class="col text-end">
+                                <button type="button" class="btn btn-danger"><i class="fas fa-plus"></i> Add Task</button>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body p-5">
-                       <table class="table table-bordered table-hover">
-                           <thead>
-                               <tr>
-                                   <th></th>
-                                   <th></th>
-                                   <th></th>
-                               </tr>
-                           </thead>
-                           <tbody>
-                               <tr>
-                                   <td scope="row"></td>
-                                   <td></td>
-                                   <td></td>
-                               </tr>
-                               <tr>
-                                   <td scope="row"></td>
-                                   <td></td>
-                                   <td></td>
-                               </tr>
-                           </tbody>
-                       </table>
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Task ID</th>
+                                    <th>Task Name</th>
+                                    <th>Start</th>
+                                    <th>End</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td scope="row"></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td scope="row"></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

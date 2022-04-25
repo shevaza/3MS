@@ -3,6 +3,7 @@ $(document).ready(function() {
 });
 
 function switchTab(i) {
-    $('.model').fadeOut();
-    $('#' + i).fadeIn();
+    $('.model').fadeOut(function() {
+        $('#' + i).fadeIn();
+    });
 }
