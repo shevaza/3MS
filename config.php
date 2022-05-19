@@ -23,6 +23,8 @@ if (isset($_POST['username'])) {
     $_SESSION['user_id'] = $res['id'];
     $_SESSION['username'] = $username;
     $_SESSION['user_type'] = $res['type'];
+    $query2 = "UPDATE `users` SET `online` = '1' WHERE `id` = '$res[id]'";
+    $result2 = mysqli_query($mysqli, $query2) or die(mysqli_error($mysqli));
     echo '<script> location.replace("index.php"); </script>';
   } else {
     echo '<script> location.replace("modules/login.php?err=1"); </script>';

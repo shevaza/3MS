@@ -133,10 +133,10 @@ Options can be passed via data attributes or JavaScript. For data attributes, ap
   </tr>
   <tr>
     <td>liveSearchStyle</td>
-    <td>string</td>
+    <td>string | function</td>
     <td><code>'contains'</code></td>
     <td>
-      <p>When set to <code>'contains'</code>, searching will reveal options that contain the searched text. For example, searching for pl with return both Ap<b>pl</b>e, <b>Pl</b>um, and <b>Pl</b>antain. When set to <code>'startsWith'</code>, searching for pl will return only <b>Pl</b>um and <b>Pl</b>antain.</p>
+      <p>When set to <code>'contains'</code>, searching will reveal options that contain the searched text. For example, searching for pl with return both Ap<b>pl</b>e, <b>Pl</b>um, and <b>Pl</b>antain. When set to <code>'startsWith'</code>, searching for pl will return only <b>Pl</b>um and <b>Pl</b>antain. If a function is used, the arguments are the option string and the searched text and it must return <code>true</code> if the option matches or <code>false<code>.</p>
     </td>
   </tr>
   <tr>
@@ -203,7 +203,15 @@ Options can be passed via data attributes or JavaScript. For data attributes, ap
     <td><code>'values'</code></td>
     <td>
       <p>Specifies how the selection is displayed with a multiple select.</p>
-      <p><code>'values'</code> displays a list of the selected options (separated by <code>multipleSeparator</code>. <code>'static'</code> simply displays the select element's title. <code>'count'</code> displays the total number of selected options. <code>'count > x'</code> behaves like <code>'values'</code> until the number of selected options is greater than x; after that, it behaves like <code>'count'</code>.
+      <p>
+        <code>'values'</code> displays a list of the selected options (separated by <code>multipleSeparator</code>).
+        <br>
+        <code>'static'</code> simply displays the select element's title.
+        <br>
+        <code>'count > x'</code> behaves like <code>'values'</code> until the number of selected options is greater than x; after that, it displays the total number of selected options.
+        <br>
+        <code>'count'</code> is an alias for <code>'count > 1'</code>.
+      </p>
     </td>
   </tr>
   <tr>
