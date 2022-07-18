@@ -27,7 +27,7 @@ if (isset($_GET['err'])) {
                 <a name="" id="" class="btn btn-sm btn-dark me-4" href="../" role="button"><i class="fas fa-arrow-left    "></i></a>
                 <img class="me-2" src="../../res/img/logo.png" alt="" width="60">
                 <a class="navbar-brand" href="#">
-                    Moulds
+                    Molds
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarID" aria-controls="navbarID" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -52,13 +52,13 @@ if (isset($_GET['err'])) {
                 <div class="card">
                     <form action="../../php_queries/add_mold.php" method="post">
                         <div class="card-header">
-                            <h4><i class="fas fa-plus"></i> Add New Mould</h4>
+                            <h4><i class="fas fa-plus"></i> Add New Mold</h4>
                         </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
-                                        <label for="">Mould Name</label>
+                                        <label for="">Mold Name</label>
                                         <input type="text" required class="form-control" name="mold_name" id="" aria-describedby="helpId" placeholder="">
                                     </div>
                                 </div>
@@ -66,8 +66,16 @@ if (isset($_GET['err'])) {
                             <div class="row mt-2">
                                 <div class="col">
                                     <div class="form-group">
-                                        <label for="">Mould Description</label>
+                                        <label for="">Mold Description</label>
                                         <textarea rows="3" class="form-control" required name="mold_description" aria-describedby="helpId" placeholder="Short Description of Mold functionality."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="">Mold Cavities</label>
+                                        <input type="number" required class="form-control" name="mold_cavity" id="" min="0">
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +104,7 @@ if (isset($_GET['err'])) {
             <div class="col-sm-12 col-md-9 col-lg-9 mb-3">
                 <div class="card">
                     <div class="card-header">
-                        <h4><i class="fas fa-industry"></i> Moulds</h4>
+                        <h4><i class="fas fa-industry"></i> Molds</h4>
                     </div>
                     <div class="card-body">
                         <table class="table table-hover table-striped table-responsive w-100">
@@ -105,6 +113,7 @@ if (isset($_GET['err'])) {
                                     <th>ID</th>
                                     <th>Name</th>
                                     <th>Description</th>
+                                    <th>Cavities</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -116,9 +125,10 @@ if (isset($_GET['err'])) {
                                     echo '<td class="w-auto">' . $res['id'] . '</td>';
                                     echo '<td class="w-auto">' . $res['name'] . '</td>';
                                     echo '<td class="w-auto">' . $res['description'] . '</td>';
+                                    echo '<td class="w-auto">' . $res['cavity'] . '</td>';
                                     echo '<td class="w-25">
                                     <div class="btn-group" role="group" aria-label="">
-                                        <button type="button" class="btn btn-sm btn-warning px-3" data-bs-toggle="modal" data-bs-target="#machines_' . $res['id'] . '"><i class="fas fa-gear"></i> Machines</button>
+                                        <button type="button" class="btn btn-sm btn-warning px-3" data-bs-toggle="modal" data-bs-target="#info_' . $res['id'] . '"><i class="fas fa-gear"></i> Machines</button>
                                         <button type="button" class="btn btn-sm btn-primary px-3" data-bs-toggle="modal" data-bs-target="#edit_' . $res['id'] . '"><i class="fas fa-pen"></i> Edit</button>
                                         <button type="button" class="btn btn-sm btn-danger px-3" data-bs-toggle="modal" data-bs-target="#delete_' . $res['id'] . '"><i class="fas fa-trash"></i> Delete</button>
                                     </div>
@@ -133,14 +143,14 @@ if (isset($_GET['err'])) {
                                             <form action="../../php_queries/edit_delete_mold.php" method="post">
                                             <div class="modal-header">
                                             <i class="fas fa-pen me-2"></i>
-                                                <h5 class="modal-title" id="staticBackdropLabel">Edit Mould: ' . $res['name'] . '</h5>
+                                                <h5 class="modal-title" id="staticBackdropLabel">Edit Mold: ' . $res['name'] . '</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
                                                     <div class="row">
                                                         <div class="col">
                                                             <div class="form-group">
-                                                                <label for="">Mould Name</label>
+                                                                <label for="">Mold Name</label>
                                                                 <input type="text" value="' . $res['name'] . '" min="0" required class="form-control" name="mold_name" id="" aria-describedby="helpId" placeholder="">
                                                             </div>
                                                         </div>
@@ -148,7 +158,7 @@ if (isset($_GET['err'])) {
                                                     <div class="row mt-2">
                                                         <div class="col">
                                                             <div class="form-group">
-                                                                <label for="">Mould Description</label>
+                                                                <label for="">Mold Description</label>
                                                                 <textarea rows="3" class="form-control" required name="mold_description" aria-describedby="helpId" placeholder="Short Description of machine functionality.">' . $res['description'] . '</textarea>
                                                             </div>
                                                         </div>
@@ -156,15 +166,22 @@ if (isset($_GET['err'])) {
                                                     <div class="row mt-2">
                                                         <div class="col">
                                                             <div class="form-group">
+                                                                <label for="">Mold Cavities</label>
+                                                                <input type="number" value="' . $res['cavity'] . '" required class="form-control" name="mold_cavity" id="" min="0">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt-2">
+                                                        <div class="col">
+                                                            <div class="form-group">
                                                                 <label for="">Compatible Machines</label>
-                                    <select id="sm_'.$res['id'].'" class="selectpicker form-control" name="machines[]" multiple required>';
+                                                                    <select id="sm_' . $res['id'] . '" class="selectpicker form-control" name="machines[]" multiple required>';
                                     $machines_q1 = mysqli_query($mysqli, "SELECT * FROM `machines`");
                                     while ($m1 = mysqli_fetch_array($machines_q1)) {
-
                                         echo '.<option value="' . $m1['id'] . '">' . $m1['number'] . '</option>';
                                     };
                                     echo '
-                                    </select>
+                                                                    </select>
                                                             </div>
                                                             </div>
                                                     </div>
@@ -188,13 +205,13 @@ if (isset($_GET['err'])) {
                                             <form action="../../php_queries/edit_delete_mold.php" method="post">
                                             <div class="modal-header">
                                             <i class="fas fa-trash me-2"></i>
-                                                <h5 class="modal-title" id="staticBackdropLabel">Delete Mould: ' . $res['name'] . '</h5>
+                                                <h5 class="modal-title" id="staticBackdropLabel">Delete Mold: ' . $res['name'] . '</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
                                                     <div class="row">
                                                         <div class="col">
-                                                        Are you sure you want to delete Mould: ' . $res['name'] . '?
+                                                        Are you sure you want to delete Mold: ' . $res['name'] . '?
                                                         </div>
                                                     </div>
                                                     </div>
@@ -210,13 +227,13 @@ if (isset($_GET['err'])) {
                                         
 
 
-                                         <div class="modal fade" id="machines_' . $res['id'] . '" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                         <div class="modal fade" id="info_' . $res['id'] . '" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                             <form action="../../php_queries/edit_delete_mold.php" method="post">
                                             <div class="modal-header">
                                             <i class="fas fa-gear me-2"></i>
-                                                <h5 class="modal-title" id="staticBackdropLabel">Mould compatible on: </h5>
+                                                <h5 class="modal-title" id="staticBackdropLabel">Compatible on:</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
@@ -253,13 +270,13 @@ if (isset($_GET['err'])) {
                                             <form action="../../php_queries/edit_delete_mold.php" method="post">
                                             <div class="modal-header">
                                             <i class="fas fa-trash me-2"></i>
-                                                <h5 class="modal-title" id="staticBackdropLabel">Delete Mould: ' . $res['name'] . '</h5>
+                                                <h5 class="modal-title" id="staticBackdropLabel">Delete Mold: ' . $res['name'] . '</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
                                                     <div class="row">
                                                         <div class="col">
-                                                        Are you sure you want to delete Mould: ' . $res['name'] . '?
+                                                        Are you sure you want to delete Mold: ' . $res['name'] . '?
                                                         </div>
                                                     </div>
                                                     </div>

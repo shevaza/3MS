@@ -5,8 +5,8 @@ if (isset($_POST['mold_name'])) {
     if (mysqli_num_rows($check) > 0) {
         header('Location: ../modules/setup/molds.php?err=Machine already exists.');
     } else {
-        $insert = mysqli_query($mysqli, "INSERT INTO `molds` (`name`, `description`) 
-    VALUES ('$_POST[mold_name]', '$_POST[mold_description]')");
+        $insert = mysqli_query($mysqli, "INSERT INTO `molds` (`name`, `description`, `cavity`) 
+    VALUES ('$_POST[mold_name]', '$_POST[mold_description]', '$_POST[mold_cavity]')");
 
     $mold_id = mysqli_insert_id($mysqli);
 

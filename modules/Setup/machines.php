@@ -116,7 +116,7 @@ if (isset($_GET['err'])) {
                                     echo '<td class="w-auto text-light bg-' . $status . '">' . $s . '</td>';
                                     echo '<td class="w-25">
                                     <div class="btn-group" role="group" aria-label="">
-                                        <button type="button" class="btn btn-sm btn-success disabled px-3"><i class="fas fa-screwdriver"></i> Molds</button>
+                                        <button type="button" class="btn btn-sm btn-success px-3" data-bs-toggle="modal" data-bs-target="#molds_' . $res['id'] . '"><i class="fas fa-screwdriver"></i> Molds</button>
                                         <button type="button" class="btn btn-sm btn-primary px-3" data-bs-toggle="modal" data-bs-target="#edit_' . $res['id'] . '">
                                             <i class="fas fa-pen"></i> Edit
                                         </button>
@@ -126,8 +126,58 @@ if (isset($_GET['err'])) {
                                     </div>  
                                     </td>';
                                     echo '</tr>';
-
+                                    $sm = mysqli_query($mysqli, "SELECT * FROM `machine_mold_comp` WHERE `machine_id` = '$res[id]'");
                                     echo '
+                                        <div class="modal fade" id="molds_' . $res['id'] . '" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="staticBackdropLabel">Machine ' . $res['number'] . ' Molds</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col">
+                                                </div>
+                                                <div class="col fw-bold">
+                                                ID
+                                                </div>
+                                                <div class="col fw-bold">
+                                                Name
+                                                </div>
+                                                </div>
+                                            ';
+                                            while ($r=mysqli_fetch_array($sm)) {
+                                                $mold = mysqli_query($mysqli, "SELECT * FROM `molds` WHERE `id` = '$r[mold_id]'");
+                                                $mold = mysqli_fetch_array($mold);
+                                                $mold = $mold['name'];
+                                                echo '
+                                                <div class="row">
+                                                <div class="col">
+                                                              Mold:
+                                                              </div>
+                                                    <div class="col">
+                                                              '.$r['mold_id']. '
+                                                              </div>
+                                                              <div class="col">
+                                                              ' . $mold . '
+                                                              </div>
+                                                              </div>
+                                                              ';
+                                                          };
+                                                          echo '
+                                                        </div>
+                                                    </div>
+                                                    </div>
+
+                                            </div>
+                                        </div>
+                                        </div>
+
+
+
+
+
                                         <div class="modal fade" id="edit_' . $res['id'] . '" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">

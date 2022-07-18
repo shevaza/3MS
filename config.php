@@ -23,6 +23,15 @@ if (isset($_POST['username'])) {
     $_SESSION['user_id'] = $res['id'];
     $_SESSION['username'] = $username;
     $_SESSION['user_type'] = $res['type'];
+    if ($res['type'] != 'super admin') {
+      $_SESSION['modules'] = array();
+      $select_modules = mysqli_query($mysqli, "SELECT * FROM `user_access` WHERE `user_id` = '$res[id]'");
+      while ($mod = mysqli_fetch_array($select_modules)) {
+        array_push($_SESSION['modules'], $mod['module']);
+      }
+    }
+
+    
     $query2 = "UPDATE `users` SET `online` = '1' WHERE `id` = '$res[id]'";
     $result2 = mysqli_query($mysqli, $query2) or die(mysqli_error($mysqli));
     echo '<script> location.replace("index.php"); </script>';

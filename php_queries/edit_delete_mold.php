@@ -7,7 +7,7 @@ if (isset($_POST['edit'])) {
         header('Location: ../modules/setup/molds.php?err=Mold already exists.');
     } else {
         // MOLD
-        $update = mysqli_query($mysqli, "UPDATE `molds` SET `name` = '$_POST[mold_name]', `description` = '$_POST[mold_description]'
+        $update = mysqli_query($mysqli, "UPDATE `molds` SET `name` = '$_POST[mold_name]', `description` = '$_POST[mold_description]', `cavity` = '$_POST[mold_cavity]'
         WHERE `id` = '$_POST[edit]'");
 
         // COMP

@@ -3,6 +3,42 @@ include '../config.php';
 if (empty($_SESSION['user_id'])) {
     header('location:login.php');
 }
+$dashboard = 'display: none';
+$maintenance = 'display: none';
+$production = 'display: none';
+$setup = 'display: none';
+$user = 'display: none';
+if ($_SESSION['user_type'] == 'Super Admin') {
+    $dashboard = '';
+    $maintenance = '';
+    $production = '';
+    $setup = '';
+    $user = '';
+} else {
+    if (in_array('production', $_SESSION['modules'])) {
+        $production = '';
+    } else {
+        $production = 'display:none';
+    }
+
+    if (in_array('maintenance', $_SESSION['modules'])) {
+        $maintenance = '';
+    } else {
+        $maintenance = 'display:none';
+    }
+
+    if (in_array('setup', $_SESSION['modules'])) {
+        $setup = '';
+    } else {
+        $setup = 'display:none';
+    }
+
+    if (in_array('user', $_SESSION['modules'])) {
+        $user = '';
+    } else {
+        $user = 'display:none';
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,35 +92,35 @@ if (empty($_SESSION['user_id'])) {
     <div class="container-fluid">
         <div class="row flex-nowrap">
             <!-- SIDE NAV -->
-            <div class="col-2 bg-dark">
-                <div class="d-flex flex-column align-items-center align-items-sm-start px-0 w-100 pt-2 text-white">
+            <div class="col-2 bg-dark p-0" id="menu">
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-0 w-100 pt-2 text-white min-vh-100">
                     <!-- <a href="#" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                         <span class="fs-5 d-none d-sm-inline ">Menu</span>
                     </a> -->
-                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 mt-3 w-100 align-items-center align-items-sm-start" id="menu">
-                        <li class="w-100 text-end" onclick="switchNav()">
-                            <a href="#" class="nav-link link-secondary px-0 align-middle pb-1">
-                                <h3 class="d-sm-inline fw-bold"><i class="fa-solid fa-xmark"></i></h3>
-                            </a>
-                        </li>
-
+                    <!-- <div id="close" class="w-100 text-end px-3">
+                        <i class="fas fa-angle-left"></i>
+                    </div> -->
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 w-100 align-items-center align-items-sm-start">
+                        <!-- <div id="open" class="p-2 bg-black">
+                            <i class="fas fa-angle-right"></i>
+                        </div> -->
                         <li class="side-item" onclick="switchTab('dashboard')">
                             <a href="#" class="nav-link px-0 align-middle py-4">
                                 <i class="fs-4 fas fa-gauge"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
                         </li>
-                        <li class="side-item" onclick="switchTab('production')">
+                        <li class="side-item" onclick="switchTab('production')" style="<?php echo $production ?>">
                             <a href="#" class="nav-link px-0 align-middle py-4">
                                 <i class="fs-4 fas fa-industry"></i> <span class="ms-1 d-none d-sm-inline">Production</span></a>
                         </li>
-                        <li class="side-item" onclick="switchTab('maintenance')">
+                        <li class="side-item" onclick="switchTab('maintenance')" style="<?php echo $maintenance ?>">
                             <a href="#" class="nav-link px-0 align-middle py-4">
                                 <i class="fs-4 fas fa-tools"></i> <span class="ms-1 d-none d-sm-inline">Maintenance</span> </a>
                         </li>
-                        <li class="side-item" onclick="switchTab('setup')">
+                        <li class="side-item" onclick="switchTab('setup')" style="<?php echo $setup ?>">
                             <a href="#" class="nav-link px-0 align-middle py-4">
                                 <i class="fs-4 fas fa-gear"></i> <span class="ms-1 d-none d-sm-inline">Setup</span> </a>
                         </li>
-                        <li class="side-item" onclick="switchTab('users')">
+                        <li class="side-item" onclick="switchTab('users')" style="<?php echo $user ?>">
                             <a href="#" class="nav-link px-0 align-middle py-4">
                                 <i class="fs-4 fas fa-user"></i> <span class="ms-1 d-none d-sm-inline">User Settings</span> </a>
                         </li>
@@ -116,7 +152,7 @@ if (empty($_SESSION['user_id'])) {
                                     </div>
                                 </div>
                             </div>
-                            <a href="setup/machines.php" class="link-light card-footer text-end">
+                            <a href="Maintenance/machine_data.php" class="link-light card-footer text-end">
                                 <span>
                                     Details <i class="fa-solid fa-circle-chevron-right"></i>
                                 </span>
@@ -190,11 +226,11 @@ if (empty($_SESSION['user_id'])) {
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-footer text-end">
+                            <a href="contacts.php" class="link-light card-footer text-end">
                                 <span>
                                     Details <i class="fa-solid fa-circle-chevron-right"></i>
                                 </span>
-                            </div>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -231,7 +267,7 @@ if (empty($_SESSION['user_id'])) {
                             </div>
                         </a>
                     </div>
-                    <div class="col col-12 col-md-12 col-lg-3 col-xl-3 mb-3">
+                    <!-- <div class="col col-12 col-md-12 col-lg-3 col-xl-3 mb-3">
                         <a class="text-dark" href="production/production_scheduler.php">
                             <div class="card db-item">
                                 <div class="card-body">
@@ -260,7 +296,7 @@ if (empty($_SESSION['user_id'])) {
                                 </div>
                             </div>
                         </a>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="row mb-2">
                     <div class="col col-3">
@@ -326,6 +362,23 @@ if (empty($_SESSION['user_id'])) {
                         </a>
                     </div>
                     <div class="col col-12 col-md-12 col-lg-4 col-xl-4 mb-3">
+                        <a class="text-dark" href="maintenance/machine_data.php">
+                            <div class="card db-item">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-auto text-end">
+                                            <i class="fa-solid fa-robot" style="font-size: 5rem;"></i>
+                                        </div>
+                                        <div class="col">
+                                            <h4 class="card-title">Machine Logs</h4>
+                                            <p class="card-text">Machine data logs</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col col-12 col-md-12 col-lg-4 col-xl-4 mb-3">
                         <a class="text-dark" href="maintenance/maintenance_log.php">
                             <div class="card db-item">
                                 <div class="card-body">
@@ -375,8 +428,8 @@ if (empty($_SESSION['user_id'])) {
                                             <i class="fas fa-toolbox" style="font-size: 5rem;"></i>
                                         </div>
                                         <div class="col">
-                                            <h4 class="card-title">Moulds</h4>
-                                            <p class="card-text">Setup Machine Moulds</p>
+                                            <h4 class="card-title">Molds</h4>
+                                            <p class="card-text">Setup Machine Molds</p>
                                         </div>
                                     </div>
                                 </div>
@@ -384,7 +437,7 @@ if (empty($_SESSION['user_id'])) {
                         </a>
                     </div>
                     <div class="col col-12 col-md-12 col-lg-4 col-xl-4 mb-3">
-                        <a class="text-dark" href="#">
+                        <a class="text-dark" href="setup/items.php">
                             <div class="card db-item">
                                 <div class="card-body">
                                     <div class="row justify-content-center">
@@ -418,7 +471,10 @@ if (empty($_SESSION['user_id'])) {
                                         </h5>
                                     </div>
                                     <div class="col text-end">
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="button" aria-pressed="false" autocomplete="off"><i class="fas fa-plus"></i> Add</button>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modelId">
+                                            <i class="fas fa-plus"></i> Add
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -439,10 +495,10 @@ if (empty($_SESSION['user_id'])) {
                                         <?php
                                         $select_users = mysqli_query($mysqli, "SELECT * FROM `users`");
                                         while ($u = mysqli_fetch_array($select_users)) {
-                                            if ($u['type'] == 'admin') {
+                                            if ($_SESSION['user_type'] == 'Super Admin') {
                                                 $admin_btns = '
-                                                <button type="button" class="btn btn-sm btn-primary px-3" data-bs-toggle="modal" data-bs-target="#edit_' . $u['id'] . '"><i class="fas fa-pen"></i> Edit</button>
-                                        <button type="button" class="btn btn-sm btn-danger px-3" data-bs-toggle="modal" data-bs-target="#delete_' . $u['id'] . '"><i class="fas fa-trash"></i> Delete</button>
+                                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#edit_' . $u['id'] . '"><i class="fas fa-pen"></i></button>
+                                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_' . $u['id'] . '"><i class="fas fa-trash"></i></button>
                                                 ';
                                             } else {
                                                 $admin_btns = '';
@@ -455,9 +511,9 @@ if (empty($_SESSION['user_id'])) {
                                             <td class="w-auto">' . $u['department'] . '</td>
                                             <td class="w-auto">' . $u['position'] . '</td>
                                             <td class="w-auto">' . $u['type'] . '</td>
-                                            <td class="w-25">
+                                            <td class="w-auto">
                                             <div class="btn-group" role="group" aria-label="">
-                                                <button type="button" class="btn btn-sm btn-info px-3" data-bs-toggle="modal" data-bs-target="#info_' . $u['id'] . '"><i class="fas fa-info"></i> Info</button>
+                                                <button type="button" class="btn btn-sm btn-info text-light" data-bs-toggle="modal" data-bs-target="#info_' . $u['id'] . '"><i class="fas fa-exclamation-circle"></i></button>
                                                 ' . $admin_btns . '
                                     </div>
                                             </td>
@@ -528,7 +584,29 @@ if (empty($_SESSION['user_id'])) {
                                         </div>
                                     </div>
                                 </div>
-                                        
+
+
+
+
+                                <div class="modal fade" id="delete_' . $u['id'] . '" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                        <form action="../php_queries/user.php" method="post">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title">Delete User' . $u['username'] . '</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                        Are you sure you want to delete user ' . $u['username'] . ' ?
+                                        </div>
+                                        <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" name="delete_user" value="' . $u['id'] . '" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
+                                        </div>
+                                        </form>
+                                        </div>
+                                    </div>
+                                </div>
                                         
                                         ';
                                         }
@@ -539,6 +617,153 @@ if (empty($_SESSION['user_id'])) {
                         </div>
                     </div>
                 </div>
+
+
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <form action="../php_queries/user.php" method="post">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">New User</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row my-4">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="username">Username</label>
+                                                <input type="text" class="form-control" name="new_username" id="username" aria-describedby="username" placeholder="Username" required>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="username">Email</label>
+                                                <input type="email" class="form-control" name="email" id="email" aria-describedby="email" placeholder="email" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="username">Password</label>
+                                                <input type="password" class="form-control" name="password" id="password" aria-describedby="password" placeholder="password" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row my-4">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="username">Phone</label>
+                                                <input type="text" class="form-control" name="phone" id="phone" aria-describedby="phone" placeholder="phone">
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="username">Extension</label>
+                                                <input type="number" class="form-control" min="0" name="extension" id="extension" aria-describedby="extension" placeholder="extension">
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="username">Address</label>
+                                                <input type="text" class="form-control" name="address" id="address" aria-describedby="address" placeholder="address">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row my-4">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="department">Department</label>
+                                                <select class="form-control selectpicker" name="department" id="department" required>
+                                                    <option selected disabled>Select Department</option>
+                                                    <option>Administration</option>
+                                                    <option>Accounting</option>
+                                                    <option>Sales</option>
+                                                    <option>IT</option>
+                                                    <option>Production</option>
+                                                    <option>Maintenance</option>
+                                                    <option>Logistics</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="username">Position</label>
+                                                <input type="text" class="form-control" name="position" id="position" aria-describedby="position" placeholder="Position">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row my-4">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="department">User Type</label>
+                                                <select class="form-control selectpicker" name="type" id="type">
+                                                    <option selected disabled>User Type</option>
+                                                    <option>Super Admin</option>
+                                                    <option>Admin</option>
+                                                    <option>User</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row my-4">
+                                        <div class="row">
+                                            <p>
+                                                Module Access
+                                            </p>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input type="checkbox" class="form-check-input" name="module[]" id="" value="production">
+                                                        Production
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input type="checkbox" class="form-check-input" name="module[]" id="" value="maintenance">
+                                                        Maintenance
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input type="checkbox" class="form-check-input" name="module[]" id="" value="setup">
+                                                        3M Setup
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input type="checkbox" class="form-check-input" name="module[]" id="" value="user">
+                                                        User Control
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" name="add_user" class="btn btn-primary">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
             </div>
 
 

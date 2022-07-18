@@ -99,7 +99,13 @@ include '../../config.php';
                                     <td>' . $res['end_time'] . '</td>
                                     <td>' . $res['repeat_hrs'] . '</td>
                                     <td>' . $ass_user . '</td>
-                                    <td></td>
+                                    <td>
+                                    <div class="btn-group">
+                                    <a class="btn btn-info btn-sm text-light" href="#" role="button"><i class="fas fa-exclamation-circle"></i> </a>
+                                    <a class="btn btn-primary btn-sm " href="#" role="button"><i class="fas fa-pen"></i> </a>
+                                    <a class="btn btn-danger btn-sm " href="#" role="button"><i class="fas fa-trash-alt"></i> </a>
+                                    </div>
+                                    </td>
                                     </tr>
                                     ';
                                 }
@@ -160,12 +166,21 @@ include '../../config.php';
                                         <label for="" class="form-label">End Time</label>
                                         <input type="datetime-local" name="end" id="" required class="form-control" placeholder="" aria-describedby="helpId">
                                     </div>
-                                    <div class="col-auto">
-                                        <label for="" class="form-label">Repeat Every</label>
+                                    <!-- <div class="col-auto">
+                                        <label for="" class="form-label">Repeat on Machine</label>
                                         <div class="input-group">
                                             <input type="number" name="repeat_hrs" required class="form-control" value="0" step=".05" min="0">
                                             <div class="input-group-append">
                                                 <span class="input-group-text" id="basic-addon2">Hrs</span>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <div class="col-auto">
+                                        <label for="" class="form-label">Repeat on Oil</label>
+                                        <div class="input-group">
+                                            <input type="number" name="repeat_oil" required class="form-control" value="0" step=".05" min="0">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text" id="basic-addon2">L</span>
                                             </div>
                                         </div>
                                     </div>
@@ -215,15 +230,27 @@ include '../../config.php';
                     <div class="card-body">
                         <div class="list-group">
                             <?php
+                            $select_main = mysqli_query($mysqli, "SELECT * FROM `maintenance_order` WHERE `type` LIKE 'preventative'");
+                            while ($m = mysqli_fetch_array($select_main)) {
+                                echo '
+                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">Machine ' . $m['machine_id'] . '</h5>
+                                        <small>Due in......</small>
+                                    </div>
+                                    <p class="mb-1">' . $m['description'] . '</p>
+                                    ';
+                                $mau = mysqli_query($mysqli, "SELECT `username` FROM `users` WHERE `id` = '$m[ass_user_id]'");
+                                while ($a = mysqli_fetch_array($mau)) {
+                                    echo '
+                                                <small>' . strtoupper($a['username']) . '</small>
+                                            ';
+                                }
+                                echo '
+                                </a>
+                                ';
+                            }
                             ?>
-                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Machine 2</h5>
-                                    <small>Today 9:20 AM</small>
-                                </div>
-                                <p class="mb-1">Fixed Heater</p>
-                                <small>Mhmd Chbib</small>
-                            </a>
                         </div>
                     </div>
                 </div>
