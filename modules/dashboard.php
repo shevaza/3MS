@@ -258,7 +258,18 @@ if ($_SESSION['user_type'] == 'Super Admin') {
             <div id="production" class="col py-3 model">
                 <div class="row mb-2">
                     <div class="col col-12 col-md-12 col-lg-3 col-xl-3 mb-3">
-                        <a class="text-dark" href="production/production_scheduler.php">
+                        <a class="text-dark" href="production/production_orders.php">
+                            <div class="card db-item">
+                                <div class="card-body">
+                                    <h4 class="card-title">PO</h4>
+                                    <p class="card-text">Production Orders</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col col-12 col-md-12 col-lg-3 col-xl-3 mb-3">
+                        <!-- <a class="text-dark" href="production/production_scheduler.php"> -->
+                        <a class="text-dark" href="#">
                             <div class="card db-item">
                                 <div class="card-body">
                                     <h4 class="card-title">Scheduler</h4>
@@ -268,16 +279,6 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                         </a>
                     </div>
                     <!-- <div class="col col-12 col-md-12 col-lg-3 col-xl-3 mb-3">
-                        <a class="text-dark" href="production/production_scheduler.php">
-                            <div class="card db-item">
-                                <div class="card-body">
-                                    <h4 class="card-title">Scheduler</h4>
-                                    <p class="card-text">Machine and Production Scheduling</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col col-12 col-md-12 col-lg-3 col-xl-3 mb-3">
                         <a class="text-dark" href="production/production_scheduler.php">
                             <div class="card db-item">
                                 <div class="card-body">
