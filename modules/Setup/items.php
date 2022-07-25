@@ -56,7 +56,7 @@ if (isset($_GET['err'])) {
                                 <h4>Parent Items</h4>
                             </div>
                             <div class="col text-end">
-                                <a class="btn btn-primary btn-sm me-auto" href="#" role="button"> <i class="fas fa-plus"></i></a>
+                                <a class="btn btn-primary btn-sm me-auto" href="#" role="button" data-bs-toggle="modal" data-bs-target="#parent"> <i class="fas fa-plus"></i></a>
                             </div>
                         </div>
                     </div>
@@ -65,14 +65,18 @@ if (isset($_GET['err'])) {
                             <thead>
                                 <tr>
                                     <th>ID</th>
+                                    <th>SKU</th>
                                     <th>Name</th>
                                     <th>Desc</th>
+                                    <th>Barcode</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td scope="row"></td>
+                                    <td></td>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -95,7 +99,7 @@ if (isset($_GET['err'])) {
                                 <h4>Child Items</h4>
                             </div>
                             <div class="col text-end">
-                                <a class="btn btn-primary btn-sm me-auto" href="#" role="button"> <i class="fas fa-plus"></i></a>
+                                <a class="btn btn-primary btn-sm me-auto" href="#" role="button" data-bs-toggle="modal" data-bs-target="#child"> <i class="fas fa-plus"></i></a>
                             </div>
                         </div>
                     </div>
@@ -123,6 +127,40 @@ if (isset($_GET['err'])) {
                 </div>
             </div>
 
+
+            <div class="modal fade" id="parent" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            New Parent Item
+                        </div>
+                        <div class="modal-body">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" onclick="turn_on()" class="btn btn-success">Yes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="child" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            New Parent Item
+                        </div>
+                        <div class="modal-body">
+                            Are you Sure you want to switch the machine ON ?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" onclick="turn_on()" class="btn btn-success">Yes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
         </div>
