@@ -192,6 +192,7 @@ include '../../js.php';
 ?>
 <script>
     $(document).ready(function() {
+        $('#machines').fadeIn();
         var id, num;
     });
 
@@ -217,7 +218,7 @@ include '../../js.php';
             dataType: "HTML",
             success: function(r) {
                 $('#machine_data').html(r);
-                
+
             }
         });
     });

@@ -80,17 +80,27 @@ include '../../config.php';
                             <label for="">Item</label>
                             <select class="form-control selectpicker" name="item" id="item" data-live-search="true">
                                 <option disabled selected>Select Item</option>
-                                <option>Pandora</option>
-                                <option>Panama</option>
-                                <option>Havana</option>
+                                <?php
+                                $select_i = mysqli_query($mysqli, "SELECT * FROM `items`");
+                                while ($i = mysqli_fetch_array($select_i)) {
+                                    echo '
+                                    <option value="' . $i['id'] . '">' . strtoupper($i['sku_code']) . ' | ' . $i['name'] . '</option>
+                                    ';
+                                }
+                                ?>
                             </select>
                         </div>
                         <div class="form-group mb-4">
                             <label for="">Colors</label>
                             <select class="form-control selectpicker" onchange="checkColors()" name="color" id="color" data-live-search="true" multiple>
-                                <option value="1">Black</option>
-                                <option value="2">White</option>
-                                <option value="3">Dark Brown</option>
+                                <?php
+                                $select_c = mysqli_query($mysqli, "SELECT * FROM `colors`");
+                                while ($c = mysqli_fetch_array($select_c)) {
+                                    echo '
+                                    <option value="' . $c['id'] . '">' . strtoupper($c['color_code']) . ' | ' . $c['color_name'] . '</option>
+                                    ';
+                                }
+                                ?>
                             </select>
                         </div>
                         <div id="colorQty">
@@ -111,7 +121,7 @@ include '../../js.php';
         for (let index = 0; index < colors.length; index++) {
             var color = colors[index].innerHTML;
             var color_code = colors[index].value;
-            var row = '<div class="row py-3 border-1 border-bottom"><div class="col">' + color_code + '</div><div class="col col-3"><input class="form-control" name="' + color_code + '_qty" placeholder="Quantity" type="number" required min="0" value="0"></div><div class="col-auto">Pcs</div></div>';
+            var row = '<div class="row py-3 border-1 border-bottom"><div class="col">' + color + '</div><div class="col col-3"><input class="form-control" name="' + color_code + '_qty" placeholder="Quantity" type="number" required min="0" value="0"></div><div class="col-auto">Pcs</div></div>';
             $('#colorQty').append(row);
         }
     }

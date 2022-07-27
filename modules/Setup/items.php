@@ -27,7 +27,7 @@ if (isset($_GET['err'])) {
                 <a name="" id="" class="btn btn-sm btn-dark me-4" href="../" role="button"><i class="fas fa-arrow-left"></i></a>
                 <img class="me-2" src="../../res/img/logo.png" alt="" width="60">
                 <a class="navbar-brand" href="#">
-                    Machines
+                    Items
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarID" aria-controls="navbarID" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -129,76 +129,78 @@ if (isset($_GET['err'])) {
 
 
             <div class="modal fade" id="parent" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            New Parent Item
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group mb-2">
-                                <label for="">SKU</label>
-                                <input type="text" class="form-control" name="parent_name" id="" aria-describedby="helpId" placeholder="3MP-XXX" required>
+                <form method="post">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                New Parent Item
                             </div>
-                            <div class="form-group mb-2">
-                                <label for="">Name</label>
-                                <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Product Title" required>
+                            <div class="modal-body">
+                                <div class="form-group mb-2">
+                                    <label for="">SKU</label>
+                                    <input type="text" class="form-control" name="parent_sku" id="" aria-describedby="helpId" placeholder="3MP-XXX" required>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="">Name</label>
+                                    <input type="text" class="form-control" name="parent_name" id="" aria-describedby="helpId" placeholder="Product Title" required>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="">Description ENG</label>
+                                    <input type="text" class="form-control" name="parent_desc_eng" id="" aria-describedby="helpId" placeholder="English Description">
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="">Description AR</label>
+                                    <input type="text" class="form-control" name="parent_desc_ar" id="" aria-describedby="helpId" placeholder="Arabic Description">
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="">Barcode</label>
+                                    <input type="text" class="form-control" name="parent_barcode" id="" aria-describedby="helpId" placeholder="0123456789" required>
+                                </div>
                             </div>
-                            <div class="form-group mb-2">
-                                <label for="">Description ENG</label>
-                                <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="English Description">
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" name="save_parent" class="btn btn-success">Save</button>
                             </div>
-                            <div class="form-group mb-2">
-                                <label for="">Description AR</label>
-                                <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Arabic Description">
-                            </div>
-                            <div class="form-group mb-2">
-                                <label for="">Barcode</label>
-                                <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="0123456789" required>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" name="save_parent" class="btn btn-success">Save</button>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
 
             <div class="modal fade" id="child" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            New Child Item
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group mb-2">
-                                <label for="parent_sku">Parent SKU</label>
-                                <select class="form-control selectpicker" name="" id="parent_sku" required data-live-search="true">
-                                    <?php
-                                    $select = mysqli_query($mysqli, "SELECT * FROM `items`");
-                                    while ($res = mysqli_fetch_array($select)) {
-                                        echo '<option value="'.$res['id'].'">'. strtoupper($res['sku_code']).'</option>';
-                                    }
-                                    ?>
-                                </select>
+                <form method="post">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                New Child Item
                             </div>
-                            <div class="form-group mb-2">
-                                <label for="">Name</label>
-                                <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Product Title" required>
+                            <div class="modal-body">
+                                <div class="form-group mb-2">
+                                    <label for="parent_sku">Parent SKU</label>
+                                    <select class="form-control selectpicker" name="parent_id" id="parent_sku" required data-live-search="true">
+                                        <?php
+                                        $select = mysqli_query($mysqli, "SELECT * FROM `items`");
+                                        while ($res = mysqli_fetch_array($select)) {
+                                            echo '<option value="' . $res['id'] . '">' . strtoupper($res['sku_code']) . '</option>';
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="">Name</label>
+                                    <input type="text" class="form-control" name="child_name" id="" aria-describedby="helpId" placeholder="Product Title" required>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="">Formula Qty</label>
+                                    <input type="number" min="0" class="form-control" name="child_qty" id="" aria-describedby="helpId" placeholder="Qty of Child in Parent" required>
+                                </div>
                             </div>
-                            <div class="form-group mb-2">
-                                <label for="">Formula Qty</label>
-                                <input type="number" min="0" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Qty of Child in Parent" required>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" name="save_child" class="btn btn-success">Save</button>
                             </div>
-                            
-      
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" name="" class="btn btn-success">Save</button>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
 
 
