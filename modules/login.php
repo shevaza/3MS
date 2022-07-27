@@ -79,7 +79,7 @@ if (isset($_GET['err']) && $_GET['err'] == 1) {
                         </div>
 
                         <div class="col">
-                            <a href="http://192.168.1.6:88/uvdesk/public/en" target="_blank">
+                            <a href="http://192.168.1.6:88/uvdesk/public/en/customer/login" target="_blank">
                                 <div class="card card-hover box mb-4">
                                     <div class="card-body">
                                         <div class="row">

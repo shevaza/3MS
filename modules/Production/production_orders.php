@@ -80,9 +80,9 @@ include '../../config.php';
                             <label for="">Item</label>
                             <select class="form-control selectpicker" name="item" id="item" data-live-search="true">
                                 <option disabled selected>Select Item</option>
-                                <option>Item 1</option>
-                                <option>Item 2</option>
-                                <option>Item 3</option>
+                                <option>Pandora</option>
+                                <option>Panama</option>
+                                <option>Havana</option>
                             </select>
                         </div>
                         <div class="form-group mb-4">

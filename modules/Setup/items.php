@@ -135,11 +135,30 @@ if (isset($_GET['err'])) {
                             New Parent Item
                         </div>
                         <div class="modal-body">
-
+                            <div class="form-group mb-2">
+                                <label for="">SKU</label>
+                                <input type="text" class="form-control" name="parent_name" id="" aria-describedby="helpId" placeholder="3MP-XXX" required>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="">Name</label>
+                                <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Product Title" required>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="">Description ENG</label>
+                                <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="English Description">
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="">Description AR</label>
+                                <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Arabic Description">
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="">Barcode</label>
+                                <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="0123456789" required>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" onclick="turn_on()" class="btn btn-success">Yes</button>
+                            <button type="submit" name="save_parent" class="btn btn-success">Save</button>
                         </div>
                     </div>
                 </div>
@@ -149,14 +168,34 @@ if (isset($_GET['err'])) {
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            New Parent Item
+                            New Child Item
                         </div>
                         <div class="modal-body">
-                            Are you Sure you want to switch the machine ON ?
+                            <div class="form-group mb-2">
+                                <label for="parent_sku">Parent SKU</label>
+                                <select class="form-control selectpicker" name="" id="parent_sku" required data-live-search="true">
+                                    <?php
+                                    $select = mysqli_query($mysqli, "SELECT * FROM `items`");
+                                    while ($res = mysqli_fetch_array($select)) {
+                                        echo '<option value="'.$res['id'].'">'. strtoupper($res['sku_code']).'</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="">Name</label>
+                                <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Product Title" required>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="">Formula Qty</label>
+                                <input type="number" min="0" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Qty of Child in Parent" required>
+                            </div>
+                            
+      
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" onclick="turn_on()" class="btn btn-success">Yes</button>
+                            <button type="submit" name="" class="btn btn-success">Save</button>
                         </div>
                     </div>
                 </div>
