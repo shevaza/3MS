@@ -41,7 +41,9 @@ include '../../config.php';
                 <div id='pending-orders'>
                     <div class="card mb-2">
                         <div class="card-body p-2 text-center">
-                            <strong>Pending Production Orders</strong>
+                            <h3>
+                                <strong>PO's In Progress</strong>
+                            </h3>
                         </div>
                     </div>
                     <div class="card p-2 mb-2">
@@ -59,53 +61,52 @@ include '../../config.php';
                         <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event mb-2 p-1'>
                             <div class='fc-event-main'>Pandora-Queen Exterior Cap</div>
                         </div>
-
-                        <!-- <p>
-                            <input type='checkbox' id='drop-remove' />
-                            <label for='drop-remove'>remove after drop</label>
-                        </p> -->
                     </div>
 
                 </div>
             </div>
             <div class="col">
                 <div class="card">
-                    <div class="card-header">
-                        <h4>
-                            New Order
-                        </h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group mb-4">
-                            <label for="">Item</label>
-                            <select class="form-control selectpicker" name="item" id="item" data-live-search="true">
-                                <option disabled selected>Select Item</option>
-                                <?php
-                                $select_i = mysqli_query($mysqli, "SELECT * FROM `items`");
-                                while ($i = mysqli_fetch_array($select_i)) {
-                                    echo '
+                    <form method="post">
+                        <div class="card-header">
+                            <h4>
+                                New Order
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group mb-4">
+                                <label for="">Item</label>
+                                <select class="form-control selectpicker" name="item" id="item" data-live-search="true" required>
+                                    <?php
+                                    $select_i = mysqli_query($mysqli, "SELECT * FROM `items`");
+                                    while ($i = mysqli_fetch_array($select_i)) {
+                                        echo '
                                     <option value="' . $i['id'] . '">' . strtoupper($i['sku_code']) . ' | ' . $i['name'] . '</option>
                                     ';
-                                }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="form-group mb-4">
-                            <label for="">Colors</label>
-                            <select class="form-control selectpicker" onchange="checkColors()" name="color" id="color" data-live-search="true" multiple>
-                                <?php
-                                $select_c = mysqli_query($mysqli, "SELECT * FROM `colors`");
-                                while ($c = mysqli_fetch_array($select_c)) {
-                                    echo '
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="">Colors</label>
+                                <select class="form-control selectpicker" onchange="checkColors()" name="color" id="color" data-live-search="true" multiple required>
+                                    <?php
+                                    $select_c = mysqli_query($mysqli, "SELECT * FROM `colors`");
+                                    while ($c = mysqli_fetch_array($select_c)) {
+                                        echo '
                                     <option value="' . $c['id'] . '">' . strtoupper($c['color_code']) . ' | ' . $c['color_name'] . '</option>
                                     ';
-                                }
-                                ?>
-                            </select>
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div id="colorQty">
+                            </div>
                         </div>
-                        <div id="colorQty">
+                        <div class="card-footer">
+                            <button class="btn btn-success" type="submit"><i class="fas fa-check"></i> Submit</button>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -121,7 +122,7 @@ include '../../js.php';
         for (let index = 0; index < colors.length; index++) {
             var color = colors[index].innerHTML;
             var color_code = colors[index].value;
-            var row = '<div class="row py-3 border-1 border-bottom"><div class="col">' + color + '</div><div class="col col-3"><input class="form-control" name="' + color_code + '_qty" placeholder="Quantity" type="number" required min="0" value="0"></div><div class="col-auto">Pcs</div></div>';
+            var row = '<div class="row py-3 border-1 border-bottom"><div class="col">' + color + '</div><div class="col col-3"><input class="form-control" name="' + color_code + '_qty" placeholder="Quantity" type="number" required min="1" value="1"></div><div class="col-auto">Pcs</div></div>';
             $('#colorQty').append(row);
         }
     }

@@ -88,7 +88,7 @@ if (isset($_GET['err'])) {
                         <h4><i class="fas fa-industry"></i> Machines</h4>
                     </div>
                     <div class="card-body p-5">
-                        <table class="table table-hover table-bordered">
+                        <table class="table table-hover table-bordered w-100">
                             <thead>
                                 <tr>
                                     <th>ID</th>

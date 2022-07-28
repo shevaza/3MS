@@ -235,8 +235,8 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col">
+                <div class="row justify-content-center">
+                    <div class="col-11">
                         <div class="card">
                             <img class="card-img-top" src="holder.js/100x180/" alt="">
                             <div class="card-body">
@@ -788,6 +788,24 @@ if ($_SESSION['user_type'] == 'Super Admin') {
         </div>
     </div>
     <!-- CLOSE MAIN CONTAINER -->
+
+
+
+    <nav class="navbar navbar-dark text-light bg-dark fixed-bottom justify-content-center">
+        <div class="row w-100 px-2">
+            <div class="col">
+                <small>
+                    &copy; 2022 Copyright <a class="text-danger" target="_blank" href="https://onpointleb.000webhostapp.com/">OnPoint</a> - Shafiq Zabet
+                </small>
+            </div>
+            <div class="col text-end">
+                <strong>
+                    <a href="changelog.php" class="link-danger">Version: 1.5</a>
+                </strong>
+            </div>
+        </div>
+    </nav>
+
 
 </body>
 <script src="../jquery/jquery.min.js"></script>

@@ -159,7 +159,7 @@ if (isset($_GET['err']) && $_GET['err'] == 1) {
         setTimeout(() => {
             $('#splash').fadeOut();
             $('#main').fadeIn();
-        }, 5000);
+        }, 3000);
     });
 </script>
 

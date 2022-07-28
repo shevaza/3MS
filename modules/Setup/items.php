@@ -47,6 +47,15 @@ if (isset($_GET['err'])) {
 
     <!-- MAIN CONTAINER -->
     <div class="container-fluid">
+        <div class="row mt-5">
+            <div class="col text-center">
+                <div class="card">
+                    <div class="card-body">
+                        <a class="btn btn-warning btn-lg p-3" href="colors.php" role="button"><strong>Colors</strong></a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row my-5">
             <div class="col-6">
                 <div class="card">
@@ -192,6 +201,22 @@ if (isset($_GET['err'])) {
                                 <div class="form-group mb-2">
                                     <label for="">Formula Qty</label>
                                     <input type="number" min="0" class="form-control" name="child_qty" id="" aria-describedby="helpId" placeholder="Qty of Child in Parent" required>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="parent_sku">Required Mould</label>
+                                    <select class="form-control selectpicker" name="parent_id" id="parent_sku" required data-live-search="true" required>
+                                        <?php
+                                        $select = mysqli_query($mysqli, "SELECT * FROM `molds`");
+                                        while ($res = mysqli_fetch_array($select)) {
+                                            if ($res['status'] == '1') {
+                                                $color = 'bg-danger';
+                                            } else {
+                                                $color = '';
+                                            }
+                                            echo '<option class="' . $color . '" value="' . $res['id'] . '">' . strtoupper($res['name']) . '</option>';
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                             </div>
                             <div class="modal-footer">
