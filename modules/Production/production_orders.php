@@ -37,7 +37,7 @@ include '../../config.php';
     </div>
     <div class="container-fluid mt-3">
         <div class="row">
-            <div class="col col-lg-3">
+            <div class="col col-lg-7">
                 <div id='pending-orders'>
                     <div class="card mb-2">
                         <div class="card-body p-2 text-center">
@@ -46,22 +46,87 @@ include '../../config.php';
                             </h3>
                         </div>
                     </div>
-                    <div class="card p-2 mb-2">
+                    <?php
+                    $select_prs = mysqli_query($mysqli, "SELECT * FROM `production_request` WHERE `status` != 'DONE'");
+                    while ($pr = mysqli_fetch_array($select_prs)) {
+                        echo '
+                        <div class="card p-4 mb-2">
                         <div class="card-title">
-                            <h4>
-                                Queen
-                            </h4>
+                        <div class="row">
+                        <div class="col">
+                        <h4>
+                            Request #' . $pr['id'] . '
+                        </h4>
                         </div>
-                        <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event mb-2 p-1'>
-                            <div class='fc-event-main'>Queen Chair</div>
+                        <div class="col">
+                        Due: ' . $pr['due_date'] . '
                         </div>
-                        <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event mb-2 p-1'>
-                            <div class='fc-event-main'>Pandora-Queen Interior Cap</div>
                         </div>
-                        <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event mb-2 p-1'>
-                            <div class='fc-event-main'>Pandora-Queen Exterior Cap</div>
                         </div>
-                    </div>
+                        
+                        ';
+                        echo '     
+                        ';
+                        $select_pos = mysqli_query($mysqli, "SELECT * FROM `production_order` WHERE `request_id` = '$pr[id]'");
+                        while ($po = mysqli_fetch_array($select_pos)) {
+
+                            echo '    
+                            <div class="row border-top border-4 my-4">
+                            <div class="col">
+                            Item ID
+                            </div>
+                             <div class="col">
+                            Item Color
+                            </div> <div class="col">
+                            Item QTY
+                            </div> <div class="col">
+                            QTY Done
+                            </div>
+                            </div>
+                            <div class="row">
+                            <div class="col">
+                            ' . $po['item_id'] . '
+                            </div>
+                            <div class="col">
+                            ' . $po['item_color'] . '
+                            </div> <div class="col">
+                            ' . $po['item_qty'] . '
+                            </div> <div class="col">
+                            ' . $po['qty_done'] . '
+                            </div>
+                            </div>
+
+
+                            <div class="row">
+                        <h5>Components</h5>
+                        </div>
+                            ';
+
+                            $select_formula = mysqli_query($mysqli, "SELECT * FROM `item_formula` WHERE `item_id` = '$po[item_id]'");
+                            while ($f = mysqli_fetch_array($select_formula)) {
+                                $comp = $f['component_id'];
+                                $comp_qty = $f['component_qty'];
+                                echo '
+                                  <div class="row">
+                        <div class="col">
+                        ' . $comp . '
+                        </div>
+                        <div class="col">
+                        ' . $comp_qty * $po['item_qty'] . '
+                        </div>
+                                    </div>
+                                ';
+                            }
+                        }
+                        echo '
+                        
+                        
+                        <div class="card-footer text-end">
+                            <a class="btn btn-primary btn-sm " href="#" role="button">Mark Done</a>
+                        </div>
+                        </div>';
+                    }
+                    ?>
 
                 </div>
             </div>
@@ -74,6 +139,20 @@ include '../../config.php';
                             </h4>
                         </div>
                         <div class="card-body">
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="">Start Date</label>
+                                        <input type="date" class="form-control" name="start_date" id="" aria-describedby="helpId" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="">Due Date</label>
+                                        <input type="date" class="form-control" name="due_date" id="" aria-describedby="helpId" placeholder="" required>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group mb-4">
                                 <label for="">Item</label>
                                 <select class="form-control selectpicker" name="item" id="item" data-live-search="true" required>
@@ -89,7 +168,7 @@ include '../../config.php';
                             </div>
                             <div class="form-group mb-4">
                                 <label for="">Colors</label>
-                                <select class="form-control selectpicker" onchange="checkColors()" name="color" id="color" data-live-search="true" multiple required>
+                                <select class="form-control selectpicker" onchange="checkColors()" name="color[]" id="color" data-live-search="true" multiple required>
                                     <?php
                                     $select_c = mysqli_query($mysqli, "SELECT * FROM `colors`");
                                     while ($c = mysqli_fetch_array($select_c)) {
@@ -103,8 +182,8 @@ include '../../config.php';
                             <div id="colorQty">
                             </div>
                         </div>
-                        <div class="card-footer">
-                            <button class="btn btn-success" type="submit"><i class="fas fa-check"></i> Submit</button>
+                        <div class="card-footer text-end">
+                            <button class="btn btn-success" name="submit_order" type="submit"><i class="fas fa-check"></i> Submit</button>
                         </div>
                     </form>
                 </div>
@@ -122,10 +201,30 @@ include '../../js.php';
         for (let index = 0; index < colors.length; index++) {
             var color = colors[index].innerHTML;
             var color_code = colors[index].value;
-            var row = '<div class="row py-3 border-1 border-bottom"><div class="col">' + color + '</div><div class="col col-3"><input class="form-control" name="' + color_code + '_qty" placeholder="Quantity" type="number" required min="1" value="1"></div><div class="col-auto">Pcs</div></div>';
+            var row = '<div class="row py-3 border-1 border-bottom"><div class="col">' + color + '</div><div class="col col-3"><input class="form-control" name="color_qty[]" placeholder="Quantity" type="number" required min="1" value="1"></div><div class="col-auto">Pcs</div></div>';
             $('#colorQty').append(row);
         }
     }
 </script>
 
 </html>
+
+<?php
+if (isset($_POST['submit_order'])) {
+    $item = $_POST['item'];
+    $colors = $_POST['color'];
+    $color_qty = $_POST['color_qty'];
+    $start_date = $_POST['start_date'];
+    $due_date = $_POST['due_date'];
+
+    $insert = mysqli_query($mysqli, "INSERT INTO `production_request` (`user_id`, `start_date`, `due_date`, `status`)
+        VALUES ('$_SESSION[user_id]', '$start_date', '$due_date', 'NEW') ");
+
+    $last_id = mysqli_insert_id($mysqli);
+    for ($i = 0; $i < count($colors); $i++) {
+        $insert = mysqli_query($mysqli, "INSERT INTO `production_order` (`request_id`, `item_id`, `item_qty`, `item_color`, `qty_done`)
+        VALUES ('$last_id', '$item', '$color_qty[$i]', '$colors[$i]', 'NEW') ");
+    }
+    echo "<meta http-equiv='refresh' content='0'>";
+}
+?>

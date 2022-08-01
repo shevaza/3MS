@@ -90,6 +90,7 @@ if (isset($_GET['err'])) {
                                 <?php
                                 $items = mysqli_query($mysqli, "SELECT * FROM `items`");
                                 while ($i = mysqli_fetch_array($items)) {
+
                                     echo '<tr>';
                                     echo '<td>' . $i['id'] . '</td>';
                                     echo '<td>' . strtoupper($i['sku_code']) . '</td>';
@@ -107,21 +108,28 @@ if (isset($_GET['err'])) {
                                     <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                     <div class="modal-header">
-                                    Delete '.$i['name']. '
+                                    Delete ' . $i['name'] . '
                                     </div>
                                     <div class="modal-body">
                                     Are You Sure?
                                     </div>
                                     <div class="modal-footer">
-                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                            <button type="submit" name="delete_item" class="btn btn-danger">Delete</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit" name="delete_item" class="btn btn-danger">Delete</button>
                                     </div>
                                     </div>
                                     </div>
                                     </div>
                                     ';
 
-
+                                    $select_comps = mysqli_query($mysqli, "SELECT * FROM `item_formula` WHERE `item_id` = '$i[id]'");
+                                    if (mysqli_num_rows($select_comps) > 0) {
+                                        $add_new = "none";
+                                        $show_comps = "";
+                                    } else {
+                                        $add_new = "";
+                                        $show_comps = "none";
+                                    }
                                     echo '
                                     <div class="modal fade" id="formula_' . $i['id'] . '" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg">
@@ -130,6 +138,46 @@ if (isset($_GET['err'])) {
                                     ' . $i['name'] . ' Formula
                                     </div>
                                     <div class="modal-body">
+
+
+                                    <div id="show_comps" style="display:' . $show_comps . '">
+                                        <div class="row">
+                                            <div class="col">
+                                                ID
+                                            </div>
+                                            <div class="col">
+                                                Name                                            
+                                            </div>
+                                            <div class="col">
+                                                Qty                                        
+                                            </div>
+                                        </div>
+                                    ';
+                                    while ($sc = mysqli_fetch_array($select_comps)) {
+                                        $get_comp_data = mysqli_query($mysqli, "SELECT * FROM `components` WHERE `id` = '$sc[component_id]'");
+                                        while ($get = mysqli_fetch_array($get_comp_data)) {
+                                            echo '
+                                            <div class="row">
+                                             <div class="col">
+                                            ' . $get['id'] . '
+                                            </div>
+                                            <div class="col">
+                                            ' . $get['name'] . '
+                                            </div>
+                                            <div class="col">
+                                            ' . $sc['component_qty'] . '
+                                            </div>
+                                            </div>
+                                            ';
+                                        }
+                                    }
+
+                                    echo '</div>
+
+
+                            
+                                    <div id="add_new" style="display:' . $add_new . '">
+
                                     <div class="form-group mb-2">
                                     <label for="parent_sku">Components</label>
                                     <select class="form-control selectpicker" id="comp_' . $i['id'] . '" onchange="checkComps(' . $i['id'] . ')" required data-live-search="true" required multiple>
@@ -152,6 +200,9 @@ if (isset($_GET['err'])) {
                                             <button type="submit" name="add_formula" class="btn btn-success">Save</button>
                                         </div>
                                         </form>
+                                        
+                                        </div>
+
                                         </div>
                                         </div>
                                         </div>
@@ -340,9 +391,16 @@ if (isset($_POST['add_formula'])) {
     $comps = $_POST['fc_id'];
     $qtys = $_POST['fc_qty'];
 
-    for ($i = 0; $i < count($comps); $i++) {
-        $insert = mysqli_query($mysqli, "INSERT INTO `item_formula` (`item_id`, `component_id`, `component_qty`)
-        VALUES ($item, $comps[$i], $qtys[$i])");
+    $check_formula = mysqli_query($mysqli, "SELECT `id` FROM `item_formula` WHERE `item_id` = '$item'");
+    if (mysqli_num_rows($check_formula) > 0) {
+        echo '<script>alert("Formula Already Exists");</script>';
+    } else {
+        for ($i = 0; $i < count($comps); $i++) {
+            $insert = mysqli_query($mysqli, "INSERT INTO `item_formula` (`item_id`, `component_id`, `component_qty`)
+            VALUES ($item, $comps[$i], $qtys[$i])");
+        }
+        echo '<script>alert("Formula Added Successfuly!");</script>';
+        echo "<meta http-equiv='refresh' content='0'>";
     }
 }
 ?>
