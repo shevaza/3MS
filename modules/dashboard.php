@@ -800,7 +800,7 @@ if ($_SESSION['user_type'] == 'Super Admin') {
             </div>
             <div class="col text-end">
                 <strong>
-                    <a href="changelog.php" class="link-danger">Version: 1.5</a>
+                    <a href="changelog.php" class="link-danger">Version: 1.5.1</a>
                 </strong>
             </div>
         </div>
