@@ -75,6 +75,7 @@ include '../../config.php';
                                     <th>Start</th>
                                     <th>End</th>
                                     <th>Repeat Hrs</th>
+                                    <th>Repeat Oil</th>
                                     <th>Assigned To</th>
                                     <th>Actions</th>
                                 </tr>
@@ -98,6 +99,7 @@ include '../../config.php';
                                     <td>' . $res['start_time'] . '</td>
                                     <td>' . $res['end_time'] . '</td>
                                     <td>' . $res['repeat_hrs'] . '</td>
+                                    <td>' . $res['repeat_oil'] . ' L</td>
                                     <td>' . $ass_user . '</td>
                                     <td>
                                     <div class="btn-group">
@@ -233,7 +235,7 @@ include '../../config.php';
                             $select_main = mysqli_query($mysqli, "SELECT * FROM `maintenance_order` WHERE `type` LIKE 'preventative'");
                             while ($m = mysqli_fetch_array($select_main)) {
                                 echo '
-                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" data-bs-toggle="modal" data-bs-target="#fill_' . $m['id'] . '">
                                     <div class="d-flex w-100 justify-content-between">
                                         <h5 class="mb-1">Machine ' . $m['machine_id'] . '</h5>
                                         <small>Due in......</small>
@@ -243,11 +245,28 @@ include '../../config.php';
                                 $mau = mysqli_query($mysqli, "SELECT `username` FROM `users` WHERE `id` = '$m[ass_user_id]'");
                                 while ($a = mysqli_fetch_array($mau)) {
                                     echo '
-                                                <small>' . strtoupper($a['username']) . '</small>
-                                            ';
+                                        <small>' . strtoupper($a['username']) . '</small>
+                                    ';
                                 }
                                 echo '
                                 </a>
+
+
+
+                                 <div class="modal fade" id="fill_' . $m['id'] . '" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                     <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Order #' . $m['id'] . '</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                     <div class="modal-body">
+                     
+                     </div>
+
+                    </div>
+                    </div>
+                    </div>
                                 ';
                             }
                             ?>

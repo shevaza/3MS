@@ -11,6 +11,7 @@ date_default_timezone_set("Asia/Beirut");
 
 
 session_start();
+
 if (isset($_POST['username'])) {
   $username = $_REQUEST['username'];
   $password = md5($_REQUEST['password']);

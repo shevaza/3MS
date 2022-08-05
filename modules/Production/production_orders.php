@@ -69,6 +69,16 @@ include '../../config.php';
                         ';
                         $select_pos = mysqli_query($mysqli, "SELECT * FROM `production_order` WHERE `request_id` = '$pr[id]'");
                         while ($po = mysqli_fetch_array($select_pos)) {
+                            
+                            $select_item = mysqli_query($mysqli, "SELECT * FROM `items` WHERE `id` = '$po[item_id]' ");
+                            $t = mysqli_fetch_array($select_item);
+                            $it = $t['name'];
+
+                            $select_color = mysqli_query($mysqli, "SELECT * FROM `colors` WHERE `id` = '$po[item_color]' ");
+                            $c = mysqli_fetch_array($select_color);
+                            $color = $c['color_name'];
+
+
 
                             echo '    
                             <div class="row border-top border-4 my-4">
@@ -85,10 +95,10 @@ include '../../config.php';
                             </div>
                             <div class="row">
                             <div class="col">
-                            ' . $po['item_id'] . '
+                            ' . $it . '
                             </div>
                             <div class="col">
-                            ' . $po['item_color'] . '
+                            ' . $color . '
                             </div> <div class="col">
                             ' . $po['item_qty'] . '
                             </div> <div class="col">
@@ -106,15 +116,19 @@ include '../../config.php';
                             while ($f = mysqli_fetch_array($select_formula)) {
                                 $comp = $f['component_id'];
                                 $comp_qty = $f['component_qty'];
+
+                                $comp_data = mysqli_query($mysqli, "SELECT * FROM `components` WHERE `id` = '$comp'");
+                                $cd = mysqli_fetch_array($comp_data);
+                                $comp_name = $cd['name'];
                                 echo '
-                                  <div class="row">
-                        <div class="col">
-                        ' . $comp . '
-                        </div>
-                        <div class="col">
-                        ' . $comp_qty * $po['item_qty'] . '
-                        </div>
+                                            <div class="row">
+                                    <div class="col">
+                                    ' . $comp_name . '
                                     </div>
+                                    <div class="col">
+                                    ' . $comp_qty * $po['item_qty'] . '
+                                    </div>
+                                                </div>
                                 ';
                             }
                         }

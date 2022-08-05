@@ -146,8 +146,8 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                                         <i class="fa-solid fa-play" style="font-size: 5rem; transform:rotate(-3deg)"></i>
                                     </div>
                                     <div class="col">
-                                        <h4 class="card-title"><?php
-                                                                echo mysqli_num_rows(mysqli_query($mysqli, "SELECT * FROM `machines` WHERE `status` = '1'")); ?></h4>
+                                        <h1 class="card-title"><?php
+                                                                echo mysqli_num_rows(mysqli_query($mysqli, "SELECT * FROM `machines` WHERE `status` = '1'")); ?></h1>
                                         <p class="card-text">Active Machines</p>
                                     </div>
                                 </div>
@@ -164,17 +164,17 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col col-auto">
-                                        <i class="fa-solid fa-hourglass" style="font-size: 5rem; transform:rotate(-3deg)"></i>
+                                        <i class="fa-solid fa-tools" style="font-size: 5rem; transform:rotate(-3deg)"></i>
                                     </div>
                                     <div class="col">
-                                        <h4 class="card-title">
+                                        <h1 class="card-title">
                                             <?php
                                             $datetime = new DateTime();
                                             $now = $datetime->format('Y-m-d H:i:s');
                                             $upcoming = mysqli_query($mysqli, "SELECT * FROM `maintenance_order` WHERE `end_time` > '$now' ");
                                             echo mysqli_num_rows($upcoming);
                                             ?>
-                                        </h4>
+                                        </h1>
                                         <p class="card-text">Upcoming Maintenance Tasks</p>
                                     </div>
                                 </div>
@@ -191,19 +191,19 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col col-auto">
-                                        <i class="fa-solid fa-tools" style="font-size: 5rem; transform:rotate(-3deg)"></i>
+                                        <i class="fa-solid fa-list" style="font-size: 5rem; transform:rotate(-3deg)"></i>
                                     </div>
                                     <div class="col">
-                                        <h4 class="card-title">
+                                        <h1 class="card-title">
                                             <?php
-                                            echo mysqli_num_rows(mysqli_query($mysqli, "SELECT * FROM `maintenance_log` WHERE `end` = NULL"));
+                                            echo mysqli_num_rows(mysqli_query($mysqli, "SELECT * FROM `production_request` WHERE `status` != 'Done'"));
                                             ?>
-                                        </h4>
-                                        <p class="card-text">Ongoing Maintenance Tasks</p>
+                                        </h1>
+                                        <p class="card-text">Production Orders</p>
                                     </div>
                                 </div>
                             </div>
-                            <a href="Maintenance/maintenance_log.php" class="link-light card-footer text-end">
+                            <a href="Production/production_orders.php" class="link-light card-footer text-end">
                                 <span>
                                     Details <i class="fa-solid fa-circle-chevron-right"></i>
                                 </span>
@@ -218,10 +218,10 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                                         <i class="fa-solid fa-user" style="font-size: 5rem; transform:rotate(-3deg)"></i>
                                     </div>
                                     <div class="col">
-                                        <h4 class="card-title">
+                                        <h1 class="card-title">
                                             <?php echo mysqli_num_rows(mysqli_query($mysqli, "SELECT * FROM `users` WHERE `online` = '1'"));
                                             ?>
-                                        </h4>
+                                        </h1>
                                         <p class="card-text">Logged in Users</p>
                                     </div>
                                 </div>
