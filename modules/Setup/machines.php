@@ -147,25 +147,26 @@ if (isset($_GET['err'])) {
                                                 </div>
                                                 </div>
                                             ';
-                                            while ($r=mysqli_fetch_array($sm)) {
-                                                $mold = mysqli_query($mysqli, "SELECT * FROM `molds` WHERE `id` = '$r[mold_id]'");
-                                                $mold = mysqli_fetch_array($mold);
-                                                $mold = $mold['name'];
-                                                echo '
-                                                <div class="row">
-                                                <div class="col">
-                                                              Mold:
-                                                              </div>
+                                    while ($r = mysqli_fetch_array($sm)) {
+                                        $mold = mysqli_query($mysqli, "SELECT * FROM `molds` WHERE `id` = '$r[mold_id]'");
+                                        while ($mold_a = mysqli_fetch_array($mold)) {
+                                            $m = $mold_a['name'];
+                                            echo '
+                                                    <div class="row">
                                                     <div class="col">
-                                                              '.$r['mold_id']. '
-                                                              </div>
-                                                              <div class="col">
-                                                              ' . $mold . '
-                                                              </div>
-                                                              </div>
-                                                              ';
-                                                          };
-                                                          echo '
+                                                                  Mold:
+                                                                  </div>
+                                                        <div class="col">
+                                                                  ' . $r['mold_id'] . '
+                                                                  </div>
+                                                                  <div class="col">
+                                                                  ' . $m . '
+                                                                  </div>
+                                                                  </div>
+                                                                  ';
+                                        }
+                                    };
+                                    echo '
                                                         </div>
                                                     </div>
                                                     </div>
