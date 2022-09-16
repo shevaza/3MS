@@ -112,3 +112,7 @@
         border-radius: 50%;
         display: inline-block;
     }
+    
+    .taskboard:hover {
+        cursor: pointer;
+    }

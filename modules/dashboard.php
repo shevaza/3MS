@@ -380,16 +380,16 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                         </a>
                     </div>
                     <div class="col col-12 col-md-12 col-lg-4 col-xl-4 mb-3">
-                        <a class="text-dark" href="maintenance/maintenance_log.php">
+                        <a class="text-dark" href="maintenance/maintenance_tasks.php">
                             <div class="card db-item">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-auto text-end">
-                                            <i class="fa-solid fa-file-waveform" style="font-size: 5rem;"></i>
+                                            <i class="fa-solid fa-tasks" style="font-size: 5rem;"></i>
                                         </div>
                                         <div class="col">
-                                            <h4 class="card-title">Maintenance Logs</h4>
-                                            <p class="card-text">All maintenance logs</p>
+                                            <h4 class="card-title">Task Board</h4>
+                                            <p class="card-text">Maintenance task board manager.</p>
                                         </div>
                                     </div>
                                 </div>
