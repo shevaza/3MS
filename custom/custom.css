@@ -116,3 +116,12 @@
     .taskboard:hover {
         cursor: pointer;
     }
+    
+    .taskcard {
+        transition: all .1s ease-in-out;
+    }
+    
+    .taskcard:hover {
+        background-color: #c71d1d !important;
+        color: white !important;
+    }

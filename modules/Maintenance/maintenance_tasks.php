@@ -57,13 +57,37 @@ if (empty($_SESSION['user_id'])) {
                                     </h3>
                                 </div>
                                 <div class="col">
-                                    <input placeholder="User" class="form-control" type="search" name="" id="">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="">Task</span>
+                                        </div>
+                                        <input class="form-control" type="search" name="task" id="task">
+                                    </div>
                                 </div>
                                 <div class="col">
-                                    <input placeholder="Status" class="form-control" type="search" name="" id="">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="">User</span>
+                                        </div>
+                                        <select class="selectpicker form-control" data-style="btn-outline-danger" data-live-search="true" name="" id="">
+                                            <option value="all" selected>All</option>
+                                            <?php
+                                            $select_users = mysqli_query($mysqli, "SELECT * FROM `users` WHERE `department` LIKE 'Maintenance'");
+                                            while ($r = mysqli_fetch_array($select_users)) {
+                                                echo '<option value="' . $r['id'] . '">' . $r['username'] . '</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="col">
-                                    <input placeholder="Type" class="form-control" type="search" name="" id="">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="">Date Range</span>
+                                        </div>
+                                        <input class="form-control" type="date" name="from" id="from">
+                                        <input class="form-control" type="date" name="to" id="to">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -71,8 +95,8 @@ if (empty($_SESSION['user_id'])) {
                 </div>
             </div>
         </div>
-        <div class="row flex-nowrap">
-            <div class="col">
+        <div class="row flex-nowrap" style="overflow-x:auto">
+            <div class="col-12 col-sm-4">
                 <div class="card taskboard">
                     <div class="card-header">
                         <div class="row">
@@ -82,19 +106,19 @@ if (empty($_SESSION['user_id'])) {
                                 </h3>
                             </div>
                             <div class="col text-end">
-                                <a class="btn btn-danger btn-sm " href="#" role="button" data-bs-toggle="modal" data-bs-target="#new"><i class="fas fa-plus"></i></a>
+                                <a class="btn btn-danger btn-sm " href="#" role="button" data-bs-toggle="modal" onclick="Select('open')" data-bs-target="#new"><i class="fas fa-plus"></i></a>
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" id="open-body" style="display:none">
 
                     </div>
                     <div class="card-footer text-muted">
-                        Footer
+                        <!-- Footer -->
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-12 col-sm-4">
                 <div class="card taskboard">
                     <div class="card-header">
                         <div class="row">
@@ -104,20 +128,20 @@ if (empty($_SESSION['user_id'])) {
                                 </h3>
                             </div>
                             <div class="col text-end">
-                                <a class="btn btn-danger btn-sm " href="#" role="button" data-bs-toggle="modal" data-bs-target="#new"><i class="fas fa-plus"></i></a>
+                                <a class="btn btn-danger btn-sm " href="#" role="button" data-bs-toggle="modal" onclick="Select('in progress')" data-bs-target="#new"><i class="fas fa-plus"></i></a>
 
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" id="ip-body" style="display:none">
 
                     </div>
                     <div class="card-footer text-muted">
-                        Footer
+                        <!-- Footer -->
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-12 col-sm-4">
                 <div class="card taskboard">
                     <div class="card-header">
                         <div class="row">
@@ -127,15 +151,15 @@ if (empty($_SESSION['user_id'])) {
                                 </h3>
                             </div>
                             <div class="col text-end">
-                                <a class="btn btn-danger btn-sm " href="#" role="button" data-bs-toggle="modal" data-bs-target="#new"><i class="fas fa-plus"></i></a>
+                                <a class="btn btn-danger btn-sm " href="#" role="button" data-bs-toggle="modal" data-bs-target="#new" onclick="Select('done')"><i class="fas fa-plus"></i></a>
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" id="done-body" style="display:none">
 
                     </div>
                     <div class="card-footer text-muted">
-                        Footer
+                        <!-- Footer -->
                     </div>
                 </div>
             </div>
@@ -152,6 +176,18 @@ if (empty($_SESSION['user_id'])) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="modal fade" id="new" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -161,18 +197,18 @@ if (empty($_SESSION['user_id'])) {
                     </h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-inline">
+                    <form class="form-inline" method="POST" autocomplete="off">
                         <div class="form-group">
-                            <label for="">Title</label>
-                            <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                            <label for="">Title *</label>
+                            <input type="text" name="title" id="title" class="form-control" placeholder="" aria-describedby="helpId" required>
                         </div>
                         <div class="form-group">
                             <label for="">Description</label>
-                            <textarea class="form-control" name="" id="" cols="30" rows="7"></textarea>
+                            <textarea class="form-control" name="desc" id="desc" cols="30" rows="7"></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="">Assign To</label>
-                            <select class="selectpicker w-100" data-live-search="true" name="" id="">
+                            <label for="">Assign To *</label>
+                            <select class="selectpicker w-100" data-live-search="true" name="user" id="user" required multiple>
                                 <?php
                                 $select_users = mysqli_query($mysqli, "SELECT * FROM `users` WHERE `department` LIKE 'Maintenance'");
                                 while ($r = mysqli_fetch_array($select_users)) {
@@ -182,18 +218,97 @@ if (empty($_SESSION['user_id'])) {
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="">Due Date</label>
-                            <input type="date" class="form-control" name="date" id="date">
+                            <label for="">Due Date *</label>
+                            <input type="date" class="form-control" name="date" id="date" required>
                         </div>
-                    </form>
+                        <div class="form-group">
+                            <label for="">Status *</label>
+                            <select class="form-control" name="status" id="status" required>
+                                <option value="open">Open</option>
+                                <option value="in progress">In Progress</option>
+                                <option value="done">Done</option>
+                            </select>
+                        </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" onclick="turn_on()" class="btn btn-danger">Save</button>
+                    <button type="submit" name="save" class="btn btn-danger">Save</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+    <div class="modal fade" id="edit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-light">
+                    <h4>
+                        Edit Task
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-inline" method="POST" autocomplete="off">
+                        <input type="hidden" name="edit_id" id="edit_id">
+                        <div class="form-group">
+                            <label for="">Title *</label>
+                            <input type="text" name="edit_title" id="edit_title" class="form-control" placeholder="" aria-describedby="helpId" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Description</label>
+                            <textarea class="form-control" name="edit_desc" id="edit_desc" cols="30" rows="7"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Assign To *</label>
+                            <select class="selectpicker w-100" data-live-search="true" name="edit_user" id="edit_user" required multiple>
+                                <?php
+                                $select_users = mysqli_query($mysqli, "SELECT * FROM `users` WHERE `department` LIKE 'Maintenance'");
+                                while ($r = mysqli_fetch_array($select_users)) {
+                                    echo '<option value="' . $r['id'] . '">' . $r['username'] . '</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Due Date *</label>
+                            <input type="date" class="form-control" name="edit_date" id="edit_date" required>
+                        </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" name="edit" class="btn btn-danger">Save</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </body>
@@ -201,4 +316,66 @@ if (empty($_SESSION['user_id'])) {
 include '../../js.php';
 ?>
 
+<script>
+    $(document).ready(function() {
+        getData();
+    });
+
+    function getData() {
+        $.ajax({
+            type: "POST",
+            url: "../../php_queries/ajax/load_tasks.php",
+            data: {
+                action: 'get'
+            },
+            dataType: "html",
+            success: function(r) {
+                data = JSON.parse(r);
+                $('#open-body').html(data[0]);
+                $('#ip-body').html(data[1]);
+                $('#done-body').html(data[2]);
+                $('.card-body').slideDown();
+            }
+        });
+    }
+
+    function Select(s) {
+        document.getElementById("status").value = s;
+    }
+
+    function EditParams(id, title, desc, due_date, status, user) {
+        $('#edit_id').val(id);
+        $('#edit_title').val(title);
+        $('#edit_desc').val(desc);
+        $('#edit_date').val(due_date);
+        $('#edit_user').selectpicker('val', user);
+    }
+</script>
+
 </html>
+
+<?php
+if (isset($_POST['save'])) {
+    $title = $_POST['title'];
+    $desc = $_POST['desc'];
+    $user = $_POST['user'];
+    $due_date = $_POST['date'];
+    $status = $_POST['status'];
+    $insert = mysqli_query($mysqli, "INSERT INTO `tasks` (`title`, `description`, `user`, `due_date`, `status`)
+    VALUES ('$title', '$desc', '$user', '$due_date', '$status')");
+    $last_id = mysqli_insert_id($mysqli);
+
+    for ($i = 0; $i < count($user); $i++) {
+        $insert = mysqli_query($mysqli, "INSERT INTO `task_ass` (`task_id`, `user_id`) VALUES ('$last_id', '$user[$i]')");
+    }
+    echo '<script><meta http-equiv="refresh" content="30"></script>';
+}
+if (isset($_POST['edit'])) {
+    $title = $_POST['edit_title'];
+    $desc = $_POST['edit_desc'];
+    $user = $_POST['edit_user'];
+    $due_date = $_POST['edit_date'];
+    $edit = mysqli_query($mysqli, "UPDATE `tasks` SET `title` = '$title', `description` = '$desc', `due_date` = '$due_date' WHERE `id` = '$id'");
+}
+
+?>

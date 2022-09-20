@@ -136,7 +136,7 @@ if ($_SESSION['user_type'] == 'Super Admin') {
 
 
             <!-- DASHBOARD -->
-            <div id="dashboard" class="col py-3 model">
+            <div id="dashboard" class="col-10 py-3 model">
                 <div class="row mb-4">
                     <div class="col col-12 col-md-3 col-lg-3 col-xl-3 mb-3">
                         <div class="card text-white bg-success card-hover">
@@ -255,7 +255,7 @@ if ($_SESSION['user_type'] == 'Super Admin') {
 
 
             <!-- PRODUCTION -->
-            <div id="production" class="col py-3 model">
+            <div id="production" class="col-10 py-3 model">
                 <div class="row mb-2">
                     <div class="col col-12 col-md-12 col-lg-3 col-xl-3 mb-3">
                         <a class="text-dark" href="production/production_orders.php">
@@ -326,7 +326,7 @@ if ($_SESSION['user_type'] == 'Super Admin') {
 
 
             <!-- MAINTENANCE -->
-            <div id="maintenance" class="col py-3 model">
+            <div id="maintenance" class="col-10 py-3 model">
                 <div class="row">
                     <div class="col col-12 col-md-12 col-lg-4 col-xl-4 mb-3">
                         <a class="text-dark" href="maintenance/maintenance_preventative.php">
@@ -401,7 +401,7 @@ if ($_SESSION['user_type'] == 'Super Admin') {
 
 
             <!-- SETUP -->
-            <div id="setup" class="col py-3 model">
+            <div id="setup" class="col-10 py-3 model">
                 <div class="row">
                     <div class="col col-12 col-md-12 col-lg-4 col-xl-4 mb-3">
                         <a class="text-dark" href="setup/machines.php">
@@ -460,7 +460,7 @@ if ($_SESSION['user_type'] == 'Super Admin') {
 
 
             <!-- USER SETTINGS -->
-            <div id="users" class="col py-3 model">
+            <div id="users" class="col-10 py-3 model">
                 <div class="row">
                     <div class="col">
                         <div class="card">
@@ -642,7 +642,7 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="username">Email</label>
-                                                <input type="email" class="form-control" name="email" id="email" aria-describedby="email" placeholder="email" required>
+                                                <input type="email" class="form-control" name="email" id="email" aria-describedby="email" placeholder="email">
                                             </div>
                                         </div>
                                     </div>
