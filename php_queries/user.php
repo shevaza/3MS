@@ -23,7 +23,7 @@ for($i = 0; $i < count($module); $i++) {
     $insert_access = mysqli_query($mysqli, "INSERT INTO `user_access`(`user_id`, `module`) VALUES ('$new_user_id', '$module[$i]')");
 }
 
-header('location: ../modules/dashboard.php');
+// header('location: ../modules/dashboard.php');
 
 }
 
