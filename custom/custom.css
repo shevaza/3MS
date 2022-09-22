@@ -125,3 +125,13 @@
         background-color: #c71d1d !important;
         color: white !important;
     }
+    
+    .badge-danger {
+        background-color: #c71d1d;
+        color: white;
+    }
+    
+    .taskcard:hover .badge-danger {
+        background-color: white;
+        color: #c71d1d;
+    }

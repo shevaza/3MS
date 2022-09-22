@@ -61,7 +61,7 @@ if (empty($_SESSION['user_id'])) {
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="">Task</span>
                                         </div>
-                                        <input class="form-control" type="search" name="task" id="task">
+                                        <input class="form-control" type="search" name="task" id="filter_title" onkeyup = "getData()">
                                     </div>
                                 </div>
                                 <div class="col">
@@ -69,7 +69,7 @@ if (empty($_SESSION['user_id'])) {
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="">User</span>
                                         </div>
-                                        <select class="selectpicker form-control" data-style="btn-outline-danger" data-live-search="true" name="" id="">
+                                        <select class="selectpicker form-control" data-style="btn-outline-danger" data-live-search="true" name="" id="filter_user" onchange="getData()">
                                             <option value="all" selected>All</option>
                                             <?php
                                             $select_users = mysqli_query($mysqli, "SELECT * FROM `users` WHERE `department` LIKE 'Maintenance'");
@@ -85,8 +85,8 @@ if (empty($_SESSION['user_id'])) {
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="">Date Range</span>
                                         </div>
-                                        <input class="form-control" type="date" name="from" id="from">
-                                        <input class="form-control" type="date" name="to" id="to">
+                                        <input class="form-control" type="date" name="from" id="filter_from" onchange="getData()">
+                                        <input class="form-control" type="date" name="to" id="filter_to" onchange="getData()">
                                     </div>
                                 </div>
                             </div>
@@ -208,7 +208,7 @@ if (empty($_SESSION['user_id'])) {
                         </div>
                         <div class="form-group">
                             <label for="">Assign To *</label>
-                            <select class="selectpicker w-100" data-live-search="true" name="user" id="user" required multiple>
+                            <select class="selectpicker w-100" data-live-search="true" name="user[]" id="user" required multiple>
                                 <?php
                                 $select_users = mysqli_query($mysqli, "SELECT * FROM `users` WHERE `department` LIKE 'Maintenance'");
                                 while ($r = mysqli_fetch_array($select_users)) {
@@ -248,63 +248,6 @@ if (empty($_SESSION['user_id'])) {
 
 
 
-    <div class="modal fade" id="edit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-danger text-light">
-                    <h4>
-                        Edit Task
-                    </h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-inline" method="POST" autocomplete="off">
-                        <input type="hidden" name="edit_id" id="edit_id">
-                        <div class="form-group">
-                            <label for="">Title *</label>
-                            <input type="text" name="edit_title" id="edit_title" class="form-control" placeholder="" aria-describedby="helpId" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Description</label>
-                            <textarea class="form-control" name="edit_desc" id="edit_desc" cols="30" rows="7"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Assign To *</label>
-                            <select class="selectpicker w-100" data-live-search="true" name="edit_user" id="edit_user" required multiple>
-                                <?php
-                                $select_users = mysqli_query($mysqli, "SELECT * FROM `users` WHERE `department` LIKE 'Maintenance'");
-                                while ($r = mysqli_fetch_array($select_users)) {
-                                    echo '<option value="' . $r['id'] . '">' . $r['username'] . '</option>';
-                                }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Due Date *</label>
-                            <input type="date" class="form-control" name="edit_date" id="edit_date" required>
-                        </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" name="edit" class="btn btn-danger">Save</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -322,11 +265,19 @@ include '../../js.php';
     });
 
     function getData() {
+        var title = $('#filter_title').val();
+        var user = $('#filter_user').val();
+        var from = $('#filter_from').val();
+        var to = $('#filter_to').val();
         $.ajax({
             type: "POST",
             url: "../../php_queries/ajax/load_tasks.php",
             data: {
-                action: 'get'
+                action: 'get',
+                title: title,
+                user: user,
+                from: from,
+                to: to
             },
             dataType: "html",
             success: function(r) {
@@ -335,20 +286,29 @@ include '../../js.php';
                 $('#ip-body').html(data[1]);
                 $('#done-body').html(data[2]);
                 $('.card-body').slideDown();
+                $('.selectpicker').selectpicker();
+            }
+        });
+    }
+
+    function switchStat(id, status) {
+        $.ajax({
+            type: "POST",
+            url: "../../php_queries/ajax/load_tasks.php",
+            data: {
+                action: status,
+                id: id
+            },
+            dataType: "html",
+            success: function(r) {
+                $('.card-body').slideUp();
+                getData();
             }
         });
     }
 
     function Select(s) {
         document.getElementById("status").value = s;
-    }
-
-    function EditParams(id, title, desc, due_date, status, user) {
-        $('#edit_id').val(id);
-        $('#edit_title').val(title);
-        $('#edit_desc').val(desc);
-        $('#edit_date').val(due_date);
-        $('#edit_user').selectpicker('val', user);
     }
 </script>
 
@@ -361,8 +321,8 @@ if (isset($_POST['save'])) {
     $user = $_POST['user'];
     $due_date = $_POST['date'];
     $status = $_POST['status'];
-    $insert = mysqli_query($mysqli, "INSERT INTO `tasks` (`title`, `description`, `user`, `due_date`, `status`)
-    VALUES ('$title', '$desc', '$user', '$due_date', '$status')");
+    $insert = mysqli_query($mysqli, "INSERT INTO `tasks` (`title`, `description`, `due_date`, `status`)
+    VALUES ('$title', '$desc', '$due_date', '$status')");
     $last_id = mysqli_insert_id($mysqli);
 
     for ($i = 0; $i < count($user); $i++) {
@@ -370,6 +330,7 @@ if (isset($_POST['save'])) {
     }
     echo '<script><meta http-equiv="refresh" content="30"></script>';
 }
+
 if (isset($_POST['edit'])) {
     $title = $_POST['edit_title'];
     $desc = $_POST['edit_desc'];
