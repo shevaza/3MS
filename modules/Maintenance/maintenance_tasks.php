@@ -348,8 +348,8 @@ if (isset($_POST['save'])) {
     $user = $_POST['user'];
     $due_date = $_POST['date'];
     $status = $_POST['status'];
-    $insert = mysqli_query($mysqli, "INSERT INTO `tasks` (`title`, `description`, `due_date`, `status`)
-    VALUES ('$title', '$desc', '$due_date', '$status')");
+    $insert = mysqli_query($mysqli, "INSERT INTO `tasks` (`title`, `description`, `due_date`, `status`, `created_by`)
+    VALUES ('$title', '$desc', '$due_date', '$status', '$_SESSION[user_id]')");
     $last_id = mysqli_insert_id($mysqli);
 
     for ($i = 0; $i < count($user); $i++) {

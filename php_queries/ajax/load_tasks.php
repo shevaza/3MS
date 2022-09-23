@@ -24,8 +24,22 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
         $open .= '
         <div class="card my-3 taskcard" draggable="true" role="button" data-bs-toggle="modal" data-bs-target="#edit_' . $res['id'] . '">
         <div class="card-body">
-        <h4 class="card-title">' . $res['title'] . '</h4>
-        <p class="card-text">' . $res['description'] . '</p>
+        <div class="row">
+            <div class="col">
+            <h4 class="card-title">' . $res['title'] . '</h4>
+            <p class="card-text">' . $res['description'] . '</p>
+            </div>
+            <div class="col text-end">
+            <small class="w-100 text-end"><strong>Created By: </strong>
+            ';
+        $get_user = mysqli_query($mysqli, "SELECT `username` FROM `users` WHERE `id` = '$res[created_by]'");
+        $get_user = mysqli_fetch_assoc($get_user);
+        $open .= '
+            <span class="badge badge-danger">' . $get_user['username'] . '</span>';
+        $open .= '
+            </small>
+            </div>
+        </div>
         <div class="row">
         <div class="col text-end">
         <small class="w-100 text-end"><strong>Due Date: </strong>' . $res['due_date'] . '</small>
@@ -149,10 +163,25 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
         $arr = '';
 
         $ip .= '
-        <div class="card my-3 taskcard" draggable="true" role="button" data-bs-toggle="modal" data-bs-target="#edit_' . $res['id'] . '">
+        <div class="card my-3 taskcard" draggable="true" role="button" data-bs-toggle="modal" data-bs-target="#edit_' . $res['id'] .
+        '">
         <div class="card-body">
-        <h4 class="card-title">' . $res['title'] . '</h4>
-        <p class="card-text">' . $res['description'] . '</p>
+        <div class="row">
+            <div class="col">
+            <h4 class="card-title">' . $res['title'] . '</h4>
+            <p class="card-text">' . $res['description'] . '</p>
+            </div>
+            <div class="col text-end">
+            <small class="w-100 text-end"><strong>Created By: </strong>
+            ';
+        $get_user = mysqli_query($mysqli, "SELECT `username` FROM `users` WHERE `id` = '$res[created_by]'");
+        $get_user = mysqli_fetch_assoc($get_user);
+        $ip .= '
+            <span class="badge badge-danger">' . $get_user['username'] . '</span>';
+        $ip .= '
+            </small>
+            </div>
+        </div>
         <div class="row">
         <div class="col text-end">
         <small class="w-100 text-end"><strong>Due Date: </strong>' . $res['due_date'] . '</small>
@@ -284,10 +313,25 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
         $arr = '';
 
         $closed .= '
-        <div class="card my-3 taskcard" draggable="true" role="button" data-bs-toggle="modal" data-bs-target="#edit_' . $res['id'] . '">
+        <div class="card my-3 taskcard" draggable="true" role="button" data-bs-toggle="modal" data-bs-target="#edit_' . $res['id'] .
+        '">
         <div class="card-body">
-        <h4 class="card-title">' . $res['title'] . '</h4>
-        <p class="card-text">' . $res['description'] . '</p>
+       <div class="row">
+            <div class="col">
+            <h4 class="card-title">' . $res['title'] . '</h4>
+            <p class="card-text">' . $res['description'] . '</p>
+            </div>
+            <div class="col text-end">
+            <small class="w-100 text-end"><strong>Created By: </strong>
+            ';
+        $get_user = mysqli_query($mysqli, "SELECT `username` FROM `users` WHERE `id` = '$res[created_by]'");
+        $get_user = mysqli_fetch_assoc($get_user);
+        $closed .= '
+            <span class="badge badge-danger">' . $get_user['username'] . '</span>';
+        $closed .= '
+            </small>
+            </div>
+        </div>
         <div class="row">
         <div class="col text-end">
         <small class="w-100 text-end"><strong>Due Date: </strong>' . $res['due_date'] . '</small>
