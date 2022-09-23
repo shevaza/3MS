@@ -235,14 +235,49 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                     </div>
                 </div>
 
-                <div class="row justify-content-center">
-                    <div class="col-11">
+                <div class="row">
+                    <div class="col-6">
                         <div class="card">
                             <img class="card-img-top" src="holder.js/100x180/" alt="">
                             <div class="card-body">
                                 <h4 class="card-title">Industry Production</h4>
                                 <canvas id="Chart" width="100" height="50"></canvas>
                             </div>
+                        </div>
+                    </div>
+                    <div class="col col-12 col-md-6 col-lg-6 col-xl-6 mb-3">
+                        <div class="card text-dark">
+                            <div class="card-body">
+                                <h4 class="mb-2">
+                                    My Assigned Tasks
+                                </h4>
+                                <table class="table table-hover w-100">
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Desc</th>
+                                            <th>Due Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $select_tasks = mysqli_query($mysqli, "SELECT * FROM tasks INNER JOIN task_ass ON tasks.id = task_ass.task_id WHERE task_ass.user_id = '$_SESSION[user_id]' AND tasks.status != 'done' ");
+                                        while ($t = mysqli_fetch_array($select_tasks)) {
+                                            echo '<tr onclick="window.location=\'maintenance/maintenance_tasks.php\';">';
+                                            echo '<td>' . $t['title'] . '</td>';
+                                            echo '<td>' . $t['description'] . '</td>';
+                                            echo '<td>' . $t['due_date'] . '</td>';
+                                            echo '</tr>';
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <a href="contacts.php" class="link-light card-footer text-end">
+                                <span>
+                                    Details <i class="fa-solid fa-circle-chevron-right"></i>
+                                </span>
+                            </a>
                         </div>
                     </div>
                 </div>

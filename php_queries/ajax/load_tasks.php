@@ -5,26 +5,22 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
     $ip = '';
     $closed = '';
 
-    // $title = $_POST['title'];
-    // $user = $_POST['user'];
-    // $from = $_POST['from'];
-    // $to = $_POST['to'];
 
 
 
     $where = "WHERE `status` LIKE 'open'";
     if (isset($_POST['title'])) {
-        $where.=" AND `title` LIKE '%$_POST[title]%'";
+        $where .= " AND `title` LIKE '%$_POST[title]%'";
     }
-    // if (isset($_POST['from']) && isset($_POST['to'])) {
-    //     $where .= " AND `date` > '$_POST[from]' AND `date` < '$_POST[to]'";
-    // }
+    if (!empty($_POST['from']) && !empty($_POST['to'])) {
+        $where .= " AND `due_date` BETWEEN '$_POST[from]' AND '$_POST[to]'";
+    }
     $query = "SELECT * FROM `tasks` $where ORDER BY `id` DESC";
     $select = mysqli_query($mysqli, $query);
     while ($res = mysqli_fetch_array($select)) {
         $task_users = mysqli_query($mysqli, "SELECT * FROM `task_ass` WHERE `task_id` = '$res[id]'");
         $arr = '';
-        
+
         $open .= '
         <div class="card my-3 taskcard" draggable="true" role="button" data-bs-toggle="modal" data-bs-target="#edit_' . $res['id'] . '">
         <div class="card-body">
@@ -56,24 +52,31 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
 
 
         $open .= '
-         <div class="modal fade" id="edit_' . $res['id'] . '" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+         <div class="modal fade" id="edit_' . $res['id'] . '"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-danger text-light">
-                    <h4>
-                        Edit Task
-                    </h4>
+                    <div class="row w-100 m-0">
+                    <div class="col">
+                        <h4>
+                            Edit Task
+                        </h4>
+                     </div>
+                     <div class="col text-end">
+                        <button type="button" class="btn btn-sm text-danger btn-light" data-bs-dismiss="modal" onclick="return confirm(\'Are you sure you want to delete? \')?deleteTask(\'' . $res['id'] . '\'):\'\';"><i class="fas fa-trash-alt"></i></button>
+                     </div>
+                </div>
                 </div>
                 <div class="modal-body">
                     <form class="form-inline" method="POST" autocomplete="off">
                         <input type="hidden" name="edit_id" id="edit_id">
                         <div class="form-group">
                             <label for="">Title *</label>
-                            <input type="text" name="edit_title" value="'.$res['title'].'" id="edit_title" class="form-control" placeholder="" aria-describedby="helpId" required>
+                            <input type="text" name="edit_title" value="' . $res['title'] . '" id="edit_title" class="form-control" placeholder="" aria-describedby="helpId" required>
                         </div>
                         <div class="form-group">
                             <label for="">Description</label>
-                            <textarea class="form-control" name="edit_desc" id="edit_desc" cols="30" rows="7">'.$res['description'].'</textarea>
+                            <textarea class="form-control" name="edit_desc" id="edit_desc" cols="30" rows="7">' . $res['description'] . '</textarea>
                         </div>
                         <div class="form-group">
                             <label for="">Assign To *</label>
@@ -88,7 +91,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
                         </div>
                         <div class="form-group">
                             <label for="">Due Date *</label>
-                            <input type="date" class="form-control" name="edit_date" id="edit_date" value="'.$res['due_date']. '" required>
+                            <input type="date" class="form-control" name="edit_date" id="edit_date" value="' . $res['due_date'] . '" required>
                         </div>
 
                 </div>
@@ -105,7 +108,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
                     </div>
                     <div class="col">
                         <div class="d-grid gap-2">
-                        <button class="btn btn-warning btn-sm btn-block" id="'.$res['id']. '" onclick="switchStat(this.id, \'inProgress\')" href="#" role="button" data-bs-dismiss="modal"><strong>In Progress <i class="fas fa-arrow-right"></i></strong></button>
+                        <button class="btn btn-warning btn-sm btn-block" id="' . $res['id'] . '" onclick="switchStat(this.id, \'inProgress\')" href="#" role="button" data-bs-dismiss="modal"><strong>In Progress <i class="fas fa-arrow-right"></i></strong></button>
                         </div>
                     </div>
                 </div>
@@ -132,7 +135,15 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
 
 
 
-    $select = mysqli_query($mysqli, "SELECT * FROM `tasks` WHERE `status` LIKE 'in progress' ORDER BY `id` DESC");
+    $where = "WHERE `status` LIKE 'in progress'";
+    if (isset($_POST['title'])) {
+        $where .= " AND `title` LIKE '%$_POST[title]%'";
+    }
+    if (!empty($_POST['from']) && !empty($_POST['to'])) {
+        $where .= " AND `due_date` BETWEEN '$_POST[from]' AND '$_POST[to]'";
+    }
+    $query = "SELECT * FROM `tasks` $where ORDER BY `id` DESC";
+    $select = mysqli_query($mysqli, $query);
     while ($res = mysqli_fetch_array($select)) {
         $task_users = mysqli_query($mysqli, "SELECT * FROM `task_ass` WHERE `task_id` = '$res[id]'");
         $arr = '';
@@ -168,13 +179,20 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
 
 
         $ip .= '
-         <div class="modal fade" id="edit_' . $res['id'] . '" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+         <div class="modal fade" id="edit_' . $res['id'] . '"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-danger text-light">
-                    <h4>
-                        Edit Task
-                    </h4>
+                    <div class="row w-100 m-0">
+                    <div class="col">
+                        <h4>
+                            Edit Task
+                        </h4>
+                     </div>
+                     <div class="col text-end">
+                        <button type="button" class="btn btn-sm text-danger btn-light" data-bs-dismiss="modal" onclick="return confirm(\'Are you sure you want to delete? \')?deleteTask(\'' . $res['id'] . '\'):\'\';"><i class="fas fa-trash-alt"></i></button>
+                     </div>
+                </div>
                 </div>
                 <div class="modal-body">
                     <form class="form-inline" method="POST" autocomplete="off">
@@ -251,8 +269,17 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
 
 
 
-    $select = mysqli_query($mysqli, "SELECT * FROM `tasks` WHERE `status` LIKE 'done' ORDER BY `id` DESC");
-     while ($res = mysqli_fetch_array($select)) {
+
+    $where = "WHERE `status` LIKE 'done'";
+    if (isset($_POST['title'])) {
+        $where .= " AND `title` LIKE '%$_POST[title]%'";
+    }
+    if (!empty($_POST['from']) && !empty($_POST['to'])) {
+        $where .= " AND `due_date` BETWEEN '$_POST[from]' AND '$_POST[to]'";
+    }
+    $query = "SELECT * FROM `tasks` $where ORDER BY `id` DESC";
+    $select = mysqli_query($mysqli, $query);
+    while ($res = mysqli_fetch_array($select)) {
         $task_users = mysqli_query($mysqli, "SELECT * FROM `task_ass` WHERE `task_id` = '$res[id]'");
         $arr = '';
 
@@ -287,13 +314,20 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
 
 
         $closed .= '
-         <div class="modal fade" id="edit_' . $res['id'] . '" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+         <div class="modal fade" id="edit_' . $res['id'] . '"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-danger text-light">
-                    <h4>
-                        Edit Task
-                    </h4>
+                <div class="row w-100 m-0">
+                    <div class="col">
+                        <h4>
+                            Edit Task
+                        </h4>
+                     </div>
+                     <div class="col text-end">
+                        <button type="button" class="btn btn-sm text-danger btn-light" data-bs-dismiss="modal" onclick="return confirm(\'Are you sure you want to delete? \')?deleteTask(\'' . $res['id'] . '\'):\'\';"><i class="fas fa-trash-alt"></i></button>
+                     </div>
+                </div>
                 </div>
                 <div class="modal-body">
                     <form class="form-inline" method="POST" autocomplete="off">
@@ -388,4 +422,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'done') {
 
 if (isset($_POST['action']) && $_POST['action'] == 'archive') {
     $update = mysqli_query($mysqli, "UPDATE `tasks` SET `status` = 'archive' WHERE `id` = '$_POST[id]' ");
+}
+
+if (isset($_POST['action']) && $_POST['action'] == 'delete') {
+    $update = mysqli_query($mysqli, "UPDATE `tasks` SET `status` = 'deleted' WHERE `id` = '$_POST[id]' ");
 }

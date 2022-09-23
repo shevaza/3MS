@@ -42,29 +42,28 @@ if (empty($_SESSION['user_id'])) {
             </div>
         </nav>
     </div>
-
     <!-- MAIN CONTAINER -->
     <div class="container-fluid mt-3">
         <div class="row flex-nowrap my-4">
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <div class="container">
-                            <div class="row">
+                        <div class="container-fluid">
+                            <div class="row justify-content-center">
                                 <div class="col col-auto">
                                     <h3>
                                         Filter
                                     </h3>
                                 </div>
-                                <div class="col">
+                                <div class="mb-2 mb-lg-0 col-12 col-sm-11 col-md-3 col-lg-3">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="">Task</span>
                                         </div>
-                                        <input class="form-control" type="search" name="task" id="filter_title" onkeyup = "getData()">
+                                        <input class="form-control" type="search" placeholder="Task Title.." name="task" id="filter_title" onkeyup="getData()">
                                     </div>
                                 </div>
-                                <div class="col">
+                                <div class="mb-2 mb-lg-0 col-12 col-sm-11 col-md-3 col-lg-3">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="">User</span>
@@ -80,7 +79,7 @@ if (empty($_SESSION['user_id'])) {
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col">
+                                <div class="mb-2 mb-lg-0 col-12 col-sm-11 col-md-3 col-lg-3">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="">Date Range</span>
@@ -88,6 +87,9 @@ if (empty($_SESSION['user_id'])) {
                                         <input class="form-control" type="date" name="from" id="filter_from" onchange="getData()">
                                         <input class="form-control" type="date" name="to" id="filter_to" onchange="getData()">
                                     </div>
+                                </div>
+                                <div class="mb-2 mb-lg-0 col-12 col-sm-11 col-md-auto">
+                                    <button type="button" name="" id="clearFilter" class="btn btn-outline-danger btn-sm btn-block">Clear Filter <i class="fa-solid fa-eraser"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -129,7 +131,6 @@ if (empty($_SESSION['user_id'])) {
                             </div>
                             <div class="col text-end">
                                 <a class="btn btn-danger btn-sm " href="#" role="button" data-bs-toggle="modal" onclick="Select('in progress')" data-bs-target="#new"><i class="fas fa-plus"></i></a>
-
                             </div>
                         </div>
                     </div>
@@ -307,9 +308,35 @@ include '../../js.php';
         });
     }
 
+    function deleteTask(id) {
+        $.ajax({
+            type: "POST",
+            url: "../../php_queries/ajax/load_tasks.php",
+            data: {
+                action: 'delete',
+                id: id
+            },
+            dataType: "html",
+            success: function(r) {
+                $('.card-body').slideUp();
+                getData();
+            }
+        });
+    }
+
     function Select(s) {
         document.getElementById("status").value = s;
     }
+
+    $('#clearFilter').click(function(e) {
+        e.preventDefault();
+        $('#filter_title').val('');
+        $('#filter_user').val('');
+        $('#filter_from').val('');
+        $('#filter_to').val('');
+        $('.card-body').slideUp();
+        getData();
+    });
 </script>
 
 </html>
