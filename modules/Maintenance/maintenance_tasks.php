@@ -331,7 +331,7 @@ include '../../js.php';
     $('#clearFilter').click(function(e) {
         e.preventDefault();
         $('#filter_title').val('');
-        $('#filter_user').val('');
+        $('#filter_user').val('all');
         $('#filter_from').val('');
         $('#filter_to').val('');
         $('.card-body').slideUp();

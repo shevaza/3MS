@@ -15,7 +15,11 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
     if (!empty($_POST['from']) && !empty($_POST['to'])) {
         $where .= " AND `due_date` BETWEEN '$_POST[from]' AND '$_POST[to]'";
     }
-    $query = "SELECT * FROM `tasks` $where ORDER BY `id` DESC";
+    $having ="";
+    if (isset($_POST['user']) && $_POST['user'] != 'all') {
+        $having .= "HAVING `users` LIKE '$_POST[user],%' OR  `users` LIKE '%, $_POST[user],%' OR  `users` LIKE '%, $_POST[user]' OR  `users` LIKE '$_POST[user]'";
+    }
+    $query = "SELECT tasks.*, GROUP_CONCAT(task_ass.user_id SEPARATOR ', ') AS `users` FROM `tasks` INNER JOIN `task_ass` on tasks.id = task_ass.task_id $where GROUP BY tasks.id $having ORDER BY `id` DESC";
     $select = mysqli_query($mysqli, $query);
     while ($res = mysqli_fetch_array($select)) {
         $task_users = mysqli_query($mysqli, "SELECT * FROM `task_ass` WHERE `task_id` = '$res[id]'");
@@ -156,7 +160,11 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
     if (!empty($_POST['from']) && !empty($_POST['to'])) {
         $where .= " AND `due_date` BETWEEN '$_POST[from]' AND '$_POST[to]'";
     }
-    $query = "SELECT * FROM `tasks` $where ORDER BY `id` DESC";
+    $having = "";
+    if (isset($_POST['user']) && $_POST['user'] != 'all') {
+        $having .= "HAVING `users` LIKE '$_POST[user],%' OR  `users` LIKE '%, $_POST[user],%' OR  `users` LIKE '%, $_POST[user]' OR  `users` LIKE '$_POST[user]'";
+    }
+    $query = "SELECT tasks.*, GROUP_CONCAT(task_ass.user_id SEPARATOR ', ') AS `users` FROM `tasks` INNER JOIN `task_ass` on tasks.id = task_ass.task_id $where GROUP BY tasks.id $having ORDER BY `id` DESC";
     $select = mysqli_query($mysqli, $query);
     while ($res = mysqli_fetch_array($select)) {
         $task_users = mysqli_query($mysqli, "SELECT * FROM `task_ass` WHERE `task_id` = '$res[id]'");
@@ -306,7 +314,11 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
     if (!empty($_POST['from']) && !empty($_POST['to'])) {
         $where .= " AND `due_date` BETWEEN '$_POST[from]' AND '$_POST[to]'";
     }
-    $query = "SELECT * FROM `tasks` $where ORDER BY `id` DESC";
+    $having = "";
+    if (isset($_POST['user']) && $_POST['user'] != 'all') {
+        $having .= "HAVING `users` LIKE '$_POST[user],%' OR  `users` LIKE '%, $_POST[user],%' OR  `users` LIKE '%, $_POST[user]' OR  `users` LIKE '$_POST[user]'";
+    }
+    $query = "SELECT tasks.*, GROUP_CONCAT(task_ass.user_id SEPARATOR ', ') AS `users` FROM `tasks` INNER JOIN `task_ass` on tasks.id = task_ass.task_id $where GROUP BY tasks.id $having ORDER BY `id` DESC";
     $select = mysqli_query($mysqli, $query);
     while ($res = mysqli_fetch_array($select)) {
         $task_users = mysqli_query($mysqli, "SELECT * FROM `task_ass` WHERE `task_id` = '$res[id]'");
