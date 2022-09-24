@@ -73,7 +73,7 @@ if (empty($_SESSION['user_id'])) {
                                             <?php
                                             $select_users = mysqli_query($mysqli, "SELECT * FROM `users` WHERE `department` LIKE 'Maintenance'");
                                             while ($r = mysqli_fetch_array($select_users)) {
-                                                echo '<option value="' . $r['id'] . '">' . $r['username'] . '</option>';
+                                                echo '<option value="' . $r['id'] . '">' . $r['first_name'] . ' '. $r['last_name'] .'</option>';
                                             }
                                             ?>
                                         </select>

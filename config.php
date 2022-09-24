@@ -23,6 +23,10 @@ if (isset($_POST['username'])) {
     $res = mysqli_fetch_array($result);
     $_SESSION['user_id'] = $res['id'];
     $_SESSION['username'] = $username;
+    $_SESSION['first_name'] = $res['first_name'];
+    $_SESSION['last_name'] = $res['last_name'];
+    $_SESSION['department'] = $res['department'];
+    $_SESSION['position'] = $res['position'];
     $_SESSION['user_type'] = $res['type'];
     if ($res['type'] != 'super admin') {
       $_SESSION['modules'] = array();

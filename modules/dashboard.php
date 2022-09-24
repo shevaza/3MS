@@ -106,6 +106,13 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                         </div> -->
                         <li class="side-item" onclick="switchTab('dashboard')">
                             <a href="#" class="nav-link px-0 align-middle py-4">
+                                <i class="fs-4 fas fa-user"></i>
+                                <h4 class="mb-0"><strong class="ms-1 mt-1 d-none d-sm-block"><?php echo ucfirst($_SESSION['first_name']) .' '. ucfirst($_SESSION['last_name']) ?></strong></h4>
+                                <small class="ms-1 d-none d-sm-block"><?php echo ucfirst($_SESSION['department']) .' | '.  ucfirst($_SESSION['position'])?></small>
+                            </a>
+                        </li>
+                        <li class="side-item" onclick="switchTab('dashboard')">
+                            <a href="#" class="nav-link px-0 align-middle py-4">
                                 <i class="fs-4 fas fa-gauge"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
                         </li>
                         <li class="side-item" onclick="switchTab('production')" style="<?php echo $production ?>">

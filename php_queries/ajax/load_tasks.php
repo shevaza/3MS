@@ -102,7 +102,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
 
         $select_users = mysqli_query($mysqli, "SELECT * FROM `users` WHERE `department` LIKE 'Maintenance'");
         while ($r = mysqli_fetch_array($select_users)) {
-            $open .= '<option value="' . $r['id'] . '">' . $r['username'] . '</option>';
+            $open .= '<option value="' . $r['id'] . '">' . $r['first_name'] . ' '. $r['last_name'] . '</option>';
         }
 
         $open .= '</select>
@@ -248,7 +248,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
 
         $select_users = mysqli_query($mysqli, "SELECT * FROM `users` WHERE `department` LIKE 'Maintenance'");
         while ($r = mysqli_fetch_array($select_users)) {
-            $ip .= '<option value="' . $r['id'] . '">' . $r['username'] . '</option>';
+            $ip .= '<option value="' . $r['id'] . '">' . $r['first_name'] . ' '. $r['last_name'] . '</option>';
         }
 
         $ip .= '</select>
@@ -402,7 +402,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
 
         $select_users = mysqli_query($mysqli, "SELECT * FROM `users` WHERE `department` LIKE 'Maintenance'");
         while ($r = mysqli_fetch_array($select_users)) {
-            $closed .= '<option value="' . $r['id'] . '">' . $r['username'] . '</option>';
+            $closed .= '<option value="' . $r['id'] . '">' . $r['first_name'] . ' '. $r['last_name'] . '</option>';
         }
 
         $closed .= '</select>

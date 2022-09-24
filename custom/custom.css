@@ -89,6 +89,7 @@
     #menu {
         z-index: 1;
         position: relative;
+        padding-bottom: 100px !important;
     }
     
     #open {
