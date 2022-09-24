@@ -73,7 +73,7 @@ if (empty($_SESSION['user_id'])) {
                                             <?php
                                             $select_users = mysqli_query($mysqli, "SELECT * FROM `users` WHERE `department` LIKE 'Maintenance'");
                                             while ($r = mysqli_fetch_array($select_users)) {
-                                                echo '<option value="' . $r['id'] . '">' . $r['first_name'] . ' '. $r['last_name'] .'</option>';
+                                                echo '<option value="' . $r['id'] . '">' . $r['first_name'] . ' ' . $r['last_name'] . '</option>';
                                             }
                                             ?>
                                         </select>
@@ -338,6 +338,30 @@ include '../../js.php';
         $('.card-body').slideUp();
         getData();
     });
+
+
+    $('.comment_btn').click(function(e) {
+        e.preventDefault();
+        console.log('click');
+    });
+
+
+    function addComment(id, comment) {
+        $.ajax({
+            type: "POST",
+            url: "../../php_queries/ajax/load_tasks.php",
+            data: {
+                action: 'comment',
+                id: id,
+                comment: comment
+            },
+            dataType: "html",
+            success: function(r) {
+                $('.card-body').slideUp();
+                getData();
+            }
+        });
+    }
 </script>
 
 </html>
