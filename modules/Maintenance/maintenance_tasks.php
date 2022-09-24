@@ -112,7 +112,7 @@ if (empty($_SESSION['user_id'])) {
                             </div>
                         </div>
                     </div>
-                    <div class="card-body" id="open-body" style="display:none">
+                    <div class="card-body tasks-cont" id="open-body">
 
                     </div>
                     <div class="card-footer text-muted">
@@ -134,7 +134,7 @@ if (empty($_SESSION['user_id'])) {
                             </div>
                         </div>
                     </div>
-                    <div class="card-body" id="ip-body" style="display:none">
+                    <div class="card-body tasks-cont" id="ip-body">
 
                     </div>
                     <div class="card-footer text-muted">
@@ -156,7 +156,7 @@ if (empty($_SESSION['user_id'])) {
                             </div>
                         </div>
                     </div>
-                    <div class="card-body" id="done-body" style="display:none">
+                    <div class="card-body tasks-cont" id="done-body">
 
                     </div>
                     <div class="card-footer text-muted">

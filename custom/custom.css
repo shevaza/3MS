@@ -136,3 +136,9 @@
         background-color: white;
         color: #c71d1d;
     }
+    
+    .tasks-cont {
+        display: none;
+        max-height: 600px;
+        overflow-y: scroll;
+    }
