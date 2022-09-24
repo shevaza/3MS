@@ -36,7 +36,7 @@ if (empty($_SESSION['user_id'])) {
                         <a class="nav-link active" aria-current="page" href="../dashboard.php">Dashboard</a>
                         <a class="nav-link" aria-current="page" href="../contacts.php">Users</a>
                         <a class="nav-link" aria-current="page" href="#">Settings</a>
-                        <a class="nav-link" aria-current="page" href="login.php">Logout</a>
+                        <a class="nav-link" aria-current="page" href="../../php_queries/logout.php">Logout</a>
                     </ul>
                 </div>
             </div>
@@ -262,6 +262,7 @@ include '../../js.php';
 
 <script>
     $(document).ready(function() {
+        $('#filter_user').selectpicker('val', '<?php echo $_SESSION['user_id']; ?>');
         getData();
     });
 
