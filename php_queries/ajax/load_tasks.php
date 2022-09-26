@@ -81,7 +81,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
                         </h4>
                     </div>
                     <div class="col text-end">
-                        <button type="button" class="btn btn-sm text-danger btn-light" data-bs-dismiss="modal" onclick="return confirm(\'Are you sure you want to delete? \')?deleteTask(\'' . $res['id'] . '\'):\'\';"><i class="fas fa-trash-alt"></i></button>
+                        <button type="button" class="btn btn-sm btn-outline-light" data-bs-dismiss="modal"><i class="fas fa-times"></i></button>
                     </div>
                 </div>
             </div>
@@ -148,6 +148,9 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
             </div>
                 <div class="modal-footer d-block">
                 <div class="row">
+                <div class="col">
+                        <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal" onclick="return confirm(\'Are you sure you want to delete? \')?deleteTask(\'' . $res['id'] . '\'):\'\';"><i class="fas fa-trash-alt"></i></button>
+                </div>
                     <div class="col text-end">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                         <button type="submit" name="edit" class="btn btn-danger"><i class="fas fa-pen"></i> Edit</button>
@@ -259,7 +262,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
                         </h4>
                      </div>
                      <div class="col text-end">
-                        <button type="button" class="btn btn-sm text-danger btn-light" data-bs-dismiss="modal" onclick="return confirm(\'Are you sure you want to delete? \')?deleteTask(\'' . $res['id'] . '\'):\'\';"><i class="fas fa-trash-alt"></i></button>
+                        <button type="button" class="btn btn-sm btn-outline-light" data-bs-dismiss="modal"><i class="fas fa-times"></i></button>
                      </div>
                 </div>
                 </div>
@@ -326,6 +329,9 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
                 </div>
                 <div class="modal-footer d-block">
                 <div class="row">
+                <div class="col">
+                        <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal" onclick="return confirm(\'Are you sure you want to delete? \')?deleteTask(\'' . $res['id'] . '\'):\'\';"><i class="fas fa-trash-alt"></i></button>
+                </div>
                     <div class="col text-end">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                         <button type="submit" name="edit" class="btn btn-danger"><i class="fas fa-pen"></i> Edit</button>
@@ -447,7 +453,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
                         </h4>
                     </div>
                     <div class="col text-end">
-                        <button type="button" class="btn btn-sm text-danger btn-light" data-bs-dismiss="modal" onclick="return confirm(\'Are you sure you want to delete? \')?deleteTask(\'' . $res['id'] . '\'):\'\';"><i class="fas fa-trash-alt"></i></button>
+                        <button type="button" class="btn btn-sm btn-outline-light" data-bs-dismiss="modal"><i class="fas fa-times"></i></button>
                     </div>
                 </div>
             </div>
@@ -514,6 +520,9 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
             </div>
                 <div class="modal-footer d-block">
                 <div class="row">
+                <div class="col">
+                        <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal" onclick="return confirm(\'Are you sure you want to delete? \')?deleteTask(\'' . $res['id'] . '\'):\'\';"><i class="fas fa-trash-alt"></i></button>
+                </div>
                     <div class="col text-end">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                         <button type="submit" name="edit" class="btn btn-danger"><i class="fas fa-pen"></i> Edit</button>
@@ -560,27 +569,28 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
 }
 
 
+$date = date("Y-m-d H:i:s");
+
 
 if (isset($_POST['action']) && $_POST['action'] == 'open') {
     $update = mysqli_query($mysqli, "UPDATE `tasks` SET `status` = 'open' WHERE `id` = '$_POST[id]' ");
 }
 
 if (isset($_POST['action']) && $_POST['action'] == 'inProgress') {
-    $update = mysqli_query($mysqli, "UPDATE `tasks` SET `status` = 'in progress' WHERE `id` = '$_POST[id]' ");
+    $update = mysqli_query($mysqli, "UPDATE `tasks` SET `status` = 'in progress' , `ip_date` = '$date' WHERE `id` = '$_POST[id]' ");
 }
 
 if (isset($_POST['action']) && $_POST['action'] == 'done') {
-    $date = date("Y-m-d");
     $update = mysqli_query($mysqli, "UPDATE `tasks` SET `status` = 'done', `close_date` = '$date' WHERE `id` = '$_POST[id]' ");
 }
 
 
 if (isset($_POST['action']) && $_POST['action'] == 'archive') {
-    $update = mysqli_query($mysqli, "UPDATE `tasks` SET `status` = 'archive' WHERE `id` = '$_POST[id]' ");
+    $update = mysqli_query($mysqli, "UPDATE `tasks` SET `status` = 'archive', `close_date` = '$date' WHERE `id` = '$_POST[id]' ");
 }
 
 if (isset($_POST['action']) && $_POST['action'] == 'delete') {
-    $update = mysqli_query($mysqli, "UPDATE `tasks` SET `status` = 'deleted' WHERE `id` = '$_POST[id]' ");
+    $update = mysqli_query($mysqli, "UPDATE `tasks` SET `status` = 'deleted', `close_date` = '$date' WHERE `id` = '$_POST[id]' ");
 }
 
 if (isset($_POST['action']) && $_POST['action'] == 'comment') {

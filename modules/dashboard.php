@@ -107,8 +107,8 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                         <li class="side-item" onclick="switchTab('dashboard')">
                             <a href="#" class="nav-link px-0 align-middle py-4">
                                 <i class="fs-4 fas fa-user"></i>
-                                <h4 class="mb-0"><strong class="ms-1 mt-1 d-none d-sm-block"><?php echo ucfirst($_SESSION['first_name']) .' '. ucfirst($_SESSION['last_name']) ?></strong></h4>
-                                <small class="ms-1 d-none d-sm-block"><?php echo ucfirst($_SESSION['department']) .' | '.  ucfirst($_SESSION['position'])?></small>
+                                <h4 class="mb-0"><strong class="ms-1 mt-1 d-none d-sm-block"><?php echo ucfirst($_SESSION['first_name']) . ' ' . ucfirst($_SESSION['last_name']) ?></strong></h4>
+                                <small class="ms-1 d-none d-sm-block"><?php echo ucfirst($_SESSION['department']) . ' | ' .  ucfirst($_SESSION['position']) ?></small>
                             </a>
                         </li>
                         <li class="side-item" onclick="switchTab('dashboard')">
@@ -437,6 +437,17 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                                 </div>
                             </div>
                         </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="card">
+                            <img class="card-img-top" src="holder.js/100x180/" alt="">
+                            <div class="card-body">
+                                <h4 class="card-title">Maintenance Performance</h4>
+                                <canvas id="Maintenance_PChart" width="100" height="50"></canvas>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -861,5 +872,6 @@ if ($_SESSION['user_type'] == 'Super Admin') {
 <script src="../bootstrap/bootstrap-select/dist/js/bootstrap-select.js"></script>
 <script src="../custom/chart.min.js"></script>
 <script src="../custom/chart.js"></script>
+
 
 </html>
