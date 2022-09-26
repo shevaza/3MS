@@ -152,14 +152,16 @@ $.ajax({
                 }]
             },
             options: {
+                responsive: true,
                 scales: {
-                    y: [{
+                    y: {
+                        display: true,
                         title: {
                             display: true,
-                            text: 'Success %'
-                        },
-                        beginAtZero: true
-                    }]
+                            text: 'Success Rate %',
+                            color: 'red',
+                        }
+                    }
                 }
             }
         });
