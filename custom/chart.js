@@ -130,7 +130,7 @@ $.ajax({
             data: {
                 labels: names,
                 datasets: [{
-                    label: 'Task Success Rate',
+                    label: 'Task Success Rate %',
                     data: rates,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
@@ -153,15 +153,16 @@ $.ajax({
             },
             options: {
                 scales: {
-                    y: {
+                    y: [{
+                        title: {
+                            display: true,
+                            text: 'Success %'
+                        },
                         beginAtZero: true
-                    }
+                    }]
                 }
             }
         });
-
-
-
 
     }
 });

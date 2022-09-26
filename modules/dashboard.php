@@ -440,7 +440,7 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col col-md-6">
                         <div class="card">
                             <img class="card-img-top" src="holder.js/100x180/" alt="">
                             <div class="card-body">
