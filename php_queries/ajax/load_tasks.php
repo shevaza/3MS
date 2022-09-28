@@ -38,13 +38,22 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
             ';
         $get_user = mysqli_query($mysqli, "SELECT `username` FROM `users` WHERE `id` = '$res[created_by]'");
         $get_user = mysqli_fetch_assoc($get_user);
-        $open .= '
+        $open .= '          
             <span class="badge badge-danger">' . $get_user['username'] . '</span>';
         $open .= '
             </small>
             </div>
         </div>
-        <div class="row">
+        <div class="row">';
+if ($res['due_date'] < date("Y-m-d")) {
+    $open.= '
+    <div class="col">
+    <h3><span class="badge badge-danger">Overdue!</span></h3>
+    </div>
+    ';
+}
+
+$open.='
         <div class="col text-end">
         <small class="w-100 text-end"><strong>Due Date: </strong>' . $res['due_date'] . '</small>
         </div>
