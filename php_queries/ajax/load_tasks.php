@@ -38,7 +38,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
             ';
         $get_user = mysqli_query($mysqli, "SELECT `username` FROM `users` WHERE `id` = '$res[created_by]'");
         $get_user = mysqli_fetch_assoc($get_user);
-        $open .= '          
+        $open .= '
             <span class="badge badge-danger">' . $get_user['username'] . '</span>';
         $open .= '
             </small>

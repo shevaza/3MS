@@ -9,6 +9,9 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
 
         $get_user = mysqli_query($mysqli, "SELECT `username` FROM `users` WHERE `id` = '$res[user_id]' ");
         $res2 = mysqli_fetch_array($get_user);
+        if ($res2 == null) {
+            $res2['username'] = 'NA';
+        }
 
         $r .= '
         <tr>
