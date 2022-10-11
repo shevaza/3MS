@@ -45,15 +45,15 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
             </div>
         </div>
         <div class="row">';
-if ($res['due_date'] < date("Y-m-d")) {
-    $open.= '
+        if ($res['due_date'] < date("Y-m-d")) {
+            $open .= '
     <div class="col">
     <h3><span class="badge badge-danger">Overdue!</span></h3>
     </div>
     ';
-}
+        }
 
-$open.='
+        $open .= '
         <div class="col text-end">
         <small class="w-100 text-end"><strong>Due Date: </strong>' . $res['due_date'] . '</small>
         </div>
@@ -79,7 +79,7 @@ $open.='
 
 
         $open .=
-        '<div class="modal fade" id="edit_' . $res['id'] . '" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            '<div class="modal fade" id="edit_' . $res['id'] . '" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header bg-danger text-light">
@@ -98,7 +98,7 @@ $open.='
                 <div class="row">
                     <div class="col">
                         <form class="form-inline" method="POST" autocomplete="off">
-                            <input type="hidden" name="edit_id" id="edit_id">
+                            <input type="hidden" name="edit_id" id="edit_id" value="'.$res['id'].'">
                             <div class="form-group">
                                 <label for="">Title *</label>
                                 <input type="text" name="edit_title" value="' . $res['title'] . '" id="edit_title" class="form-control" placeholder="" aria-describedby="helpId" required>
@@ -122,7 +122,9 @@ $open.='
                                 <label for="">Due Date *</label>
                                 <input type="date" class="form-control" name="edit_date" id="edit_date" value="' . $res['due_date'] . '" required>
                             </div>
-
+                            <div class="form-group row mt-4 m-1">
+                            <button type="submit" name="edit" class="btn btn-danger"><i class="fas fa-pen"></i> Edit</button>
+                            </div>
 
                     </div>
 
@@ -162,7 +164,6 @@ $open.='
                 </div>
                     <div class="col text-end">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" name="edit" class="btn btn-danger"><i class="fas fa-pen"></i> Edit</button>
                     </div>
                 </div>
                 <div class="row mt-4">
@@ -216,7 +217,7 @@ $open.='
         $arr = '';
 
         $ip .= '
-        <div class="card my-3 taskcard" draggable="true" role="button" data-bs-toggle="modal" data-bs-target="#edit_' . $res['id'] .'">
+        <div class="card my-3 taskcard" draggable="true" role="button" data-bs-toggle="modal" data-bs-target="#edit_' . $res['id'] . '">
         <div class="card-body">
         <div class="row">
             <div class="col">
@@ -309,21 +310,21 @@ $open.='
 
                         <div class="col p-3 mb-2 border-2 border style="overflow-y:scrollable">
                         ';
-                        $select_comments = mysqli_query($mysqli, "SELECT *, users.username FROM `task_comments` INNER JOIN `users` ON task_comments.user_id = users.id WHERE `task_id` = '$res[id]' ");
-                        while ($c = mysqli_fetch_array($select_comments)) {
-                            $ip.= '
+        $select_comments = mysqli_query($mysqli, "SELECT *, users.username FROM `task_comments` INNER JOIN `users` ON task_comments.user_id = users.id WHERE `task_id` = '$res[id]' ");
+        while ($c = mysqli_fetch_array($select_comments)) {
+            $ip .= '
                             <div class="card my-2">
                             <div class="row p-1">
                             <div class="col">
-                            <strong>'.$c['username'].': </strong>
-                            '.$c['comment'].'
+                            <strong>' . $c['username'] . ': </strong>
+                            ' . $c['comment'] . '
                             </div>
-                            <div class="col-auto"><small>'.$c['comment_date'].'</small></div>
+                            <div class="col-auto"><small>' . $c['comment_date'] . '</small></div>
                             </div>
                             </div>
                             ';
-                        }
-                        $ip .= '
+        }
+        $ip .= '
                         </div>
                         </div>
                         <div class="row justify-content-end">
@@ -450,7 +451,7 @@ $open.='
 
 
         $closed .=
-        '
+            '
          <div class="modal fade" id="edit_' . $res['id'] . '" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">

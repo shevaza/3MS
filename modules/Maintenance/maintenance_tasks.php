@@ -384,9 +384,9 @@ if (isset($_POST['save'])) {
 }
 
 if (isset($_POST['edit'])) {
+    $id = $_POST['edit_id'];
     $title = $_POST['edit_title'];
     $desc = $_POST['edit_desc'];
-    $user = $_POST['edit_user'];
     $due_date = $_POST['edit_date'];
     $edit = mysqli_query($mysqli, "UPDATE `tasks` SET `title` = '$title', `description` = '$desc', `due_date` = '$due_date' WHERE `id` = '$id'");
 }
