@@ -280,7 +280,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
                 <div class="row">
                 <div class="col">
                     <form class="form-inline" method="POST" autocomplete="off">
-                        <input type="hidden" name="edit_id" id="edit_id">
+                    <input type="hidden" name="edit_id" id="edit_id" value="' . $res['id'] . '">
                         <div class="form-group">
                             <label for="">Title *</label>
                             <input type="text" name="edit_title" value="' . $res['title'] . '" id="edit_title" class="form-control" placeholder="" aria-describedby="helpId" required>
@@ -304,7 +304,9 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
                             <label for="">Due Date *</label>
                             <input type="date" class="form-control" name="edit_date" id="edit_date" value="' . $res['due_date'] . '" required>
                         </div>
-
+  <div class="form-group row mt-4 m-1">
+                            <button type="submit" name="edit" class="btn btn-danger"><i class="fas fa-pen"></i> Edit</button>
+                            </div>
 
                         </div>
 
@@ -471,7 +473,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
                 <div class="row">
                     <div class="col">
                         <form class="form-inline" method="POST" autocomplete="off">
-                            <input type="hidden" name="edit_id" id="edit_id">
+                        <input type="hidden" name="edit_id" id="edit_id" value="' . $res['id'] . '">
+
                             <div class="form-group">
                                 <label for="">Title *</label>
                                 <input type="text" name="edit_title" value="' . $res['title'] . '" id="edit_title" class="form-control" placeholder="" aria-describedby="helpId" required>
@@ -495,7 +498,9 @@ if (isset($_POST['action']) && $_POST['action'] == 'get') {
                                 <label for="">Due Date *</label>
                                 <input type="date" class="form-control" name="edit_date" id="edit_date" value="' . $res['due_date'] . '" required>
                             </div>
-
+  <div class="form-group row mt-4 m-1">
+                            <button type="submit" name="edit" class="btn btn-danger"><i class="fas fa-pen"></i> Edit</button>
+                            </div>
 
                     </div>
 
