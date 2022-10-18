@@ -49,7 +49,7 @@
 
                           <div class="form-group mt-3">
                         <label for="">Diagnosis</label>
-                        <input type="text" name="diagnosis" id="diagnosis" class="form-control"  aria-describedby="helpId">
+                        <input type="text" name="diagnosis" id="diagnosis" class="form-control"  aria-describedby="helpId" required>
                         </div>
 
                         <div class="row">
