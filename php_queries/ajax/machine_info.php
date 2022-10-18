@@ -1,7 +1,7 @@
 <?php
 include '../../config.php';
 if (isset($_POST['action']) && $_POST['action'] == 'get') {
-    $machine_log = mysqli_query($mysqli, "SELECT * FROM `machine_status` WHERE `machine_id` = '$_POST[id]' ");
+    $machine_log = mysqli_query($mysqli, "SELECT * FROM `machine_status` WHERE `machine_id` = '$_POST[id]' ORDER BY `id` DESC LIMIT 10");
     $r = '';
     while ($res = mysqli_fetch_assoc($machine_log)) {
         $get_id = mysqli_query($mysqli, "SELECT `number` FROM `machines` WHERE `id` = '$res[machine_id]'");

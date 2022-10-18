@@ -169,7 +169,7 @@ if (empty($_SESSION['user_id'])) {
                         <div class="form-group">
                             <label for="">Machine Oil Level</label>
                             <input type="number" class="form-control" min="0" id="oil" name="oil" required aria-describedby="helpId" placeholder="">
-                            <small id="helpId" class="form-text text-muted">L</small>
+                            <small id="helpId" class="form-text text-muted">cm</small>
                         </div>
                     </div>
                     <div class="modal-footer">

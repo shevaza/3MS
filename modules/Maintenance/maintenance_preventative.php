@@ -99,11 +99,11 @@ include '../../config.php';
                                     <td>' . $res['start_time'] . '</td>
                                     <td>' . $res['end_time'] . '</td>
                                     <td>' . $res['repeat_hrs'] . '</td>
-                                    <td>' . $res['repeat_oil'] . ' L</td>
+                                    <td>' . $res['repeat_oil'] . ' cm</td>
                                     <td>' . $ass_user . '</td>
                                     <td>
                                     <div class="btn-group">
-                                    <a class="btn btn-info btn-sm text-light" href="#" role="button"><i class="fas fa-exclamation-circle"></i> </a>
+                                    <a class="btn btn-success btn-sm text-light" data-bs-toggle="modal" data-bs-target="#fill_' . $res['id'] . '"><i class="fas fa-plus"></i> </a>
                                     <a class="btn btn-primary btn-sm " href="#" role="button"><i class="fas fa-pen"></i> </a>
                                     <a class="btn btn-danger btn-sm " href="#" role="button"><i class="fas fa-trash-alt"></i> </a>
                                     </div>
@@ -135,6 +135,7 @@ include '../../config.php';
                                             <label for="">Machine</label>
                                             <select class="form-control selectpicker" required name="machine" id="" data-style="btn-outline-danger" data-live-search="true">
                                                 <option selected value="NULL">NA</option>
+                                                <option value="all">All</option>
                                                 <?php
                                                 $machines = mysqli_query($mysqli, "SELECT * FROM `machines`");
                                                 while ($a = mysqli_fetch_array($machines)) {
@@ -149,6 +150,7 @@ include '../../config.php';
                                             <label for="">Mould</label>
                                             <select class="form-control selectpicker" required name="mold" id="" data-style="btn-outline-danger" data-live-search="true">
                                                 <option selected value="NULL">NA</option>
+                                                <option value="all">All</option>
                                                 <?php
                                                 $machines = mysqli_query($mysqli, "SELECT * FROM `molds`");
                                                 while ($a = mysqli_fetch_array($machines)) {
@@ -168,21 +170,21 @@ include '../../config.php';
                                         <label for="" class="form-label">End Time</label>
                                         <input type="datetime-local" name="end" id="" required class="form-control" placeholder="" aria-describedby="helpId">
                                     </div>
-                                    <!-- <div class="col-auto">
-                                        <label for="" class="form-label">Repeat on Machine</label>
+                                    <div class="col-auto">
+                                        <label for="" class="form-label">Repeat on Time</label>
                                         <div class="input-group">
                                             <input type="number" name="repeat_hrs" required class="form-control" value="0" step=".05" min="0">
                                             <div class="input-group-append">
                                                 <span class="input-group-text" id="basic-addon2">Hrs</span>
                                             </div>
                                         </div>
-                                    </div> -->
+                                    </div>
                                     <div class="col-auto">
                                         <label for="" class="form-label">Repeat on Oil</label>
                                         <div class="input-group">
                                             <input type="number" name="repeat_oil" required class="form-control" value="0" step=".05" min="0">
                                             <div class="input-group-append">
-                                                <span class="input-group-text" id="basic-addon2">L</span>
+                                                <span class="input-group-text" id="basic-addon2">cm</span>
                                             </div>
                                         </div>
                                     </div>
@@ -228,48 +230,16 @@ include '../../config.php';
                 <div class="card">
                     <div class="card-header">
                         <h4><i class="fas fa-clock"></i> Upcoming Tasks</h4>
+                        <div class="input-group">
+                            <input type="number" class="form-control" value="72" min="0" name="get_hrs" id="get_hrs">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">Hrs</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
-                        <div class="list-group">
-                            <?php
-                            $select_main = mysqli_query($mysqli, "SELECT * FROM `maintenance_order` WHERE `type` LIKE 'preventative'");
-                            while ($m = mysqli_fetch_array($select_main)) {
-                                echo '
-                                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" data-bs-toggle="modal" data-bs-target="#fill_' . $m['id'] . '">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1">Machine ' . $m['machine_id'] . '</h5>
-                                        <small>Due in......</small>
-                                    </div>
-                                    <p class="mb-1">' . $m['description'] . '</p>
-                                    ';
-                                $mau = mysqli_query($mysqli, "SELECT `username` FROM `users` WHERE `id` = '$m[ass_user_id]'");
-                                while ($a = mysqli_fetch_array($mau)) {
-                                    echo '
-                                        <small>' . strtoupper($a['username']) . '</small>
-                                    ';
-                                }
-                                echo '
-                                </a>
+                        <div class="list-group" id="prev_list">
 
-
-
-                                 <div class="modal fade" id="fill_' . $m['id'] . '" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-xl">
-                    <div class="modal-content">
-                     <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLabel">Order #' . $m['id'] . '</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                     <div class="modal-body">
-                     
-                     </div>
-
-                    </div>
-                    </div>
-                    </div>
-                                ';
-                            }
-                            ?>
                         </div>
                     </div>
                 </div>
@@ -310,5 +280,45 @@ include '../../config.php';
 <?php
 include '../../js.php';
 ?>
+<script>
+    function getList() {
+        $.ajax({
+            type: "POST",
+            url: "../../php_queries/ajax/get_prev_list.php",
+            data: {
+                hrs: $('#get_hrs').val()
+            },
+            dataType: "HTML",
+            success: function(r) {
+                $('#prev_list').html(r);
+            }
+        });
+    }
+    $(document).ready(function() {
+        getList();
+    });
+
+    $('#get_hrs').keyup(function(e) {
+        if ($('#get_hrs').val() > 0) {
+            getList();
+        }
+    });
+</script>
 
 </html>
+
+
+<?php
+if (isset($_POST['done'])) {
+    $order_id = $_POST['order_id'];
+    $diagnosis = $_POST['diagnosis'];
+    $start = $_POST['start'];
+    $start = date("Y-m-d H:i:s", strtotime($start));
+    $end = $_POST['end'];
+    $end = date("Y-m-d H:i:s", strtotime($end));
+    $user_id = $_POST['user_id'];
+    $status = $_POST['status'];
+
+    $insert = mysqli_query($mysqli, "INSERT INTO `maintenance_log` (`order_id`, `diagnosis`, `start`, `end`, `user_id`, `status`) VALUES ('$order_id','$diagnosis','$start','$end','$user_id','$status')");
+}
+?>
