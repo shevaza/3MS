@@ -237,7 +237,7 @@ include '../../config.php';
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" style="max-height:600px; overflow-y: scroll;">
                         <div class="list-group" id="prev_list">
 
                         </div>
