@@ -23,6 +23,9 @@ if (isset($_POST['add'])) {
         $insert = mysqli_query($mysqli, "INSERT INTO `maintenance_log`
   (`order_id`, `diagnosis`, `start`, `end`, `error_id`, `user_id`, `status`)
   VALUES ('$last_id','$_POST[description]', '$_POST[start_date]','$end_date', NULLIF('$error',''),'$_POST[user_id]','$_POST[status]')");
+
+    header('Location: ../modules/maintenance/maintenance_corrective.php');
+
 }
 
 if (isset($_POST['edit'])) {
