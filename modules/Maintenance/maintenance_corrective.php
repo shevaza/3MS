@@ -72,13 +72,13 @@ include '../../config.php';
                                             <span class="input-group-text" id="basic-addon1">Machine #</span>
                                         </div>
                                         <select class="form-control selectpicker" data-style="btn-outline-primary" required data-live-search="true" name="machine" id="">
+                                            <option value="0" selected>NA</option>
                                             <?php
                                             $machines = mysqli_query($mysqli, "SELECT * FROM `machines`");
                                             while ($m = mysqli_fetch_array($machines)) {
                                                 echo '<option value="' . $m['id'] . '">' . $m['number'] . '</option>';
                                             }
                                             ?>
-                                            <option value="0">NA</option>
                                         </select>
                                     </div>
                                 </div>
@@ -88,13 +88,13 @@ include '../../config.php';
                                             <span class="input-group-text" id="basic-addon1">Mould</span>
                                         </div>
                                         <select class="form-control selectpicker" required data-style="btn-outline-primary" data-live-search="true" name="mold" id="">
+                                            <option value="0" selected>NA</option>
                                             <?php
                                             $machines = mysqli_query($mysqli, "SELECT * FROM `molds`");
                                             while ($m = mysqli_fetch_array($machines)) {
                                                 echo '<option value="' . $m['id'] . '">' . $m['name'] . '</option>';
                                             }
                                             ?>
-                                            <option value="0">NA</option>
                                         </select>
                                     </div>
                                 </div>
@@ -114,6 +114,7 @@ include '../../config.php';
                                             <span class="input-group-text" id="basic-addon1">Error</span>
                                         </div>
                                         <select class="form-control selectpicker" data-style="btn-outline-danger" data-live-search="true" name="error" id="">
+                                            <option value="0" selected>NA</option>
                                             <?php
                                             $errors_q = mysqli_query($mysqli, "SELECT * FROM `errors`");
                                             while ($e = mysqli_fetch_array($errors_q)) {
@@ -170,7 +171,7 @@ include '../../config.php';
                             </div>
                             <div class="row mt-2">
                                 <div class="col text-end">
-                                    <input name="" id="" class="btn btn-danger" type="submit" value="Submit">
+                                    <input name="add" id="" class="btn btn-danger" type="submit" value="Submit">
                                 </div>
                             </div>
                         </form>
@@ -193,16 +194,23 @@ include '../../config.php';
                             <?php
                             $logs = mysqli_query($mysqli, "SELECT * 
                             FROM `maintenance_log` JOIN `maintenance_order` ON `maintenance_log`.order_id = `maintenance_order`.id
-                            WHERE `maintenance_order`.type LIKE 'corrective'");
+                            WHERE `maintenance_order`.type LIKE 'corrective' ORDER BY maintenance_log.id DESC LIMIT 6");
                             while ($res = mysqli_fetch_array($logs)) {
                                 echo '
                                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">' . $res['machine_id'] . ' | ' . $res['mold_id'] . '</h5>
+                                    <h5 class="mb-1">Machine: ' . $res['machine_id'] . ' | Mould: ' . $res['mold_id'] . '</h5>
                                     <small>' . $res['end_time'] . '</small>
                                 </div>
-                                <p class="mb-1">' . $res['diagnostic'] . '</p>
+                                <p class="mb-1">' . $res['description'] . '</p>
+                                <div class="row">
+                                <div class="col">
                                 <small>' . $res['user_id'] . '</small>
+                                </div>
+                                <div class="col text-end">
+                                <small>Status: ' . $res['status'] . '</small>
+                                </div>
+                                </div>
                             </a>
                                 ';
                             }
