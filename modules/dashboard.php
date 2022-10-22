@@ -415,6 +415,23 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                         </a>
                     </div>
                     <div class="col col-12 col-md-12 col-lg-4 col-xl-4 mb-3">
+                        <a class="text-dark" href="maintenance/maintenance_log.php">
+                            <div class="card db-item">
+                                <div class="card-body">
+                                    <div class="row justify-content-center">
+                                        <div class="col-auto text-end">
+                                            <i class="fa-solid fa-book" style="font-size: 5rem;"></i>
+                                        </div>
+                                        <div class="col">
+                                            <h4 class="card-title">Maintenance Log</h4>
+                                            <p class="card-text">All maintenance tasks.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col col-12 col-md-12 col-lg-4 col-xl-4 mb-3">
                         <a class="text-dark" href="maintenance/machine_data.php">
                             <div class="card db-item">
                                 <div class="card-body">

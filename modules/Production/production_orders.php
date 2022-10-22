@@ -48,11 +48,11 @@ include '../../config.php';
                     </div>
                     <div class="card">
                         <div class="row">
-                            <div class="col text-end">
-                                <a class="btn btn-outline-primary m-0 w-100 btn-sm " onclick="Switch('po')" href="#" role="button">Show PO's</a>
-                            </div>
-                            <div class="col text-start">
-                                <a class="btn btn-outline-primary m-0 w-100 btn-sm " onclick="Switch('comp')" href="#" role="button">Show Components</a>
+                            <div class="col">
+                                <div class="btn-group w-100">                                    
+                                    <a class="btn btn-outline-primary" onclick="Switch('po')" href="#" role="button">Show PO's</a>
+                                    <a class="btn btn-outline-primary" onclick="Switch('comp')" href="#" role="button">Show Components</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -62,8 +62,8 @@ include '../../config.php';
                         $select_prs = mysqli_query($mysqli, "SELECT * FROM `production_request` WHERE `status` != 'DONE'");
                         while ($pr = mysqli_fetch_array($select_prs)) {
                             echo '
-                        <div class="card p-4 mb-2">
-                        <div class="card-title">
+                        <div class="card mb-2">
+                        <div class="card-title p-3">
                         <div class="row">
                         <div class="col">
                         <h4>
@@ -92,7 +92,8 @@ include '../../config.php';
 
 
 
-                                echo '    
+                                echo '
+                                <div class="card-body">
                             <div class="row border-top border-4 my-4">
                             <div class="col">
                             Item ID
@@ -145,6 +146,7 @@ include '../../config.php';
                                 }
                             }
                             echo '
+                                </div>
                         
                         
                         <div class="card-footer text-end">

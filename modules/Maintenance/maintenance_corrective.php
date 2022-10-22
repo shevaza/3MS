@@ -196,16 +196,27 @@ include '../../config.php';
                             FROM `maintenance_log` JOIN `maintenance_order` ON `maintenance_log`.order_id = `maintenance_order`.id
                             WHERE `maintenance_order`.type LIKE 'corrective' ORDER BY maintenance_log.id DESC LIMIT 6");
                             while ($res = mysqli_fetch_array($logs)) {
+                                $mould = mysqli_query($mysqli, "SELECT `name` FROM `molds` WHERE `id` = '$res[mold_id]' LIMIT 1");
+                                $m = 'NA';
+                                while ($mold = mysqli_fetch_array($mould)) {
+                                    $m = $mold['name'];
+                                }
                                 echo '
                                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Machine: ' . $res['machine_id'] . ' | Mould: ' . $res['mold_id'] . '</h5>
+                                    <h5 class="mb-1">Machine: ' . $res['machine_id'] . ' | Mould: ' . $m . '</h5>
                                     <small>' . $res['end_time'] . '</small>
                                 </div>
-                                <p class="mb-1">' . $res['description'] . '</p>
+                                <p class="mb-1">' . $res['description'] . '</p>          
                                 <div class="row">
                                 <div class="col">
-                                <small>' . $res['user_id'] . '</small>
+                                ';
+                                $user = mysqli_query($mysqli, "SELECT `username` FROM `users` Where `id` = '$res[user_id]'");
+                                while ($u = mysqli_fetch_array($user)) {
+                                    $us = $u['username'];
+                                }
+                                echo'
+                                <small>' . $us . '</small>
                                 </div>
                                 <div class="col text-end">
                                 <small>Status: ' . $res['status'] . '</small>
