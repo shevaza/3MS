@@ -9,6 +9,7 @@ include '../../config.php';
     maintenance_order.mold_id,
     maintenance_order.start_time,
     maintenance_order.end_time,
+    maintenance_log.diagnosis,
     maintenance_log.user_id,
     maintenance_log.status
     FROM `maintenance_order` INNER JOIN `maintenance_log`

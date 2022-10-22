@@ -66,6 +66,7 @@ include '../../config.php';
                                     <th>Mould</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
+                                    <th>Diagnosis</th>
                                     <th>User</th>
                                     <th>Status</th>
                                 </tr>
@@ -156,6 +157,9 @@ include '../../js.php';
                 },
                 {
                     "data": "end_time"
+                },
+                {
+                    "data": "diagnosis"
                 },
                 {
                     "data": "user_id"
