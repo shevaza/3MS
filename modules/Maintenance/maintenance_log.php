@@ -150,7 +150,7 @@ include '../../js.php';
                     "data": "machine_id"
                 },
                 {
-                    "data": "mold_id"
+                    "data": "name"
                 },
                 {
                     "data": "start_time"
@@ -162,7 +162,7 @@ include '../../js.php';
                     "data": "diagnosis"
                 },
                 {
-                    "data": "user_id"
+                    "data": "username"
                 },
                 {
                     "data": "status"
