@@ -299,6 +299,28 @@ if ($_SESSION['user_type'] == 'Super Admin') {
             <!-- PRODUCTION -->
             <div id="production" class="col-10 py-3 model">
                 <div class="row mb-2">
+                    <div class="col col-12 col-md-12 col-lg-6 col-xl-6 mb-3">
+                        <a class="text-dark" href="production/machine_log.php">
+                            <div class="card db-item">
+                                <div class="card-body">
+                                    <h2 class="card-title"><i class="fas fa-list-alt"></i> Machine Logs</h2>
+                                    <p class="card-text">Machine Datasheets</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col col-12 col-md-12 col-lg-6 col-xl-6 mb-3">
+                        <a class="text-dark" href="production/machine_weekly_report.php">
+                            <div class="card db-item">
+                                <div class="card-body">
+                                    <h2 class="card-title"><i class="fas fa-file-alt"></i> Weekly Report</h2>
+                                    <p class="card-text">Machine Weekly Summary</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="row mb-2">
                     <div class="col col-12 col-md-12 col-lg-3 col-xl-3 mb-3">
                         <a class="text-dark" href="production/production_orders.php">
                             <div class="card db-item">

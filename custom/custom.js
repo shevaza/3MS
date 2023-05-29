@@ -26,3 +26,9 @@ $('#close').click(function() {
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
 }
+
+var myModal = new bootstrap.Modal(document.getElementById('myModal'));
+$('.actionbtn').click(function(e) {
+    e.preventDefault();
+    myModal.show();
+});
