@@ -8,6 +8,13 @@ include '../../config.php';
     <meta charset='utf-8' />
     <?php
     include '../../css.php';
+    if (isset($_GET['from'])) {
+        $from = $_GET['from'];
+        $to = $_GET['to'];
+    } else {
+        $from = '';
+        $to = date('Y-m-d');
+    }
     ?>
 </head>
 
@@ -167,7 +174,19 @@ include '../../config.php';
 
 
 
-
+        <div class="row mb-3">
+            <div class="col text-end">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="btn-group" role="group" aria-label="Button group name">
+                            <a type="button" class="btn btn-danger" href="?from=today&to=today">Today</a>
+                            <a type="button" class="btn btn-danger" href="?from=week&to=today">Week</a>
+                            <a type="button" class="btn btn-danger" href="?from=month&to=today">Month</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col">
                 <div class="card">
@@ -197,7 +216,7 @@ include '../../config.php';
                             </thead>
                             <tbody>
                                 <?php
-                                $select = mysqli_query($mysqli, "SELECT * FROM `machine_log` ORDER BY `id` DESC");
+                                $select = mysqli_query($mysqli, "SELECT * FROM `machine_log` WHERE `date` >= '$from' AND `date` <= '$to' ORDER BY `id` DESC");
                                 while ($res = mysqli_fetch_array($select)) {
                                     echo '<tr>';
                                     echo '<td>' . $res['id'] . '</td>';
@@ -220,7 +239,7 @@ include '../../config.php';
                                      <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_' . $res['id'] . '">Edit</a>
                                      <a class="btn btn-danger btn-sm" role="button">Delete</a>
                                      </div></td>';
-                                     echo '</tr>';
+                                    echo '</tr>';
                                     echo '
                                 <div class="modal fade" id="modal_' . $res['id'] . '" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
