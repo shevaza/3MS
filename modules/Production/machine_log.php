@@ -173,11 +173,12 @@ include '../../config.php';
                 <div class="card">
                     <img class="card-img-top" src="holder.js/100x180/" alt="">
                     <div class="card-body">
-                        <table class="table w-100 table-striped">
+                        <table class="table w-100 table-striped table-bordered">
                             <thead>
                                 <tr>
                                     <th>ID</th>
                                     <th>Machine</th>
+                                    <th>Shift</th>
                                     <th>Qty Left</th>
                                     <th>Cycle Time</th>
                                     <th>Item Weight</th>
@@ -190,6 +191,7 @@ include '../../config.php';
                                     <th>Stoppage Time End</th>
                                     <th>Notes</th>
                                     <th>Date Added</th>
+                                    <th>Actions</th>
 
                                 </tr>
                             </thead>
@@ -197,8 +199,10 @@ include '../../config.php';
                                 <?php
                                 $select = mysqli_query($mysqli, "SELECT * FROM `machine_log` ORDER BY `id` DESC");
                                 while ($res = mysqli_fetch_array($select)) {
+                                    echo '<tr>';
                                     echo '<td>' . $res['id'] . '</td>';
                                     echo '<td>' . $res['machine_id'] . '</td>';
+                                    echo '<td>' . $res['shift'] . '</td>';
                                     echo '<td>' . $res['qty_left'] . '</td>';
                                     echo '<td>' . $res['cycle_time'] . '</td>';
                                     echo '<td>' . $res['item_weight'] . '</td>';
@@ -211,6 +215,33 @@ include '../../config.php';
                                     echo '<td>' . $res['stoppage_time_end'] . '</td>';
                                     echo '<td>' . $res['notes'] . '</td>';
                                     echo '<td>' . $res['date'] . '</td>';
+                                    echo '<td>
+                                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                     <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_' . $res['id'] . '">Edit</a>
+                                     <a class="btn btn-danger btn-sm" role="button">Delete</a>
+                                     </div></td>';
+                                     echo '</tr>';
+                                    echo '
+                                <div class="modal fade" id="modal_' . $res['id'] . '" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Entry ' . $res['id'] . '</h5>
+                                                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                            </div>
+                                            <div class="modal-body">
+                                            
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary">Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                     ';
                                 }
                                 ?>
                             </tbody>

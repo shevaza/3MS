@@ -313,8 +313,8 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                         <a class="text-dark" href="production/machine_weekly_report.php">
                             <div class="card db-item">
                                 <div class="card-body">
-                                    <h2 class="card-title"><i class="fas fa-file-alt"></i> Weekly Report</h2>
-                                    <p class="card-text">Machine Weekly Summary</p>
+                                    <h2 class="card-title"><i class="fas fa-file-alt"></i> Machine Report</h2>
+                                    <p class="card-text">Machine Summary</p>
                                 </div>
                             </div>
                         </a>

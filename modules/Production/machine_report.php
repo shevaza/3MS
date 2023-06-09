@@ -18,7 +18,7 @@ include '../../config.php';
                 <a name="" id="" class="btn btn-sm btn-dark me-4" href="../" role="button"><i class="fas fa-arrow-left    "></i></a>
                 <img class="me-2" src="../../res/img/logo.png" alt="" width="60">
                 <a class="navbar-brand" href="#">
-                    Machine Weekly Report
+                    Machine Report
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarID" aria-controls="navbarID" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
