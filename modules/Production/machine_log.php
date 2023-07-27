@@ -6,15 +6,13 @@ include '../../config.php';
 
 <head>
     <meta charset='utf-8' />
+    <style>
+        .calc {
+            background-color: #aaffaa !important;
+        }
+    </style>
     <?php
     include '../../css.php';
-    if (isset($_GET['from'])) {
-        $from = $_GET['from'];
-        $to = $_GET['to'];
-    } else {
-        $from = '';
-        $to = date('Y-m-d');
-    }
     ?>
 </head>
 
@@ -87,13 +85,13 @@ include '../../config.php';
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="">Quantity Left</label>
-                                        <input type="number" min="0" class="form-control" name="qty_left" id="qty_left" aria-describedby="helpId" placeholder="Quantity Left" required>
+                                        <input type="number" step="0.5" min="0" class="form-control" name="qty_left" id="qty_left" aria-describedby="helpId" placeholder="Quantity Left" required>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="">Cycle Time</label>
-                                        <input type="number" min="0" class="form-control" name="cycle_time" id="cycle_time" aria-describedby="helpId" placeholder="Cycle Time" required>
+                                        <input type="number" step="0.5" min="0" class="form-control" name="cycle_time" id="cycle_time" aria-describedby="helpId" placeholder="Cycle Time" required>
                                     </div>
                                 </div>
                             </div>
@@ -101,13 +99,13 @@ include '../../config.php';
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="">Item Weight</label>
-                                        <input type="number" min="0" class="form-control" name="item_weight" id="item_weight" aria-describedby="helpId" placeholder="Item Weight" required>
+                                        <input type="number" step="0.5" min="0" class="form-control" name="item_weight" id="item_weight" aria-describedby="helpId" placeholder="Item Weight" required>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="">Produced Quantity</label>
-                                        <input type="number" min="0" class="form-control" name="prod_qty" id="prod_qty" aria-describedby="helpId" placeholder="Produced Quantity" required>
+                                        <input type="number" step="0.5" min="0" class="form-control" name="prod_qty" id="prod_qty" aria-describedby="helpId" placeholder="Produced Quantity" required>
                                     </div>
                                 </div>
                             </div>
@@ -115,13 +113,13 @@ include '../../config.php';
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="">Color Change Qty</label>
-                                        <input type="number" min="0" class="form-control" name="color_change_qty" id="color_change_qty" aria-describedby="helpId" placeholder="Color Change Qty" required>
+                                        <input type="number" step="0.5" min="0" class="form-control" name="color_change_qty" id="color_change_qty" aria-describedby="helpId" placeholder="Color Change Qty" required>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="">Damaged Qty</label>
-                                        <input type="number" min="0" class="form-control" name="damaged_qty" id="damaged_qty" aria-describedby="helpId" placeholder="Damaged Quantity" required>
+                                        <input type="number" step="0.5" min="0" class="form-control" name="damaged_qty" id="damaged_qty" aria-describedby="helpId" placeholder="Damaged Quantity" required>
                                     </div>
                                 </div>
                             </div>
@@ -129,13 +127,13 @@ include '../../config.php';
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="">Carrot Weight</label>
-                                        <input type="number" min="0" class="form-control" name="carrot_weight" id="carrot_weight" aria-describedby="helpId" placeholder="Carrot Weight" required>
+                                        <input type="number" step="0.5" min="0" class="form-control" name="carrot_weight" id="carrot_weight" aria-describedby="helpId" placeholder="Carrot Weight" required>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="">Number of Cavities</label>
-                                        <input type="number" min="0" class="form-control" name="cavities" id="cavities" aria-describedby="helpId" placeholder="Cavities" required>
+                                        <input type="number" step="0.5" min="0" class="form-control" name="cavities" id="cavities" aria-describedby="helpId" placeholder="Cavities" required>
                                     </div>
                                 </div>
                             </div>
@@ -175,72 +173,145 @@ include '../../config.php';
 
 
         <div class="row mb-3">
-            <div class="col text-end">
+            <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <div class="btn-group" role="group" aria-label="Button group name">
-                            <a type="button" class="btn btn-danger" href="?from=today&to=today">Today</a>
-                            <a type="button" class="btn btn-danger" href="?from=week&to=today">Week</a>
-                            <a type="button" class="btn btn-danger" href="?from=month&to=today">Month</a>
-                        </div>
+                        <form action="" method="get">
+                            <div class="row">
+                                <div class="col">
+                                    <input type="date" name="from" id="" class="form-control" value="" aria-describedby="helpId">
+                                </div>
+                                <div class="col">
+                                    <input type="date" name="to" id="" class="form-control" value="" aria-describedby="helpId">
+                                </div>
+                                <div class="col col-auto">
+                                    <div class="btn-group" role="group" aria-label="Button group name">
+                                        <button type="submit" class="btn btn-danger" name="from" value="today">Today</button>
+                                        <button type="submit" class="btn btn-danger" name="from" value="week">Week</button>
+                                        <button type="submit" class="btn btn-danger" name="from" value="month">Month</button>
+                                    </div>
+                                </div>
+                                <div class="col col-auto">
+                                    <div class="btn-group" role="group" aria-label="Button group name">
+                                        <input type="checkbox" class="btn-check" id="morning" autocomplete="off" name="morning" value="true">
+                                        <label class="btn btn-outline-danger" for="morning">Morning</label>
+                                        <input type="checkbox" class="btn-check" id="evening" autocomplete="off" name="evening" value="true">
+                                        <label class="btn btn-outline-danger" for="evening">Evening</label>
+                                        <input type="checkbox" class="btn-check" id="night" autocomplete="off" name="night" value="true">
+                                        <label class="btn btn-outline-danger" for="night">Night</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="d-grid gap-2">
+                                        <button type="submit" class="btn btn-danger">Filter</button>
+                                    </div>
+                                </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <div class="card">
-                    <img class="card-img-top" src="holder.js/100x180/" alt="">
-                    <div class="card-body">
-                        <table class="table w-100 table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Machine</th>
-                                    <th>Shift</th>
-                                    <th>Qty Left</th>
-                                    <th>Cycle Time</th>
-                                    <th>Item Weight</th>
-                                    <th>Produced Qty</th>
-                                    <th>Color Change Qty</th>
-                                    <th>Damaged Qty</th>
-                                    <th>Carrot Weight</th>
-                                    <th>Cavities</th>
-                                    <th>Stoppage Time Start</th>
-                                    <th>Stoppage Time End</th>
-                                    <th>Notes</th>
-                                    <th>Date Added</th>
-                                    <th>Actions</th>
+    </div>
+    <div class="row">
+        <div class="col col-10">
+            <div class="card">
+                <div class="card-header">
+                    <h4>
+                        Log Time: <?php
+                                    $m = '';
+                                    $e = '';
+                                    $n = '';
+                                    if (isset($_GET['from'])) {
+                                        $from = $_GET['from'];
+                                        $to = $_GET['to'];
+                                        if ($from == 'today') {
+                                            $from = $to = date('Y-m-d');
+                                        } elseif ($from == 'week') {
+                                            $from = date('Y-m-d', strtotime(' - 3 days'));
+                                            $to = date('Y-m-d');
+                                        } elseif ($from == 'month') {
+                                            $from = date('Y-m-d', strtotime(' - 1 months'));
+                                            $to = date('Y-m-d');
+                                        }
+                                        if (isset($_GET['morning'])) {
+                                            $m = 'Morning';
+                                        }
+                                        if (isset($_GET['evening'])) {
+                                            $e = 'Evening';
+                                        }
+                                        if (isset($_GET['night'])) {
+                                            $n = 'Night';
+                                        }
+                                    } else {
+                                        $from = date('Y-m-d');
+                                        $to = date('Y-m-d');
+                                    }
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $select = mysqli_query($mysqli, "SELECT * FROM `machine_log` WHERE `date` >= '$from' AND `date` <= '$to' ORDER BY `id` DESC");
-                                while ($res = mysqli_fetch_array($select)) {
-                                    echo '<tr>';
-                                    echo '<td>' . $res['id'] . '</td>';
-                                    echo '<td>' . $res['machine_id'] . '</td>';
-                                    echo '<td>' . $res['shift'] . '</td>';
-                                    echo '<td>' . $res['qty_left'] . '</td>';
-                                    echo '<td>' . $res['cycle_time'] . '</td>';
-                                    echo '<td>' . $res['item_weight'] . '</td>';
-                                    echo '<td>' . $res['prod_qty'] . '</td>';
-                                    echo '<td>' . $res['color_change_qty'] . '</td>';
-                                    echo '<td>' . $res['damaged_qty'] . '</td>';
-                                    echo '<td>' . $res['carrot_weight'] . '</td>';
-                                    echo '<td>' . $res['cavities'] . '</td>';
-                                    echo '<td>' . $res['stoppage_time_start'] . '</td>';
-                                    echo '<td>' . $res['stoppage_time_end'] . '</td>';
-                                    echo '<td>' . $res['notes'] . '</td>';
-                                    echo '<td>' . $res['date'] . '</td>';
-                                    echo '<td>
+                                    echo $from . ' - ' . $to ?>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <table id="main-table" class="table w-100 table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Machine</th>
+                                <th>Shift</th>
+                                <th>Qty Left</th>
+                                <th>Cycle Time</th>
+                                <th>Item Weight</th>
+                                <th>Produced Qty</th>
+                                <th>Color Change Qty</th>
+                                <th>Damaged Qty</th>
+                                <th>Carrot Weight</th>
+                                <th>Cavities</th>
+                                <th>Stoppage Time Start</th>
+                                <th>Stoppage Time End</th>
+                                <th>Time left for shift</th>
+                                <th>Total Weight</th>
+                                <th>Total Waste Qty</th>
+                                <th>Total Damaged Qty</th>
+                                <th>Productive Time</th>
+                                <th>% Defective</th>
+                                <th>Notes</th>
+                                <th>Date Added</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $select = mysqli_query($mysqli, "SELECT * FROM `machine_log` WHERE DATE(`date`) >= '$from' AND DATE(`date`) <= '$to'
+                            AND (`shift` LIKE '$m' OR `shift` LIKE '$e' OR `shift` LIKE '$n') ORDER BY `id` DESC");
+                            while ($res = mysqli_fetch_array($select)) {
+                                echo '<tr>';
+                                echo '<td>' . $res['id'] . '</td>';
+                                echo '<th>' . $res['machine_id'] . '</th>';
+                                echo '<td>' . $res['shift'] . '</td>';
+                                echo '<td>' . $res['qty_left'] . '</td>';
+                                echo '<td>' . $res['cycle_time'] . '</td>';
+                                echo '<td>' . $res['item_weight'] . '</td>';
+                                echo '<td>' . $res['prod_qty'] . '</td>';
+                                echo '<td>' . $res['color_change_qty'] . '</td>';
+                                echo '<td>' . $res['damaged_qty'] . '</td>';
+                                echo '<td>' . $res['carrot_weight'] . '</td>';
+                                echo '<td>' . $res['cavities'] . '</td>';
+                                echo '<td>' . $res['stoppage_time_start'] . '</td>';
+                                echo '<td>' . $res['stoppage_time_end'] . '</td>';
+                                echo '<td class="calc">' . number_format((($res['qty_left'] / $res['cavities']) * $res['cycle_time']) / 3600, 2) . '</td>';
+                                echo '<td class="calc">' . number_format(($res['prod_qty'] * $res['item_weight']) / 1000, 2) . '</td>';
+                                echo '<td class="calc">' . number_format(($res['carrot_weight'] * $res['damaged_qty']) + ($res['carrot_weight'] * $res['color_change_qty']) + ($res['carrot_weight'] * $res['prod_qty']), 2) . '</td>';
+                                echo '<td class="calc">' . number_format((($res['color_change_qty'] * $res['item_weight']) + ($res['damaged_qty'] * $res['item_weight']) + ($res['carrot_weight'] * $res['damaged_qty']) + ($res['carrot_weight'] * $res['color_change_qty']) + ($res['carrot_weight'] * $res['prod_qty'])) / 1000, 2) . '</td>';
+                                echo '<td class="calc">' . number_format(($res['prod_qty'] + $res['color_change_qty'] + $res['damaged_qty']) / $res['cavities'] * $res['cycle_time'] / 3600, 2) . '</td>';
+                                echo '<td class="calc">' . number_format(($res['color_change_qty'] + $res['damaged_qty']) / ($res['color_change_qty'] + $res['damaged_qty'] + $res['prod_qty']) * 100, 2)  . '</td>';
+                                echo '<td>' . $res['notes'] . '</td>';
+                                echo '<td>' . $res['date'] . '</td>';
+                                echo '<td>
                                      <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                                      <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_' . $res['id'] . '">Edit</a>
                                      <a class="btn btn-danger btn-sm" role="button">Delete</a>
                                      </div></td>';
-                                    echo '</tr>';
-                                    echo '
+                                echo '</tr>';
+                                echo '
                                 <div class="modal fade" id="modal_' . $res['id'] . '" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -261,14 +332,54 @@ include '../../config.php';
                                     </div>
                                 </div>
                                      ';
-                                }
-                                ?>
-                            </tbody>
-                        </table>
-                    </div>
+                            }
+                            ?>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="14" style="text-align:right; padding-right:10px">Totals:</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
             </div>
         </div>
+        <div class="col col-2">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Machine Productivity</h4>
+                    <?php
+                    $select = mysqli_query($mysqli, "SELECT `machine_id`,SUM((`prod_qty` + `color_change_qty` + `damaged_qty`) / `cavities` * `cycle_time` / 3600) AS `ma` FROM `machine_log` WHERE DATE(`date`) >= '$from' AND DATE(`date`) <= '$to'
+                    AND (`shift` LIKE '$m' OR `shift` LIKE '$e' OR `shift` LIKE '$n')
+                    GROUP BY `machine_id` ORDER BY `machine_id` ASC");
+                    while ($res = mysqli_fetch_array($select)) {
+                        if (number_format($res['ma'] / 8 * 100, 2) < 90 && number_format($res['ma'] / 8 * 100, 2) > 50) {
+                            $danger = 'bg-warning';
+                        } elseif (number_format($res['ma'] / 8 * 100, 2) < 50) {
+                            $danger = 'bg-danger text-light';
+                        } else {
+                            $danger = 'bg-success text-light';
+                        }
+                        echo '<div class="row py-3 my-2 border-top ' . $danger . '">
+                        <div class="col">
+                        <h4>Machine #' . $res['machine_id'] . '</h4>
+                        <h5>' . number_format($res['ma'] / 8 * 100, 2) . '%</h5>
+                        </div>
+                    </div>';
+                    }
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
     </div>
     <div class="actionbtn">
@@ -278,6 +389,110 @@ include '../../config.php';
 <?php
 include '../../js.php';
 ?>
+<script>
+    $(document).ready(function() {
+        table.destroy();
+        table = $('#main-table').DataTable({
+            "scrollX": true,
+            order: [
+                [0, 'desc']
+            ],
+            footerCallback: function(row, data, start, end, display) {
+                var api = this.api();
+
+                // Remove the formatting to get integer data for summation
+                var intVal = function(i) {
+                    return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
+                };
+
+                // Total over all pages
+                total_weight = api
+                    .column(14)
+                    .data()
+                    .reduce(function(a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                // Total over this page
+                pageTotal_weight = api
+                    .column(14, {
+                        page: 'current'
+                    })
+                    .data()
+                    .reduce(function(a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+
+
+
+                // Total over all pages
+                total_damaged = api
+                    .column(16)
+                    .data()
+                    .reduce(function(a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                // Total over this page
+                pageTotal_damaged = api
+                    .column(16, {
+                        page: 'current'
+                    })
+                    .data()
+                    .reduce(function(a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+
+
+
+                // Total over all pages
+                total_time = api
+                    .column(17)
+                    .data()
+                    .reduce(function(a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                // Total over this page
+                pageTotal_time = api
+                    .column(17, {
+                        page: 'current'
+                    })
+                    .data()
+                    .reduce(function(a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+
+                // Total over all pages
+                total_deff = api
+                    .column(18)
+                    .data()
+                    .reduce(function(a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                // Total over this page
+                pageTotal_deff = api
+                    .column(18, {
+                        page: 'current'
+                    })
+                    .data()
+                    .reduce(function(a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                // Update footer
+                $(api.column(14).footer()).html(pageTotal_weight + ' (' + total_weight + ' Total)');
+                $(api.column(16).footer()).html(pageTotal_damaged + ' (' + total_damaged + ' Total)');
+                $(api.column(17).footer()).html(pageTotal_time + ' (' + total_time + ' Total)');
+                $(api.column(18).footer()).html(pageTotal_deff + ' (' + total_deff + ' Total)');
+            },
+        });
+    });
+</script>
 
 </html>
 
