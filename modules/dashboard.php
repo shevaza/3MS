@@ -310,7 +310,8 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                         </a>
                     </div>
                     <div class="col col-12 col-md-12 col-lg-6 col-xl-6 mb-3">
-                        <a class="text-dark" href="production/machine_weekly_report.php">
+                        <!-- <a class="text-dark" href="production/machine_weekly_report.php"> -->
+                        <a class="text-dark" href="#">
                             <div class="card db-item">
                                 <div class="card-body">
                                     <h2 class="card-title"><i class="fas fa-file-alt"></i> Machine Report</h2>
@@ -332,7 +333,8 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                         </a>
                     </div>
                     <div class="col col-12 col-md-12 col-lg-3 col-xl-3 mb-3">
-                        <a class="text-dark" href="production/mold_change.php">
+                        <!-- <a class="text-dark" href="production/mold_change.php"> -->
+                        <a class="text-dark" href="#">
                             <div class="card db-item">
                                 <div class="card-body">
                                     <h4 class="card-title">Mold Change</h4>
@@ -342,8 +344,8 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                         </a>
                     </div>
                     <div class="col col-12 col-md-12 col-lg-3 col-xl-3 mb-3">
-                        <!-- <a class="text-dark" href="production/production_scheduler.php"> -->
-                        <a class="text-dark" href="#">
+                        <a class="text-dark" href="production/production_scheduler.php">
+                            <!-- <a class="text-dark" href="#"> -->
                             <div class="card db-item">
                                 <div class="card-body">
                                     <h4 class="card-title">Scheduler</h4>

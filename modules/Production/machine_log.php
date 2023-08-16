@@ -20,7 +20,7 @@ include '../../config.php';
     <div class="container-flex">
         <nav class="navbar navbar-expand-sm navbar-light bg-light">
             <div class="container-fluid">
-                <a name="" id="" class="btn btn-sm btn-dark me-4" href="../" role="button"><i class="fas fa-arrow-left    "></i></a>
+                <a name="" id="" class="btn btn-sm btn-dark me-4" href="../" role="button"><i class="fas fa-arrow-left"></i></a>
                 <img class="me-2" src="../../res/img/logo.png" alt="" width="60">
                 <a class="navbar-brand" href="#">
                     Machine Logs
@@ -58,7 +58,7 @@ include '../../config.php';
                                 <div class="col">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Machine</label>
-                                        <select class="selectpicker w-100" data-style="btn-danger" name="machine_id" id="machine_id" required>
+                                        <select class="selectpicker w-100" data-style="btn-lg btn-outline-danger" name="machine_id" id="machine_id" required>
                                             <option disabled>Select Number</option>
                                             <?php
                                             $select = mysqli_query($mysqli, "SELECT `id`,`number` FROM `machines`");
@@ -72,11 +72,11 @@ include '../../config.php';
                                 <div class="col">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Shift</label>
-                                        <select class="selectpicker w-100" data-style="btn-danger" name="shift" id="shift" required>
+                                        <select class="selectpicker w-100" data-style="btn-lg btn-outline-danger" name="shift" id="shift" required>
                                             <option disabled>Select Shift</option>
-                                            <option>Morning</option>
-                                            <option>Evening</option>
-                                            <option>Night</option>
+                                            <option>Morning &#x263C;</option>
+                                            <option>Evening &#x263D;</option>
+                                            <option>Night &#x263E;</option>
                                         </select>
                                     </div>
                                 </div>
