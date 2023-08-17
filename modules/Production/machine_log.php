@@ -44,7 +44,7 @@ include '../../config.php';
 
         <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
                     <form method="post">
                         <div class="modal-header">
@@ -74,9 +74,9 @@ include '../../config.php';
                                         <label for="" class="form-label">Shift</label>
                                         <select class="selectpicker w-100" data-style="btn-lg btn-outline-danger" name="shift" id="shift" required>
                                             <option disabled>Select Shift</option>
-                                            <option>Morning &#x263C;</option>
-                                            <option>Evening &#x263D;</option>
-                                            <option>Night &#x263E;</option>
+                                            <option value="Morning">Morning &#x263C;</option>
+                                            <option value="Evening">Evening &#x263D;</option>
+                                            <option value="Night">Night &#x263E;</option>
                                         </select>
                                     </div>
                                 </div>
@@ -313,7 +313,7 @@ include '../../config.php';
                                 echo '</tr>';
                                 echo '
                                 <div class="modal fade" id="modal_' . $res['id'] . '" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
+                                    <div class="modal-dialog modal-xl" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title">Entry ' . $res['id'] . '</h5>
@@ -322,7 +322,113 @@ include '../../config.php';
                                                     </button>
                                             </div>
                                             <div class="modal-body">
-                                            
+
+
+
+                                            <div class="row mb-3">
+                                                    <div class="col">
+                                                        <div class="mb-3">
+                                                            <label for="" class="form-label">Machine</label>
+                                                            <select class="selectpicker w-100" data-style="btn-lg btn-outline-danger" name="machine_id" id="machine_id" required>
+                                                                <option disabled>Select Number</option>';
+                                                                $select = mysqli_query($mysqli, "SELECT `id`,`number` FROM `machines`");
+                                                                while ($m = mysqli_fetch_array($select)) {
+                                                                    echo '<option value="' . $m['id'] . '">' . $m['number'] . '</option>';
+                                                                }
+                                                            echo'
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="mb-3">
+                                                            <label for="" class="form-label">Shift</label>
+                                                            <select class="selectpicker w-100" data-style="btn-lg btn-outline-danger" name="shift" id="shift" required>
+                                                                <option disabled>Select Shift</option>
+                                                                <option value="Morning">Morning &#x263C;</option>
+                                                                <option value="Evening">Evening &#x263D;</option>
+                                                                <option value="Night">Night &#x263E;</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="">Quantity Left</label>
+                                                            <input type="number" step="0.5" min="0" class="form-control" name="qty_left" id="qty_left" aria-describedby="helpId" placeholder="Quantity Left" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="">Cycle Time</label>
+                                                            <input type="number" step="0.5" min="0" class="form-control" name="cycle_time" id="cycle_time" aria-describedby="helpId" placeholder="Cycle Time" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="">Item Weight</label>
+                                                            <input type="number" step="0.5" min="0" class="form-control" name="item_weight" id="item_weight" aria-describedby="helpId" placeholder="Item Weight" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="">Produced Quantity</label>
+                                                            <input type="number" step="0.5" min="0" class="form-control" name="prod_qty" id="prod_qty" aria-describedby="helpId" placeholder="Produced Quantity" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="">Color Change Qty</label>
+                                                            <input type="number" step="0.5" min="0" class="form-control" name="color_change_qty" id="color_change_qty" aria-describedby="helpId" placeholder="Color Change Qty" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="">Damaged Qty</label>
+                                                            <input type="number" step="0.5" min="0" class="form-control" name="damaged_qty" id="damaged_qty" aria-describedby="helpId" placeholder="Damaged Quantity" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="">Carrot Weight</label>
+                                                            <input type="number" step="0.5" min="0" class="form-control" name="carrot_weight" id="carrot_weight" aria-describedby="helpId" placeholder="Carrot Weight" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="">Number of Cavities</label>
+                                                            <input type="number" step="0.5" min="0" class="form-control" name="cavities" id="cavities" aria-describedby="helpId" placeholder="Cavities" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="">Stoppage time Start</label>
+                                                            <input type="datetime-local" class="form-control" name="stoppage_time_start" id="stoppage_time_start" aria-describedby="helpId" placeholder="Stoppage time Start" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="">Stoppage time End</label>
+                                                            <input type="datetime-local" class="form-control" name="stoppage_time_end" id="stoppage_time_end" aria-describedby="helpId" placeholder="Stoppage time End" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="">Notes</label>
+                                                            <textarea class="form-control" name="notes" id="notes" cols="30" rows="5"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
