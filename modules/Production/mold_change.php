@@ -77,7 +77,7 @@ include '../../config.php';
                         html: '<p>' + info.event.extendedProps.remarks + '</p><p>Remove Mold: ' + info.event.extendedProps.remove + '</p>' + '</p><p>Install Mold: ' + info.event.extendedProps.install + '</p> ',
                         showCloseButton: true,
                         showCancelButton: true,
-                        showDenyButton: true,
+                        showDenyButton: false,
                         cancelButtonText: 'Close',
                         confirmButtonText: 'Delete',
                         denyButtonText: 'Edit'
