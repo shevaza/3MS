@@ -311,7 +311,8 @@ include '../../config.php';
                                      <a class="btn btn-danger btn-sm" role="button">Delete</a>
                                      </div></td>';
                                 echo '</tr>';
-                                echo '
+                                
+                                $modal= '
                                 <div class="modal fade" id="modal_' . $res['id'] . '" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
                                     <div class="modal-dialog modal-xl" role="document">
                                         <div class="modal-content">
@@ -331,11 +332,11 @@ include '../../config.php';
                                                             <label for="" class="form-label">Machine</label>
                                                             <select class="selectpicker w-100" data-style="btn-lg btn-outline-danger" name="machine_id" id="machine_id" required>
                                                                 <option disabled>Select Number</option>';
-                                                                $select = mysqli_query($mysqli, "SELECT `id`,`number` FROM `machines`");
-                                                                while ($m = mysqli_fetch_array($select)) {
-                                                                    echo '<option value="' . $m['id'] . '">' . $m['number'] . '</option>';
-                                                                }
-                                                            echo'
+                                                                // $select_m = mysqli_query($mysqli, "SELECT `id`,`number` FROM `machines`");
+                                                                // while ($m = mysqli_fetch_array($select_m)) {
+                                                                //     $modal.= '<option value="' . $m['id'] . '">' . $m['number'] . '</option>';
+                                                                // }
+                                                            $modal.='
                                                             </select>
                                                         </div>
                                                     </div>
@@ -438,6 +439,7 @@ include '../../config.php';
                                     </div>
                                 </div>
                                      ';
+                                     echo $modal;
                             }
                             ?>
                         </tbody>
@@ -463,21 +465,21 @@ include '../../config.php';
                 <div class="card-body">
                     <h4 class="card-title">Machine Productivity</h4>
                     <?php
-                    $select = mysqli_query($mysqli, "SELECT `machine_id`,SUM((`prod_qty` + `color_change_qty` + `damaged_qty`) / `cavities` * `cycle_time` / 3600) AS `ma` FROM `machine_log` WHERE DATE(`date`) >= '$from' AND DATE(`date`) <= '$to'
+                    $select_m1 = mysqli_query($mysqli, "SELECT `machine_id`,SUM((`prod_qty` + `color_change_qty` + `damaged_qty`) / `cavities` * `cycle_time` / 3600) AS `ma` FROM `machine_log` WHERE DATE(`date`) >= '$from' AND DATE(`date`) <= '$to'
                     AND (`shift` LIKE '$m' OR `shift` LIKE '$e' OR `shift` LIKE '$n')
                     GROUP BY `machine_id` ORDER BY `machine_id` ASC");
-                    while ($res = mysqli_fetch_array($select)) {
-                        if (number_format($res['ma'] / 8 * 100, 2) < 90 && number_format($res['ma'] / 8 * 100, 2) > 50) {
+                    while ($res1 = mysqli_fetch_array($select_m1)) {
+                        if (number_format($res1['ma'] / 8 * 100, 2) < 90 && number_format($res1['ma'] / 8 * 100, 2) > 50) {
                             $danger = 'bg-warning';
-                        } elseif (number_format($res['ma'] / 8 * 100, 2) < 50) {
+                        } elseif (number_format($res1['ma'] / 8 * 100, 2) < 50) {
                             $danger = 'bg-danger text-light';
                         } else {
                             $danger = 'bg-success text-light';
                         }
                         echo '<div class="row py-3 my-2 border-top ' . $danger . '">
                         <div class="col">
-                        <h4>Machine #' . $res['machine_id'] . '</h4>
-                        <h5>' . number_format($res['ma'] / 8 * 100, 2) . '%</h5>
+                        <h4>Machine #' . $res1['machine_id'] . '</h4>
+                        <h5>' . number_format($res1['ma'] / 8 * 100, 2) . '%</h5>
                         </div>
                     </div>';
                     }

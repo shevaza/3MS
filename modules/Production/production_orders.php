@@ -49,7 +49,7 @@ include '../../config.php';
                     <div class="card">
                         <div class="row">
                             <div class="col">
-                                <div class="btn-group w-100">                                    
+                                <div class="btn-group w-100">
                                     <a class="btn btn-outline-primary" onclick="Switch('po')" href="#" role="button">Show PO's</a>
                                     <a class="btn btn-outline-primary" onclick="Switch('comp')" href="#" role="button">Show Components</a>
                                 </div>
@@ -157,82 +157,97 @@ include '../../config.php';
                         ?>
                     </div>
 
-                    <div class="tab" id="comp">
-                        <?php
-                        $select = mysqli_query($mysqli, "SELECT *, SUM(`comp_qty`) FROM `po_details` WHERE `status` != 'done' GROUP BY `comp_id`");
-                        while ($res = mysqli_fetch_array($select)) {
-                            echo '
-                            <div class="card">
-                            '.$res['comp_id'].'
+                    <div class="tab" id="comp" style="display: none;">
+                        <div class="card p-4">
+                            <div class="row border-bottom">
+                                <div class="col">
+                                    Component
+                                </div>
+                                <div class="col">
+                                    QTY
+                                </div>
+                            </div>
+                            <?php
+                            $select = mysqli_query($mysqli, "SELECT *, SUM(`comp_qty`) AS `total_qty` FROM `po_details` WHERE `status` != 'done' GROUP BY `comp_id`");
+                            while ($res = mysqli_fetch_array($select)) {
+                                echo '
+                            <div class="row p-2">
+                            <div class="col">
+                            ' . $res['comp_id'] . '
+                            </div>
+                            <div class="col">
+                            ' . $res['total_qty'] . '
+                            </div>
                             </div>
                             ';
-                        }
-                        ?>
+                            }
+                            ?>
+                        </div>
                     </div>
 
 
-                    </div>
                 </div>
-                <div class="col">
-                    <div class="card">
-                        <form method="post">
-                            <div class="card-header">
-                                <h4>
-                                    New Order
-                                </h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="row mb-4">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="">Start Date</label>
-                                            <input type="date" class="form-control" name="start_date" id="" aria-describedby="helpId" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="">Due Date</label>
-                                            <input type="date" class="form-control" name="due_date" id="" aria-describedby="helpId" placeholder="" required>
-                                        </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <form method="post">
+                        <div class="card-header">
+                            <h4>
+                                New Order
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="">Start Date</label>
+                                        <input type="date" class="form-control" name="start_date" id="" aria-describedby="helpId" placeholder="">
                                     </div>
                                 </div>
-                                <div class="form-group mb-4">
-                                    <label for="">Item</label>
-                                    <select class="form-control selectpicker" name="item" id="item" data-live-search="true" required>
-                                        <?php
-                                        $select_i = mysqli_query($mysqli, "SELECT * FROM `items`");
-                                        while ($i = mysqli_fetch_array($select_i)) {
-                                            echo '
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="">Due Date</label>
+                                        <input type="date" class="form-control" name="due_date" id="" aria-describedby="helpId" placeholder="" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="">Item</label>
+                                <select class="form-control selectpicker" name="item" id="item" data-live-search="true" required>
+                                    <?php
+                                    $select_i = mysqli_query($mysqli, "SELECT * FROM `items`");
+                                    while ($i = mysqli_fetch_array($select_i)) {
+                                        echo '
                                     <option value="' . $i['id'] . '">' . strtoupper($i['sku_code']) . ' | ' . $i['name'] . '</option>
                                     ';
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                                <div class="form-group mb-4">
-                                    <label for="">Colors</label>
-                                    <select class="form-control selectpicker" onchange="checkColors()" name="color[]" id="color" data-live-search="true" multiple required>
-                                        <?php
-                                        $select_c = mysqli_query($mysqli, "SELECT * FROM `colors`");
-                                        while ($c = mysqli_fetch_array($select_c)) {
-                                            echo '
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="">Colors</label>
+                                <select class="form-control selectpicker" onchange="checkColors()" name="color[]" id="color" data-live-search="true" multiple required>
+                                    <?php
+                                    $select_c = mysqli_query($mysqli, "SELECT * FROM `colors`");
+                                    while ($c = mysqli_fetch_array($select_c)) {
+                                        echo '
                                     <option value="' . $c['id'] . '">' . strtoupper($c['color_code']) . ' | ' . $c['color_name'] . '</option>
                                     ';
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                                <div id="colorQty">
-                                </div>
+                                    }
+                                    ?>
+                                </select>
                             </div>
-                            <div class="card-footer text-end">
-                                <button class="btn btn-success" name="submit_order" type="submit"><i class="fas fa-check"></i> Submit</button>
+                            <div id="colorQty">
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="card-footer text-end">
+                            <button class="btn btn-success" name="submit_order" type="submit"><i class="fas fa-check"></i> Submit</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
 </body>
 <?php
 include '../../js.php';
@@ -251,7 +266,7 @@ include '../../js.php';
 
     function Switch(id) {
         $('.tab').hide();
-        $("#"+id).fadeIn();
+        $("#" + id).fadeIn();
     }
 </script>
 
@@ -272,12 +287,12 @@ if (isset($_POST['submit_order'])) {
     for ($i = 0; $i < count($colors); $i++) {
         $insert = mysqli_query($mysqli, "INSERT INTO `production_order` (`request_id`, `item_id`, `item_qty`, `item_color`, `qty_done`)
         VALUES ('$last_pr_id', '$item', '$color_qty[$i]', '$colors[$i]', 'NEW') ");
-        
+
         $last_po_id = mysqli_insert_id($mysqli);
-        $select = mysqli_query($mysqli, "SELECT * FROM `components` WHERE `item_id` = '$item'");
+        $select = mysqli_query($mysqli, "SELECT * FROM `item_formula` WHERE `item_id` = '$item'");
         while ($a = mysqli_fetch_array($select)) {
-            $insert = mysqli_query($mysqli, "INSERT INTO `po_details` (`order_id`, `comp_id`, `comp_qty`, `comp_color`, `status`)
-            VALUES ('$last_po_id', '$c[id]', )");
+            $qty = $a['component_qty'] * $color_qty[$i];
+            $insert = mysqli_query($mysqli, "INSERT INTO `po_details` (`order_id`, `comp_id`, `comp_qty`, `comp_color`, `status`) VALUES ('$last_po_id', '$a[component_id]', '$qty', '$colors[$i]', 'NEW')");
         }
     }
     echo "<meta http-equiv='refresh' content='0'>";

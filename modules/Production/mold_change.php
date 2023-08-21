@@ -17,6 +17,11 @@ include '../../config.php';
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
                 events: 'fetchEvents.php',
                 // selectable: true,
                 // select: async function(start, end, allDay) {

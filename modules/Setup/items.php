@@ -316,7 +316,7 @@ if (isset($_GET['err'])) {
                                         <?php
                                         $select = mysqli_query($mysqli, "SELECT * FROM `molds`");
                                         while ($res = mysqli_fetch_array($select)) {
-                                            echo '<option value="' . $res['id'] . '">' . strtoupper($res['name']) . '</option>';
+                                            echo '<option value="' . $res['id'] . '">' . strtoupper($res['name']) . ' | ' . $res['description'] . '</option>';
                                         }
                                         ?>
                                     </select>
