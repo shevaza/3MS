@@ -332,10 +332,13 @@ include '../../config.php';
                                                             <label for="" class="form-label">Machine</label>
                                                             <select class="selectpicker w-100" data-style="btn-lg btn-outline-danger" name="machine_id" id="machine_id" required>
                                                                 <option disabled>Select Number</option>';
-                                                                // $select_m = mysqli_query($mysqli, "SELECT `id`,`number` FROM `machines`");
-                                                                // while ($m = mysqli_fetch_array($select_m)) {
-                                                                //     $modal.= '<option value="' . $m['id'] . '">' . $m['number'] . '</option>';
-                                                                // }
+                                                                $select_m = mysqli_query($mysqli, "SELECT `id`,`number` FROM `machines`");
+                                                                while ($m = mysqli_fetch_array($select_m)) {
+                                                                    $modal.= '
+                                                                    <option value="' . $m['id'] . '">' . $m['number'] . '</option>
+                                                                    <option value="' . $m['id'] . '">' . $m['number'] . '</option>
+                                                                    ';
+                                                                }
                                                             $modal.='
                                                             </select>
                                                         </div>
