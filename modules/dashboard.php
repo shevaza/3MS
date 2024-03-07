@@ -6,12 +6,14 @@ if (empty($_SESSION['user_id'])) {
 $dashboard = 'display: none';
 $maintenance = 'display: none';
 $production = 'display: none';
+$hr = 'display: none';
 $setup = 'display: none';
 $user = 'display: none';
 if ($_SESSION['user_type'] == 'Super Admin') {
     $dashboard = '';
     $maintenance = '';
     $production = '';
+    $hr = '';
     $setup = '';
     $user = '';
 } else {
@@ -20,7 +22,11 @@ if ($_SESSION['user_type'] == 'Super Admin') {
     } else {
         $production = 'display:none';
     }
-
+    if (in_array('hr', $_SESSION['modules'])) {
+        $hr = '';
+    } else {
+        $production = 'display:none';
+    }
     if (in_array('maintenance', $_SESSION['modules'])) {
         $maintenance = '';
     } else {
@@ -122,6 +128,10 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                         <li class="side-item" onclick="switchTab('maintenance')" style="<?php echo $maintenance ?>">
                             <a href="#" class="nav-link px-0 align-middle py-4">
                                 <i class="fs-4 fas fa-tools"></i> <span class="ms-1 d-none d-sm-inline">Maintenance</span> </a>
+                        </li>
+                        <li class="side-item" onclick="switchTab('hr')" style="<?php echo $hr ?>">
+                            <a href="#" class="nav-link px-0 align-middle py-4">
+                                <i class="fs-4 fas fa-person"></i> <span class="ms-1 d-none d-sm-inline">HR</span> </a>
                         </li>
                         <li class="side-item" onclick="switchTab('setup')" style="<?php echo $setup ?>">
                             <a href="#" class="nav-link px-0 align-middle py-4">
@@ -334,7 +344,7 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                     </div>
                     <div class="col col-12 col-md-12 col-lg-3 col-xl-3 mb-3">
                         <a class="text-dark" href="production/mold_change.php">
-                        <!-- <a class="text-dark" href="#"> -->
+                            <!-- <a class="text-dark" href="#"> -->
                             <div class="card db-item">
                                 <div class="card-body">
                                     <h4 class="card-title">Mold Change</h4>
@@ -501,6 +511,11 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- HR -->
+            <div id="maintenance" class="col-10 py-3 model">
+
             </div>
 
 
@@ -834,6 +849,14 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                                                     <label class="form-check-label">
                                                         <input type="checkbox" class="form-check-input" name="module[]" id="" value="maintenance">
                                                         Maintenance
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input type="checkbox" class="form-check-input" name="module[]" id="" value="hr">
+                                                        HR
                                                     </label>
                                                 </div>
                                             </div>
