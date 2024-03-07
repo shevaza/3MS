@@ -72,12 +72,16 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                     <a class="navbar-brand" href="#">
                         3MPlast ERP
                     </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarID" aria-controls="navbarID" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarID"
+                        aria-controls="navbarID" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarID">
                         <ul class="navbar-nav ms-auto">
-                            <a class="nav-link diabled me-2 border-end border-dark border-2" aria-current="page" href="#">Welcome <span class="fw-bold text-black"><?php echo ucfirst($_SESSION['username']) ?></span></a>
+                            <a class="nav-link diabled me-2 border-end border-dark border-2" aria-current="page"
+                                href="#">Welcome <span class="fw-bold text-black">
+                                    <?php echo ucfirst($_SESSION['username']) ?>
+                                </span></a>
                             <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
                             <a class="nav-link" aria-current="page" href="contacts.php">Users</a>
                             <a class="nav-link" aria-current="page" href="#">Settings</a>
@@ -99,7 +103,8 @@ if ($_SESSION['user_type'] == 'Super Admin') {
         <div class="row flex-nowrap">
             <!-- SIDE NAV -->
             <div class="col-2 bg-dark p-0" id="menu">
-                <div class="d-flex flex-column align-items-center align-items-sm-start px-0 w-100 pt-2 text-white min-vh-100">
+                <div
+                    class="d-flex flex-column align-items-center align-items-sm-start px-0 w-100 pt-2 text-white min-vh-100">
                     <!-- <a href="#" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                         <span class="fs-5 d-none d-sm-inline ">Menu</span>
                     </a> -->
@@ -113,21 +118,28 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                         <li class="side-item" onclick="switchTab('dashboard')">
                             <a href="#" class="nav-link px-0 align-middle py-4">
                                 <i class="fs-4 fas fa-user"></i>
-                                <h4 class="mb-0"><strong class="ms-1 mt-1 d-none d-sm-block"><?php echo ucfirst($_SESSION['first_name']) . ' ' . ucfirst($_SESSION['last_name']) ?></strong></h4>
-                                <small class="ms-1 d-none d-sm-block"><?php echo ucfirst($_SESSION['department']) . ' | ' .  ucfirst($_SESSION['position']) ?></small>
+                                <h4 class="mb-0"><strong class="ms-1 mt-1 d-none d-sm-block">
+                                        <?php echo ucfirst($_SESSION['first_name']) . ' ' . ucfirst($_SESSION['last_name']) ?>
+                                    </strong></h4>
+                                <small class="ms-1 d-none d-sm-block">
+                                    <?php echo ucfirst($_SESSION['department']) . ' | ' . ucfirst($_SESSION['position']) ?>
+                                </small>
                             </a>
                         </li>
                         <li class="side-item" onclick="switchTab('dashboard')">
                             <a href="#" class="nav-link px-0 align-middle py-4">
-                                <i class="fs-4 fas fa-gauge"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
+                                <i class="fs-4 fas fa-gauge"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+                            </a>
                         </li>
                         <li class="side-item" onclick="switchTab('production')" style="<?php echo $production ?>">
                             <a href="#" class="nav-link px-0 align-middle py-4">
-                                <i class="fs-4 fas fa-industry"></i> <span class="ms-1 d-none d-sm-inline">Production</span></a>
+                                <i class="fs-4 fas fa-industry"></i> <span
+                                    class="ms-1 d-none d-sm-inline">Production</span></a>
                         </li>
                         <li class="side-item" onclick="switchTab('maintenance')" style="<?php echo $maintenance ?>">
                             <a href="#" class="nav-link px-0 align-middle py-4">
-                                <i class="fs-4 fas fa-tools"></i> <span class="ms-1 d-none d-sm-inline">Maintenance</span> </a>
+                                <i class="fs-4 fas fa-tools"></i> <span
+                                    class="ms-1 d-none d-sm-inline">Maintenance</span> </a>
                         </li>
                         <li class="side-item" onclick="switchTab('hr')" style="<?php echo $hr ?>">
                             <a href="#" class="nav-link px-0 align-middle py-4">
@@ -139,7 +151,8 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                         </li>
                         <li class="side-item" onclick="switchTab('users')" style="<?php echo $user ?>">
                             <a href="#" class="nav-link px-0 align-middle py-4">
-                                <i class="fs-4 fas fa-user"></i> <span class="ms-1 d-none d-sm-inline">User Settings</span> </a>
+                                <i class="fs-4 fas fa-user"></i> <span class="ms-1 d-none d-sm-inline">User
+                                    Settings</span> </a>
                         </li>
                     </ul>
                     <hr>
@@ -160,11 +173,14 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col col-auto">
-                                        <i class="fa-solid fa-play" style="font-size: 5rem; transform:rotate(-3deg)"></i>
+                                        <i class="fa-solid fa-play"
+                                            style="font-size: 5rem; transform:rotate(-3deg)"></i>
                                     </div>
                                     <div class="col">
-                                        <h1 class="card-title"><?php
-                                                                echo mysqli_num_rows(mysqli_query($mysqli, "SELECT * FROM `machines` WHERE `status` = '1'")); ?></h1>
+                                        <h1 class="card-title">
+                                            <?php
+                                            echo mysqli_num_rows(mysqli_query($mysqli, "SELECT * FROM `machines` WHERE `status` = '1'")); ?>
+                                        </h1>
                                         <p class="card-text">Active Machines</p>
                                     </div>
                                 </div>
@@ -181,7 +197,8 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col col-auto">
-                                        <i class="fa-solid fa-tools" style="font-size: 5rem; transform:rotate(-3deg)"></i>
+                                        <i class="fa-solid fa-tools"
+                                            style="font-size: 5rem; transform:rotate(-3deg)"></i>
                                     </div>
                                     <div class="col">
                                         <h1 class="card-title">
@@ -208,7 +225,8 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col col-auto">
-                                        <i class="fa-solid fa-list" style="font-size: 5rem; transform:rotate(-3deg)"></i>
+                                        <i class="fa-solid fa-list"
+                                            style="font-size: 5rem; transform:rotate(-3deg)"></i>
                                     </div>
                                     <div class="col">
                                         <h1 class="card-title">
@@ -232,7 +250,8 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col col-auto">
-                                        <i class="fa-solid fa-user" style="font-size: 5rem; transform:rotate(-3deg)"></i>
+                                        <i class="fa-solid fa-user"
+                                            style="font-size: 5rem; transform:rotate(-3deg)"></i>
                                     </div>
                                     <div class="col">
                                         <h1 class="card-title">
@@ -514,8 +533,26 @@ if ($_SESSION['user_type'] == 'Super Admin') {
             </div>
 
             <!-- HR -->
-            <div id="maintenance" class="col-10 py-3 model">
-
+            <div id="hr" class="col-10 py-3 model">
+                <div class="row">
+                        <div class="col col-12 col-md-12 col-lg-4 col-xl-4 mb-3">
+                        <a class="text-dark" href="hr/timesheets.php">
+                            <div class="card db-item">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-auto text-end">
+                                            <i class="fa-solid fa-file" style="font-size: 5rem;"></i>
+                                        </div>
+                                        <div class="col">
+                                            <h4 class="card-title">Timesheets</h4>
+                                            <p class="card-text">Employee timesheets</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
 
 
@@ -592,7 +629,8 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                                     </div>
                                     <div class="col text-end">
                                         <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modelId">
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#modelId">
                                             <i class="fas fa-plus"></i> Add
                                         </button>
                                     </div>
@@ -742,26 +780,31 @@ if ($_SESSION['user_type'] == 'Super Admin') {
 
 
                 <!-- Modal -->
-                <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+                    aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <form action="../php_queries/user.php" method="post">
                                 <div class="modal-header">
                                     <h5 class="modal-title">New User</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="row my-4">
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="username">Username</label>
-                                                <input type="text" class="form-control" name="new_username" id="username" aria-describedby="username" placeholder="Username" required>
+                                                <input type="text" class="form-control" name="new_username"
+                                                    id="username" aria-describedby="username" placeholder="Username"
+                                                    required>
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="username">Email</label>
-                                                <input type="email" class="form-control" name="email" id="email" aria-describedby="email" placeholder="email">
+                                                <input type="email" class="form-control" name="email" id="email"
+                                                    aria-describedby="email" placeholder="email">
                                             </div>
                                         </div>
                                     </div>
@@ -769,7 +812,9 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="username">Password</label>
-                                                <input type="password" class="form-control" name="password" id="password" aria-describedby="password" placeholder="password" required>
+                                                <input type="password" class="form-control" name="password"
+                                                    id="password" aria-describedby="password" placeholder="password"
+                                                    required>
                                             </div>
                                         </div>
                                     </div>
@@ -777,19 +822,22 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="username">Phone</label>
-                                                <input type="text" class="form-control" name="phone" id="phone" aria-describedby="phone" placeholder="phone">
+                                                <input type="text" class="form-control" name="phone" id="phone"
+                                                    aria-describedby="phone" placeholder="phone">
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="username">Extension</label>
-                                                <input type="number" class="form-control" min="0" name="extension" id="extension" aria-describedby="extension" placeholder="extension">
+                                                <input type="number" class="form-control" min="0" name="extension"
+                                                    id="extension" aria-describedby="extension" placeholder="extension">
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="username">Address</label>
-                                                <input type="text" class="form-control" name="address" id="address" aria-describedby="address" placeholder="address">
+                                                <input type="text" class="form-control" name="address" id="address"
+                                                    aria-describedby="address" placeholder="address">
                                             </div>
                                         </div>
                                     </div>
@@ -797,7 +845,8 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="department">Department</label>
-                                                <select class="form-control selectpicker" name="department" id="department" required>
+                                                <select class="form-control selectpicker" name="department"
+                                                    id="department" required>
                                                     <option selected disabled>Select Department</option>
                                                     <option>Administration</option>
                                                     <option>Accounting</option>
@@ -812,7 +861,8 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="username">Position</label>
-                                                <input type="text" class="form-control" name="position" id="position" aria-describedby="position" placeholder="Position">
+                                                <input type="text" class="form-control" name="position" id="position"
+                                                    aria-describedby="position" placeholder="Position">
                                             </div>
                                         </div>
                                     </div>
@@ -839,7 +889,8 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                                             <div class="col">
                                                 <div class="form-check">
                                                     <label class="form-check-label">
-                                                        <input type="checkbox" class="form-check-input" name="module[]" id="" value="production">
+                                                        <input type="checkbox" class="form-check-input" name="module[]"
+                                                            id="" value="production">
                                                         Production
                                                     </label>
                                                 </div>
@@ -847,7 +898,8 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                                             <div class="col">
                                                 <div class="form-check">
                                                     <label class="form-check-label">
-                                                        <input type="checkbox" class="form-check-input" name="module[]" id="" value="maintenance">
+                                                        <input type="checkbox" class="form-check-input" name="module[]"
+                                                            id="" value="maintenance">
                                                         Maintenance
                                                     </label>
                                                 </div>
@@ -855,7 +907,8 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                                             <div class="col">
                                                 <div class="form-check">
                                                     <label class="form-check-label">
-                                                        <input type="checkbox" class="form-check-input" name="module[]" id="" value="hr">
+                                                        <input type="checkbox" class="form-check-input" name="module[]"
+                                                            id="" value="hr">
                                                         HR
                                                     </label>
                                                 </div>
@@ -863,7 +916,8 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                                             <div class="col">
                                                 <div class="form-check">
                                                     <label class="form-check-label">
-                                                        <input type="checkbox" class="form-check-input" name="module[]" id="" value="setup">
+                                                        <input type="checkbox" class="form-check-input" name="module[]"
+                                                            id="" value="setup">
                                                         3M Setup
                                                     </label>
                                                 </div>
@@ -871,7 +925,8 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                                             <div class="col">
                                                 <div class="form-check">
                                                     <label class="form-check-label">
-                                                        <input type="checkbox" class="form-check-input" name="module[]" id="" value="user">
+                                                        <input type="checkbox" class="form-check-input" name="module[]"
+                                                            id="" value="user">
                                                         User Control
                                                     </label>
                                                 </div>
@@ -880,7 +935,8 @@ if ($_SESSION['user_type'] == 'Super Admin') {
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
                                     <button type="submit" name="add_user" class="btn btn-primary">Save</button>
                                 </div>
                             </form>
@@ -922,7 +978,8 @@ if ($_SESSION['user_type'] == 'Super Admin') {
         <div class="row w-100 px-2">
             <div class="col">
                 <small>
-                    &copy; 2022 Copyright <a class="text-danger" target="_blank" href="https://onpointleb.000webhostapp.com/">OnPoint</a> - Shafiq Zabet
+                    &copy; 2022 Copyright <a class="text-danger" target="_blank"
+                        href="https://onpointleb.000webhostapp.com/">OnPoint</a> - Shafiq Zabet
                 </small>
             </div>
             <div class="col text-end">
