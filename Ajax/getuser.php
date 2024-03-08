@@ -28,7 +28,7 @@ if (isset($_POST['id'])) {
     foreach ($data as $user) {
         $div1 .= '<img src="' . $user['profile_picture_url'] . '" width="100" height="100" style="border-radius:50%">';
         $div1 .= '<h3 class="card-title">' . $user['full name'] . '</h3>';
-        $div1 .= '<div class="row"><div class="col">' . $user['email'] . '</div></div>';
+        $div1 .= '<div class="row"><div class="col"><a href="mailto:' . $user['email'] . '">' . $user['email'] . '</a></div></div>';
         $div1 .= '<div class="row"><div class="col">' . $user['department'] . '</div></div>';
 
 
@@ -65,10 +65,12 @@ if (isset($_POST['id'])) {
                     $out = new \DateTime($out);
                     $out->add(new \DateInterval('PT2H'));
                     $outs = $out->format($datetimeFormat);
+                    $diff = (($in->diff($out))->h)*60 + ($in->diff($out))->i;
+                    $diff > (9*60) ? $color = '' : $color = 'bg-danger text-light';
                 } else {
                     $outs = 'NA';
                 }
-                $div2 .= '<tr>';
+                $div2 .= '<tr class="'.$color.'">';
                 $div2 .= '<td>' . $thisday->format($dateFormat) . '</td>';
                 $div2 .= '<td>' . $ins . '</td>';
                 $div2 .= '<td>' . $outs . '</td>';

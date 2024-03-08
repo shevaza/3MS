@@ -77,7 +77,9 @@ $data = [];
     <div class="container mt-5">
         <div class="row">
             <div class="col">
-                <select class="form-control" name="" id="" onchange="getuserData(this.value)">
+                <select class="selectpicker form-control" name="" id="" onchange="getuserData(this.value)"
+                    data-live-search="true">
+                    <option selected disabled>Select User</option>
                     <?php
                     foreach ($users as $user) {
                         echo '<option value="' . $user['employee_id'] . '">' . $user['full name'] . '</option>';
@@ -89,17 +91,22 @@ $data = [];
         <div class="row mt-4 justify-content-center">
             <div class="col-md-auto col-12 text-center mb-4">
                 <div class="card">
+                     <div class="card-header">
+                        <h4 class="card-title">Employee</h4>
+                    </div>
                     <div id="div1" class="card-body">
-                     
+                        <h4>No Data</h4>
                     </div>
                 </div>
             </div>
             <div class="col">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-header">
                         <h4 class="card-title">Timesheet</h4>
+                    </div>
+                    <div class="card-body">
                         <div class="table-responsive" id="div2">
-                            
+                            <h4>No Data</h4>
                         </div>
                     </div>
                 </div>
@@ -112,6 +119,8 @@ include '../../js.php';
 ?>
 <script>
     function getuserData(user) {
+        $('#div1').html('Loading...');
+        $('#div2').html('Loading...');
         $.ajax({
             type: "POST",
             url: "../../Ajax/getuser.php",
@@ -122,8 +131,10 @@ include '../../js.php';
                 $('#div1').html(JSON.parse(r)[0]);
                 $('#div2').html(JSON.parse(r)[1]);
                 $('#table').dataTable({
-                    order: [[0, 'desc']]
+                    order: [[0, 'desc']],
+
                 });
+                $('#table').addClass('table table-hover');
             }
         });
     }
